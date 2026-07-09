@@ -284,6 +284,43 @@ GOVERNANCE = {
     "FRAMEWORKS_DATA_DIR": FRAMEWORKS_DATA_DIR,
 }
 
+# ---------------------------------------------------------------------------
+# RAG configuration (Phase 3). Lightweight + pluggable: the defaults are
+# dependency-free (deterministic hashing embedder + DB-backed vector index) so
+# the platform runs and tests reproducibly anywhere. Set EMBEDDING_BACKEND=
+# sentence_transformers and VECTOR_INDEX=chroma to opt into the heavy stack.
+# ---------------------------------------------------------------------------
+RAG = {
+    "EMBEDDING_BACKEND": env_str("EMBEDDING_BACKEND", "hashing"),  # hashing | sentence_transformers
+    "EMBEDDING_MODEL": env_str("EMBEDDING_MODEL", "all-MiniLM-L6-v2"),
+    "EMBEDDING_DIM": env_int("EMBEDDING_DIM", 256),
+    "VECTOR_INDEX": env_str("VECTOR_INDEX", "db"),  # db | chroma
+    "CHUNK_SIZE": env_int("RAG_CHUNK_SIZE", 900),
+    "CHUNK_OVERLAP": env_int("RAG_CHUNK_OVERLAP", 150),
+    "RETRIEVAL_TOP_K": env_int("RAG_TOP_K", 6),
+    "CHROMA_PERSIST_DIR": env_str("CHROMA_PERSIST_DIR", str(BASE_DIR / ".chroma")),
+}
+
+# ---------------------------------------------------------------------------
+# LLM configuration (Phase 4). Provider-agnostic. Default is a deterministic
+# offline mock (no key, fully testable); set LLM_PROVIDER + LLM_API_KEY to use a
+# real provider (Anthropic Claude / OpenAI / Gemini / Ollama).
+# ---------------------------------------------------------------------------
+LLM = {
+    "PROVIDER": env_str("LLM_PROVIDER", "mock"),  # mock | anthropic | openai | gemini | ollama
+    "MODEL": env_str("LLM_MODEL", "claude-opus-4-8"),
+    "API_KEY": env_str("LLM_API_KEY", "") or env_str("ANTHROPIC_API_KEY", ""),
+    "BASE_URL": env_str("LLM_BASE_URL", ""),
+    "TEMPERATURE": float(env_str("LLM_TEMPERATURE", "0.0")),
+    "MAX_TOKENS": env_int("LLM_MAX_TOKENS", 1500),
+    "SEED": env_int("LLM_SEED", 42),
+    "CONFIDENCE_THRESHOLD": float(env_str("LLM_CONFIDENCE_THRESHOLD", "0.55")),
+    "MAX_RETRIES": env_int("LLM_MAX_RETRIES", 2),
+}
+# If an Anthropic key is present but provider left as mock, auto-upgrade to Claude.
+if LLM["PROVIDER"] == "mock" and LLM["API_KEY"]:
+    LLM["PROVIDER"] = "anthropic"
+
 
 # ---------------------------------------------------------------------------
 # Logging

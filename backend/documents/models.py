@@ -77,8 +77,10 @@ class DocumentChunk(BaseModel):
     char_start = models.PositiveIntegerField(null=True, blank=True)
     char_end = models.PositiveIntegerField(null=True, blank=True)
     token_count = models.PositiveIntegerField(null=True, blank=True)
-    # Identifier of the corresponding vector in the ChromaDB collection.
+    # Identifier of the corresponding vector in the external vector store.
     embedding_id = models.CharField(max_length=128, blank=True)
+    # Dense vector for the default DB-backed vector index (list of floats).
+    embedding = models.JSONField(null=True, blank=True)
     metadata = models.JSONField(default=dict, blank=True)
 
     class Meta:
