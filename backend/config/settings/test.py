@@ -2,8 +2,12 @@
 import tempfile
 
 from .base import *  # noqa: F401,F403
+from .base import REST_FRAMEWORK
 
 DEBUG = False
+
+# Disable throttling in tests (avoids cross-test rate-limit flakiness).
+REST_FRAMEWORK = {**REST_FRAMEWORK, "DEFAULT_THROTTLE_CLASSES": [], "DEFAULT_THROTTLE_RATES": {}}
 
 # In-memory SQLite for speed and isolation.
 DATABASES = {

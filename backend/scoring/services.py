@@ -67,7 +67,8 @@ def score_and_persist(assessment) -> engine.ScoreReport:
         row.raw_score = rs.raw_score
         row.weighted_score = rs.weighted_score
         row.normalized_score = rs.normalized_score
-        row.breakdown = {"counted": rs.counted}
+        # Merge (never clobber) LLM/override-set keys like needs_review.
+        row.breakdown = {**(row.breakdown or {}), "counted": rs.counted}
         row.computed_at = now
         row.save(
             update_fields=[

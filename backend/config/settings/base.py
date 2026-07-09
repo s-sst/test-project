@@ -245,6 +245,25 @@ REST_FRAMEWORK = {
     ],
     "EXCEPTION_HANDLER": "common.exceptions.governed_exception_handler",
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": env_str("THROTTLE_ANON", "120/min"),
+        "user": env_str("THROTTLE_USER", "1000/min"),
+    },
+}
+
+# ---------------------------------------------------------------------------
+# Security / RBAC (Phase 8)
+# ---------------------------------------------------------------------------
+# When RBAC enforcement is off (dev/demo default) all endpoints remain open so
+# the platform is trivially demoable. Production enables it (see prod.py), and
+# write/override endpoints then require an authenticated user with a sufficient
+# role. Reads stay open unless you also tighten DEFAULT_PERMISSION_CLASSES.
+SECURITY = {
+    "ENFORCE_RBAC": env_bool("ENFORCE_RBAC", False),
 }
 
 

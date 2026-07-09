@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 
 from assessments.models import Assessment
 from common.enums import ReportFormat
+from common.permissions import IsAuditorOrAbove
 from common.responses import created, ok
 
 from .models import GeneratedReport
@@ -26,6 +27,8 @@ class _ReportCreateSerializer(serializers.Serializer):
 
 class ReportCreateView(APIView):
     """POST /api/report — generate a PDF or JSON report for an assessment."""
+
+    permission_classes = [IsAuditorOrAbove]
 
     def post(self, request):
         serializer = _ReportCreateSerializer(data=request.data)

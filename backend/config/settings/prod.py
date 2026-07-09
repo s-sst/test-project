@@ -1,8 +1,12 @@
 """Production settings: strict security, env-driven, no insecure defaults."""
 from .base import *  # noqa: F401,F403
-from .base import env_bool, env_str
+from .base import SECURITY, env_bool, env_str
 
 DEBUG = False
+
+# Enforce role-based access control on write/override endpoints in production
+# (overridable via the ENFORCE_RBAC env var).
+SECURITY = {**SECURITY, "ENFORCE_RBAC": env_bool("ENFORCE_RBAC", True)}
 
 # Fail fast if the secret key was not overridden.
 if SECRET_KEY == "insecure-dev-key-change-me":  # noqa: F405

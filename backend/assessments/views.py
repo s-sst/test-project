@@ -5,6 +5,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 
 from common.enums import AssessmentStatus
+from common.permissions import IsAuditorOrAbove
 from common.responses import ok
 
 from .models import Assessment
@@ -55,6 +56,8 @@ class ProcessView(APIView):
     default). With a real provider a task queue would be introduced (Phase 8).
     """
 
+    permission_classes = [IsAuditorOrAbove]
+
     def post(self, request):
         serializer = AssessmentCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -71,6 +74,8 @@ class ProcessView(APIView):
 
 class ReprocessView(APIView):
     """POST /api/reprocess — reset an assessment and run it again."""
+
+    permission_classes = [IsAuditorOrAbove]
 
     def post(self, request):
         serializer = ReprocessSerializer(data=request.data)

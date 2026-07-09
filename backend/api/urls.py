@@ -19,6 +19,7 @@ from dashboard.views import DashboardView
 from documents.views import DocumentDetailView, DocumentListView, DocumentUploadView
 from frameworks.views import FrameworkDetailView, FrameworkListView
 from reports.views import ReportCreateView, ReportDetailView, ReportDownloadView
+from scoring.views import ScoreOverrideView
 
 from .views import HealthView, RootView
 
@@ -42,6 +43,8 @@ urlpatterns = [
     path("report/<uuid:report_id>", ReportDetailView.as_view(), name="report-detail"),
     path("report/<uuid:report_id>/download", ReportDownloadView.as_view(), name="report-download"),
     path("dashboard", DashboardView.as_view(), name="dashboard"),
+    # --- Human oversight ---
+    path("score/<uuid:score_id>/override", ScoreOverrideView.as_view(), name="score-override"),
     # --- Audit ---
     path("audit-logs", AuditLogListView.as_view(), name="audit-log-list"),
     # --- Auth ---

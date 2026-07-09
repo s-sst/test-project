@@ -4,6 +4,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.views import APIView
 
+from common.permissions import IsAuditorOrAbove
 from common.responses import created, ok
 
 from .models import UploadedDocument
@@ -19,6 +20,7 @@ class DocumentUploadView(APIView):
     """
 
     parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [IsAuditorOrAbove]
 
     def post(self, request):
         serializer = DocumentUploadSerializer(data=request.data, context={"request": request})
