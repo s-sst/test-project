@@ -1,0 +1,655 @@
+{
+  "framework": {
+    "id": "nist_ai_rmf",
+    "name": "NIST AI Risk Management Framework (AI RMF 1.0)",
+    "version": "1.0",
+    "publisher": "National Institute of Standards and Technology (NIST)",
+    "category": "AI Risk Management / Trustworthy AI Governance",
+    "description": "Control library derived from the NIST Artificial Intelligence Risk Management Framework 1.0 (NIST AI 100-1). Requirements are mapped to the four Core functions (GOVERN, MAP, MEASURE, MANAGE), their categories, and representative subcategories, and reflect the seven trustworthiness characteristics defined in Section 3 (AI Risks and Trustworthiness, §§3.1–3.7): valid and reliable; safe; secure and resilient; accountable and transparent; explainable and interpretable; privacy-enhanced; and fair with harmful bias managed. The AI RMF is a voluntary framework; these controls express its subcategory outcomes as auditable requirements.",
+    "source_url": "https://doi.org/10.6028/NIST.AI.100-1",
+    "scoring": {
+      "status_scores": {
+        "PASS": 1,
+        "PARTIAL": 0.5,
+        "FAIL": 0,
+        "CANNOT_DETERMINE": 0
+      },
+      "aggregation": "weighted_mean",
+      "cannot_determine_policy": "exclude"
+    },
+    "controls": [
+      {
+        "id": "govern",
+        "title": "GOVERN — Cultivate a risk management culture",
+        "description": "The GOVERN function cultivates and implements a culture of AI risk management within organizations. It establishes the policies, processes, accountability structures, workforce, and third-party governance that enable the MAP, MEASURE, and MANAGE functions and is intended to be applied continuously across the AI lifecycle (NIST AI RMF 1.0, §5.1).",
+        "requirements": [
+          {
+            "identifier": "NISTAIRMF-GOVERN-1.1",
+            "title": "Legal and regulatory requirements for AI are understood, managed, and documented",
+            "description": "The organization identifies, understands, documents, and actively manages the legal and regulatory requirements that apply to its AI systems, and keeps this understanding current as systems and law evolve.",
+            "control": "Maintain a documented register of applicable AI-related laws, regulations, and legal obligations, mapped to each in-scope AI system, with a named owner and a defined review cadence; refresh it upon material legal or system change.",
+            "weight": 4,
+            "category": "Legal & Regulatory Compliance",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "Documented register of applicable AI laws, regulations, and legal/contractual obligations",
+              "Mapping of specific legal/regulatory requirements to individual AI systems in the inventory",
+              "Legal review records or sign-off with dates and named reviewer/owner",
+              "Defined review cadence and evidence of last review"
+            ],
+            "pass_criteria": "A current, documented register of applicable legal and regulatory requirements exists, covers all in-scope AI systems, maps specific requirements to systems, has a named owner, and shows review within the organization's defined cadence.",
+            "partial_criteria": "A register or documentation of legal/regulatory requirements exists but is incomplete (some systems or requirements missing), lacks a named owner, or has not been reviewed within the defined cadence.",
+            "fail_criteria": "No documented identification of applicable AI legal/regulatory requirements exists, or requirements are not mapped to or managed for AI systems.",
+            "references": [
+              "NIST AI RMF 1.0 (AI 100-1), Core Function GOVERN, Category 1, Subcategory GOVERN 1.1",
+              "NIST AI RMF 1.0, §5.1 (Govern)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-1.2",
+            "title": "Trustworthiness characteristics are integrated into organizational policies and practices",
+            "description": "The characteristics of trustworthy AI are embedded into organizational policies, processes, procedures, and practices so that trustworthiness is operationalized rather than aspirational.",
+            "control": "Establish and maintain policies and procedures that explicitly address the seven trustworthiness characteristics (valid and reliable; safe; secure and resilient; accountable and transparent; explainable and interpretable; privacy-enhanced; fair with harmful bias managed) and define how each is operationalized across the AI lifecycle.",
+            "weight": 4,
+            "category": "AI Governance Policy",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "AI policy/standard that enumerates and defines the trustworthiness characteristics",
+              "Procedures linking each characteristic to lifecycle activities (design, development, deployment, monitoring)",
+              "Policy approval records and version history"
+            ],
+            "pass_criteria": "Approved organizational policies and procedures explicitly incorporate all seven trustworthiness characteristics and define how each is operationalized across the AI lifecycle.",
+            "partial_criteria": "Policies reference some but not all trustworthiness characteristics, or reference them at a high level without operational procedures.",
+            "fail_criteria": "No organizational policies or procedures integrate the AI trustworthiness characteristics.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 1.2",
+              "NIST AI RMF 1.0, §3 (AI Risks and Trustworthiness), §§3.1–3.7 (trustworthiness characteristics)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-1.6",
+            "title": "Mechanisms are in place to inventory AI systems, resourced by risk priority",
+            "description": "The organization maintains an inventory of its AI systems that is resourced according to organizational risk priorities, enabling systematic mapping, measuring, and managing of risk.",
+            "control": "Maintain a centrally governed AI system inventory that records each system's purpose, owner, lifecycle stage, and risk classification, is resourced per organizational risk priorities, and is updated on a defined cadence.",
+            "weight": 3,
+            "category": "AI Inventory & Asset Management",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "AI system inventory/register with per-system metadata (owner, purpose, lifecycle stage, risk tier)",
+              "Documented process for adding/updating/retiring inventory entries",
+              "Evidence of resourcing aligned to risk priority (e.g., higher-risk systems reviewed more frequently)"
+            ],
+            "pass_criteria": "A maintained AI system inventory exists, includes risk classification and key metadata for all in-scope systems, is resourced according to risk priority, and is updated on a defined cadence.",
+            "partial_criteria": "An inventory exists but is incomplete, lacks risk classification, or is not regularly maintained.",
+            "fail_criteria": "No AI system inventory or equivalent mechanism exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 1.6"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-2.1",
+            "title": "Roles, responsibilities, and lines of communication for AI risk are documented and clear",
+            "description": "Roles and responsibilities and lines of communication related to mapping, measuring, and managing AI risks are documented and clearly communicated to individuals and teams throughout the organization, including executive accountability for AI risk decisions.",
+            "control": "Define and publish an AI risk accountability structure (e.g., RACI) covering mapping, measuring, and managing AI risks, with clear lines of communication and documented executive responsibility for AI development/deployment risk decisions.",
+            "weight": 4,
+            "category": "Accountability & Roles",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "Documented roles/responsibilities matrix (e.g., RACI) for AI risk activities",
+              "Defined escalation and communication lines",
+              "Evidence of executive/leadership accountability for AI risk decisions (charter, board/committee minutes)",
+              "Evidence the structure has been communicated organization-wide"
+            ],
+            "pass_criteria": "Documented roles, responsibilities, and lines of communication for AI risk exist, assign executive accountability, and have been communicated organization-wide.",
+            "partial_criteria": "Roles are documented but incomplete, lack clear communication lines, do not assign executive accountability, or have not been communicated broadly.",
+            "fail_criteria": "No documented roles, responsibilities, or lines of communication for AI risk management exist.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 2.1",
+              "NIST AI RMF 1.0, Subcategory GOVERN 2.3 (executive responsibility)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-3.1",
+            "title": "AI risk decision-making is informed by a diverse, interdisciplinary team",
+            "description": "Decision-making related to mapping, measuring, and managing AI risks throughout the lifecycle is informed by a demographically diverse team spanning multiple disciplines, experiences, and domain/user expertise, and their participation is documented.",
+            "control": "Establish and document interdisciplinary, demographically diverse participation in AI risk decision-making (e.g., cross-functional review boards, documented team composition), and prioritize opportunities for such collaboration across the lifecycle.",
+            "weight": 2,
+            "category": "Workforce Diversity, Equity & Inclusion",
+            "risk_domain": "Fair with Harmful Bias Managed",
+            "evidence_expectations": [
+              "Documented composition of teams/committees making AI risk decisions",
+              "Evidence of interdisciplinary and demographically diverse participation",
+              "Records of collaboration opportunities (e.g., review boards, workshops)"
+            ],
+            "pass_criteria": "AI risk decision-making is demonstrably informed by an interdisciplinary and diverse team, and participation is documented.",
+            "partial_criteria": "Some diversity/interdisciplinary input exists but is informal, undocumented, or limited to a narrow group.",
+            "fail_criteria": "AI risk decisions are made without any documented interdisciplinary or diverse input.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 3.1"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-4.1",
+            "title": "Policies foster a critical-thinking and safety-first mindset",
+            "description": "Organizational policies and practices foster a critical-thinking and safety-first mindset in the design, development, deployment, and use of AI systems to minimize potential negative impacts.",
+            "control": "Institute practices such as pre-deployment safety review gates, documented safe-development guidelines, and protected mechanisms for personnel to raise safety and ethics concerns; provide AI risk training so staff can execute these practices.",
+            "weight": 3,
+            "category": "Organizational Culture & Safety",
+            "risk_domain": "Safe",
+            "evidence_expectations": [
+              "Documented safe-development / responsible-AI practices and review gates",
+              "Mechanism (e.g., channel, process) for raising AI safety/ethics concerns and records of its use",
+              "AI risk management training records for personnel and partners (GOVERN 2.2)"
+            ],
+            "pass_criteria": "Policies and practices that promote a safety-first, critical-thinking mindset exist (e.g., review gates, concern-raising mechanisms, training) and there is evidence they are applied.",
+            "partial_criteria": "Some relevant policies or training exist but are not consistently applied or lack a concern-raising mechanism.",
+            "fail_criteria": "No policies or practices exist to foster a safety-first, critical-thinking culture for AI.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 4.1",
+              "NIST AI RMF 1.0, Subcategory GOVERN 2.2 (training)",
+              "NIST AI RMF 1.0, §3.2 (Safe)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-5.1",
+            "title": "External feedback on AI impacts is collected, prioritized, and integrated",
+            "description": "Organizational policies and practices are in place to collect, consider, prioritize, and integrate feedback from those external to the team that developed or deployed the AI system regarding potential individual and societal impacts related to AI risks.",
+            "control": "Establish channels and procedures to solicit and adjudicate external/stakeholder feedback on AI impacts, prioritize it, and feed it back into design and deployment decisions; document how feedback is incorporated.",
+            "weight": 3,
+            "category": "Stakeholder Engagement & Feedback",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "Documented policy/process for collecting external stakeholder feedback on AI impacts",
+              "Records of feedback received, prioritized, and adjudicated",
+              "Evidence feedback was integrated into system design/implementation (linkage to GOVERN 5.2)"
+            ],
+            "pass_criteria": "Documented mechanisms collect, prioritize, and integrate external feedback on AI impacts, with evidence that feedback influences design/deployment.",
+            "partial_criteria": "Feedback is collected but not systematically prioritized or integrated, or the process is undocumented.",
+            "fail_criteria": "No mechanism exists to collect or integrate external feedback on AI impacts.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 5.1",
+              "NIST AI RMF 1.0, Subcategory GOVERN 5.2 (integrating adjudicated feedback)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-GOVERN-6.1",
+            "title": "Policies address AI risks from third-party software, data, and supply chain",
+            "description": "Policies and procedures are in place to address AI risks and benefits arising from third-party software and data and other supply chain issues, including the risk of infringing a third party's intellectual property or other rights, with contingency processes for high-risk third-party failures.",
+            "control": "Maintain third-party/supply-chain AI risk policies covering vendor due diligence, data and IP rights, and contractual risk allocation, plus contingency plans for failures or incidents in high-risk third-party data or AI systems.",
+            "weight": 3,
+            "category": "Third-Party & Supply Chain Risk",
+            "risk_domain": "Secure and Resilient",
+            "evidence_expectations": [
+              "Third-party AI risk policy addressing IP/data rights and supply chain risk",
+              "Vendor due-diligence records and contractual clauses on AI risk",
+              "Documented contingency/fallback procedures for high-risk third-party AI or data failures (GOVERN 6.2)"
+            ],
+            "pass_criteria": "Documented policies and procedures address third-party AI risks including IP/rights infringement, are applied in procurement/vendor management, and contingency processes for high-risk third-party failures exist.",
+            "partial_criteria": "Third-party AI risk policies exist but are incomplete (e.g., no IP/rights coverage or no contingency processes) or are not consistently applied.",
+            "fail_criteria": "No policies or procedures address AI risks from third-party software, data, or the supply chain.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function GOVERN, Subcategory GOVERN 6.1",
+              "NIST AI RMF 1.0, Subcategory GOVERN 6.2 (contingency processes)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "map",
+        "title": "MAP — Establish context and identify risks",
+        "description": "The MAP function establishes the context to frame risks related to an AI system and identifies risks throughout the lifecycle. Outcomes of the MAP function are the basis for the MEASURE and MANAGE functions, and are essential when deciding whether to design, develop, or deploy an AI system (NIST AI RMF 1.0, §5.2).",
+        "requirements": [
+          {
+            "identifier": "NISTAIRMF-MAP-1.1",
+            "title": "Intended purposes, context, laws/norms, and deployment settings are documented",
+            "description": "Intended purposes, potentially beneficial uses, context-specific laws, norms and expectations, and the prospective settings in which the AI system will be deployed are understood and documented for each AI system.",
+            "control": "Produce and maintain, for each AI system, a context/use-case document capturing intended purpose, beneficial uses, applicable context-specific laws and norms, and prospective deployment settings.",
+            "weight": 4,
+            "category": "Context Establishment",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "Documented use-case/context description per AI system (purpose, beneficial uses)",
+              "Statement of context-specific laws, norms, and expectations",
+              "Description of prospective deployment settings and users"
+            ],
+            "pass_criteria": "For each in-scope AI system, documentation captures intended purpose, beneficial uses, context-specific laws/norms, and prospective deployment settings.",
+            "partial_criteria": "Context documentation exists but is incomplete, omits deployment settings or applicable norms, or covers only some systems.",
+            "fail_criteria": "No documentation of intended purpose or deployment context exists for AI systems.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MAP, Subcategory MAP 1.1",
+              "NIST AI RMF 1.0, §5.2 (Map)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MAP-1.5",
+            "title": "Organizational risk tolerances are determined and documented",
+            "description": "Organizational risk tolerances for AI are determined and documented, providing the basis for calibrating the level of risk management activity and go/no-go decisions.",
+            "control": "Define, document, and obtain leadership approval of AI risk tolerances (including acceptable and unacceptable outcomes), and use them to set the level of risk management activity for each system.",
+            "weight": 4,
+            "category": "Risk Tolerance",
+            "risk_domain": "Safe",
+            "evidence_expectations": [
+              "Documented, approved AI risk tolerance statement",
+              "Evidence risk tolerances drive risk management activity levels and go/no-go decisions (linkage to GOVERN 1.3)",
+              "Leadership approval record"
+            ],
+            "pass_criteria": "Documented and approved organizational AI risk tolerances exist and are used to calibrate risk management activities and proceed/not-proceed decisions.",
+            "partial_criteria": "Risk tolerances are referenced but not fully documented or approved, or are not applied to decisions.",
+            "fail_criteria": "No documented organizational AI risk tolerances exist.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MAP, Subcategory MAP 1.5",
+              "NIST AI RMF 1.0, Subcategory GOVERN 1.3 (risk tolerance-based activities)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MAP-2.3",
+            "title": "Scientific integrity and TEVV considerations are identified and documented",
+            "description": "Scientific integrity and test, evaluation, verification, and validation (TEVV) considerations are identified and documented, including those related to experimental design and data collection and selection.",
+            "control": "Document, before build and evaluation, the TEVV plan and scientific-integrity considerations for each system, including experimental design, data collection and selection methods, and representativeness assumptions.",
+            "weight": 3,
+            "category": "Test, Evaluation, Verification & Validation (TEVV)",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "Documented TEVV plan referencing experimental design",
+              "Data collection and selection methodology and rationale",
+              "Statement of scientific-integrity considerations and known limitations"
+            ],
+            "pass_criteria": "TEVV and scientific-integrity considerations (experimental design, data collection/selection) are documented for in-scope AI systems.",
+            "partial_criteria": "Some TEVV or data-selection considerations are documented but experimental design or scientific-integrity aspects are missing or incomplete.",
+            "fail_criteria": "No documentation of TEVV or scientific-integrity considerations exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MAP, Subcategory MAP 2.3"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MAP-3.5",
+            "title": "Human oversight processes are defined, assessed, and documented",
+            "description": "Processes for human oversight are defined, assessed, and documented in accordance with organizational policies established in the GOVERN function, including differentiation of roles and responsibilities for human-AI configurations.",
+            "control": "Define and document human oversight procedures for each AI system with named roles, decision authority, intervention/override points, and alignment to GOVERN policies; periodically assess their adequacy.",
+            "weight": 5,
+            "category": "Human Oversight",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "Documented human oversight procedure identifying named roles and decision authority",
+              "Defined intervention/override points and human-AI configuration responsibilities (linkage to GOVERN 3.2)",
+              "Assessment records evaluating oversight effectiveness"
+            ],
+            "pass_criteria": "Human oversight processes are documented with named roles, aligned to GOVERN policies, and have been assessed for adequacy for each relevant AI system.",
+            "partial_criteria": "Human oversight is described but roles are unspecified, not aligned to organizational policy, or not assessed.",
+            "fail_criteria": "No documented human oversight processes exist for AI systems that require them.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MAP, Subcategory MAP 3.5",
+              "NIST AI RMF 1.0, Subcategory GOVERN 3.2 (human-AI configuration roles)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MAP-4.1",
+            "title": "Legal and technology risks of AI components, including third-party data/software, are mapped",
+            "description": "Approaches for mapping AI technology and legal risks of system components — including the use of third-party data or software — are in place, followed, and documented, including risks of infringing a third party's intellectual property or other rights.",
+            "control": "Maintain and follow a documented approach to identify and map technology and legal risks for each AI component, including third-party data and software and IP/rights considerations, recorded per system.",
+            "weight": 3,
+            "category": "Component & Third-Party Risk Mapping",
+            "risk_domain": "Secure and Resilient",
+            "evidence_expectations": [
+              "Documented approach/methodology for mapping component and third-party legal/technology risks",
+              "Per-system inventory of components with third-party data/software identified",
+              "Assessment of IP/rights-infringement risk for third-party components"
+            ],
+            "pass_criteria": "A documented approach maps technology and legal risks of all AI components, including third-party data/software and IP/rights, and is applied per system.",
+            "partial_criteria": "Component/third-party risk mapping is partial, undocumented, or omits IP/rights considerations.",
+            "fail_criteria": "No approach exists to map technology or legal risks of AI system components including third-party data/software.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MAP, Subcategory MAP 4.1"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MAP-5.1",
+            "title": "Likelihood and magnitude of impacts are identified and documented",
+            "description": "The likelihood and magnitude of each identified impact — both beneficial and harmful — to individuals, groups, communities, organizations, and society are identified and documented, informed by expected use, past uses in similar contexts, public incident reports, and stakeholder feedback.",
+            "control": "Conduct and document an AI impact assessment estimating the likelihood and magnitude of potential positive and negative impacts on affected parties, drawing on expected use, analogous past uses, public incident data, and feedback.",
+            "weight": 4,
+            "category": "Impact Assessment",
+            "risk_domain": "Fair with Harmful Bias Managed",
+            "evidence_expectations": [
+              "Documented AI impact assessment covering individuals, groups, communities, organizations, and society",
+              "Likelihood and magnitude ratings for identified impacts",
+              "References to expected use, past/similar-context uses, public incident reports, or stakeholder feedback used as inputs"
+            ],
+            "pass_criteria": "A documented impact assessment identifies both beneficial and harmful impacts with likelihood and magnitude, across relevant affected parties, informed by defined inputs.",
+            "partial_criteria": "Impacts are identified but likelihood/magnitude is not characterized, coverage of affected parties is narrow, or inputs are not evidenced.",
+            "fail_criteria": "No documented assessment of AI impacts to individuals, groups, communities, organizations, or society exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MAP, Subcategory MAP 5.1",
+              "NIST AI RMF 1.0, §5.2 (Map)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "measure",
+        "title": "MEASURE — Analyze, assess, benchmark, and monitor AI risk",
+        "description": "The MEASURE function employs quantitative, qualitative, or mixed-method tools, techniques, and methodologies to analyze, assess, benchmark, and monitor AI risk and related impacts. It selects methods and metrics (MEASURE 1), evaluates AI systems for the trustworthiness characteristics identified during MAP (MEASURE 2), tracks risks over time (MEASURE 3), and assesses the efficacy of measurement (MEASURE 4) (NIST AI RMF 1.0, §5.3).",
+        "requirements": [
+          {
+            "identifier": "NISTAIRMF-MEASURE-1.1",
+            "title": "Measurement approaches and metrics for AI risks are selected and documented, including unmeasurable risks",
+            "description": "Approaches and metrics for measurement of AI risks enumerated during the MAP function are selected and implemented, starting with the most significant risks; risks or trustworthiness characteristics that will not or cannot be measured are documented.",
+            "control": "Define and document the set of measurement approaches and metrics for the AI risks identified in MAP, prioritizing the most significant risks, and explicitly document any risks/characteristics that are not or cannot be measured and why.",
+            "weight": 3,
+            "category": "Measurement Methods & Metrics",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "Documented mapping of identified AI risks to selected metrics/approaches",
+              "Prioritization showing the most significant risks measured first",
+              "Explicit documentation of risks/characteristics not or cannot be measured, with rationale"
+            ],
+            "pass_criteria": "Measurement approaches and metrics are selected, documented, and prioritized for identified AI risks, and unmeasured/unmeasurable risks are documented with rationale.",
+            "partial_criteria": "Some metrics are selected but prioritization or documentation of unmeasurable risks is missing or incomplete.",
+            "fail_criteria": "No documented selection of measurement approaches or metrics for identified AI risks exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 1.1"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.5",
+            "title": "AI system is demonstrated to be valid and reliable, with generalizability limits documented",
+            "description": "The AI system to be deployed is demonstrated to be valid and reliable, and limitations on generalizability beyond the conditions under which the technology was developed are documented.",
+            "control": "Perform and document validity and reliability testing prior to deployment, including performance under representative conditions and an explicit statement of generalizability limitations and out-of-distribution behavior.",
+            "weight": 5,
+            "category": "Validity & Reliability",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "Validity/reliability test results with metrics and test conditions",
+              "Documented limitations on generalizability beyond development conditions",
+              "Pre-deployment sign-off referencing validity/reliability evidence"
+            ],
+            "pass_criteria": "Documented evidence demonstrates the deployed system is valid and reliable and explicitly records limitations on generalizability.",
+            "partial_criteria": "Some validity/reliability testing exists but generalizability limitations are not documented, or testing does not reflect deployment conditions.",
+            "fail_criteria": "No demonstration of validity and reliability exists prior to deployment.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.5",
+              "NIST AI RMF 1.0, §3.1 (Valid and Reliable)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.6",
+            "title": "AI system is evaluated for safety and demonstrated to fail safely",
+            "description": "The AI system is evaluated regularly for safety risks identified in MAP; it is demonstrated to be safe such that residual negative risk does not exceed risk tolerance, and it can fail safely, particularly if operated beyond its knowledge limits. Safety metrics reflect reliability, robustness, real-time monitoring, and failure response times.",
+            "control": "Conduct recurring safety evaluations that quantify residual risk against the documented risk tolerance, verify fail-safe/graceful-degradation behavior at and beyond knowledge limits, and track real-time monitoring and failure-response-time metrics.",
+            "weight": 5,
+            "category": "Safety",
+            "risk_domain": "Safe",
+            "evidence_expectations": [
+              "Safety evaluation reports showing residual risk vs. documented risk tolerance",
+              "Evidence of fail-safe / graceful-degradation testing at knowledge limits",
+              "Real-time monitoring and failure-response-time metrics"
+            ],
+            "pass_criteria": "Regular safety evaluations demonstrate residual negative risk within tolerance and fail-safe behavior, with documented safety metrics (monitoring, response times).",
+            "partial_criteria": "Some safety evaluation exists but residual risk is not compared to tolerance, fail-safe behavior is not demonstrated, or evaluations are not recurring.",
+            "fail_criteria": "No safety evaluation of the AI system exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.6",
+              "NIST AI RMF 1.0, §3.2 (Safe)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.7",
+            "title": "AI system security and resilience are evaluated and documented",
+            "description": "AI system security and resilience — as identified in the MAP function — are evaluated and documented, addressing adversarial threats and the ability to withstand and recover from adverse events.",
+            "control": "Evaluate and document AI security and resilience, including adversarial/robustness testing (e.g., evasion, poisoning, extraction), access controls, and the system's ability to maintain or restore function under adverse conditions.",
+            "weight": 4,
+            "category": "Security & Resilience",
+            "risk_domain": "Secure and Resilient",
+            "evidence_expectations": [
+              "Security and adversarial robustness test results",
+              "Documented resilience assessment (withstand/recover from adverse events)",
+              "Security control documentation relevant to the AI system"
+            ],
+            "pass_criteria": "Security and resilience of the AI system are evaluated and documented, including adversarial robustness and recovery capability.",
+            "partial_criteria": "Some security or resilience evaluation exists but omits adversarial robustness or resilience/recovery, or is undocumented.",
+            "fail_criteria": "No evaluation of AI system security and resilience exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.7",
+              "NIST AI RMF 1.0, §3.3 (Secure and Resilient)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.8",
+            "title": "Risks associated with transparency and accountability are examined and documented",
+            "description": "Risks associated with transparency and accountability — as identified in the MAP function — are examined and documented, so that appropriate information about the AI system is available to relevant AI actors.",
+            "control": "Produce and maintain transparency artifacts (e.g., model/system documentation, model cards, decision/audit logs) and examine and document transparency- and accountability-related risks for each system.",
+            "weight": 3,
+            "category": "Transparency & Accountability",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "System/model documentation (e.g., model cards, system datasheets)",
+              "Documented examination of transparency and accountability risks",
+              "Logging/audit trail supporting accountability of AI decisions"
+            ],
+            "pass_criteria": "Transparency and accountability risks are examined and documented, and appropriate transparency artifacts are maintained for the AI system.",
+            "partial_criteria": "Some transparency documentation exists but transparency/accountability risks are not explicitly examined, or artifacts are incomplete.",
+            "fail_criteria": "No examination or documentation of transparency and accountability risks exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.8",
+              "NIST AI RMF 1.0, §3.4 (Accountable and Transparent)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.9",
+            "title": "AI model is explained, validated, and documented; outputs interpreted in context",
+            "description": "The AI model is explained, validated, and documented, and AI system output is interpreted within its context — as identified in MAP — to inform responsible use and governance.",
+            "control": "Apply and document explainability/interpretability methods appropriate to the model, validate that explanations are faithful, and provide guidance for interpreting outputs within the deployment context to support responsible use.",
+            "weight": 3,
+            "category": "Explainability & Interpretability",
+            "risk_domain": "Explainable and Interpretable",
+            "evidence_expectations": [
+              "Documentation of explainability/interpretability methods used and their validation",
+              "Interpretation guidance for outputs within deployment context",
+              "Records linking explanations to responsible-use decisions/governance"
+            ],
+            "pass_criteria": "The model is explained, its explanations validated, and documented, and output interpretation guidance within context exists to inform responsible use.",
+            "partial_criteria": "Some explainability work exists but is not validated, not documented, or lacks contextual interpretation guidance.",
+            "fail_criteria": "No explainability or interpretability analysis of the AI model exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.9",
+              "NIST AI RMF 1.0, §3.5 (Explainable and Interpretable)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.10",
+            "title": "Privacy risk of the AI system is examined and documented",
+            "description": "Privacy risk of the AI system — as identified in the MAP function — is examined and documented, addressing risks such as re-identification, memorization, and inappropriate data use, along with privacy-enhancing measures.",
+            "control": "Conduct and document a privacy risk examination for the AI system covering data collection and use, re-identification/memorization risks, and applied privacy-enhancing techniques and data-minimization measures.",
+            "weight": 4,
+            "category": "Privacy",
+            "risk_domain": "Privacy-Enhanced",
+            "evidence_expectations": [
+              "Documented privacy risk assessment for the AI system",
+              "Analysis of re-identification/memorization risk and data handling",
+              "Description of privacy-enhancing techniques or data-minimization measures applied"
+            ],
+            "pass_criteria": "Privacy risk of the AI system is examined and documented, including data-use and re-identification/memorization risks and privacy-enhancing measures.",
+            "partial_criteria": "Some privacy analysis exists but omits key risks (e.g., re-identification/memorization) or privacy-enhancing measures, or is undocumented.",
+            "fail_criteria": "No examination or documentation of AI system privacy risk exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.10",
+              "NIST AI RMF 1.0, §3.6 (Privacy-Enhanced)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-2.11",
+            "title": "Fairness and harmful bias are evaluated and results documented",
+            "description": "Fairness and bias — as identified in the MAP function — are evaluated and results are documented, addressing systemic, computational/statistical, and human bias (including cognitive) across relevant populations.",
+            "control": "Evaluate fairness and bias across relevant subpopulations using defined metrics, addressing systemic, computational/statistical, and human bias (including cognitive), and document results and any disparities identified.",
+            "weight": 5,
+            "category": "Fairness & Bias Management",
+            "risk_domain": "Fair with Harmful Bias Managed",
+            "evidence_expectations": [
+              "Bias/fairness evaluation report with defined metrics and results",
+              "Analysis across relevant subpopulations/protected groups",
+              "Documentation of systemic, computational/statistical, and human bias considerations (per NIST SP 1270)"
+            ],
+            "pass_criteria": "Fairness and bias are evaluated across relevant populations and the three bias categories (systemic, computational/statistical, human), with results documented.",
+            "partial_criteria": "Some bias evaluation exists but is limited in scope (e.g., single metric or population) or results are not fully documented.",
+            "fail_criteria": "No fairness or bias evaluation of the AI system exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 2.11",
+              "NIST AI RMF 1.0, §3.7 (Fair – with Harmful Bias Managed)",
+              "NIST SP 1270 (Towards a Standard for Identifying and Managing Bias in Artificial Intelligence)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-3.3",
+            "title": "Feedback and appeal processes for end users and impacted communities are established and integrated",
+            "description": "Feedback processes for end users and impacted communities to report problems and appeal AI system outcomes are established and integrated into AI system evaluation metrics.",
+            "control": "Provide accessible mechanisms for end users and impacted communities to report problems and appeal outcomes, and integrate the resulting feedback into the system's ongoing evaluation metrics and risk tracking.",
+            "weight": 3,
+            "category": "Risk Tracking Over Time",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "Documented problem-reporting and appeal mechanism available to users/impacted communities",
+              "Records of reports/appeals received and their disposition",
+              "Evidence feedback is integrated into evaluation metrics/risk tracking"
+            ],
+            "pass_criteria": "Established feedback and appeal mechanisms for users/impacted communities exist and their input is integrated into evaluation metrics.",
+            "partial_criteria": "Feedback/appeal mechanisms exist but are not integrated into evaluation metrics or lack coverage of impacted communities.",
+            "fail_criteria": "No feedback or appeal process for end users or impacted communities exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 3.3"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MEASURE-4.3",
+            "title": "Measurable performance improvements or declines are identified and documented with AI actor input",
+            "description": "Measurable performance improvements or declines — based on consultations with relevant AI actors, including affected communities, and field data about context-relevant risks and trustworthiness characteristics — are identified and documented.",
+            "control": "Periodically analyze field/operational data and consult relevant AI actors and affected communities to identify measurable improvements or declines in trustworthiness and performance, and document the findings and resulting actions.",
+            "weight": 2,
+            "category": "Measurement Efficacy & Feedback",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "Documented analysis of performance improvements/declines using field data",
+              "Records of consultation with relevant AI actors and affected communities",
+              "Trend documentation for context-relevant risks and trustworthiness characteristics"
+            ],
+            "pass_criteria": "Measurable performance improvements/declines are identified and documented using field data and input from relevant AI actors including affected communities.",
+            "partial_criteria": "Some performance trends are tracked but without AI actor/community consultation or complete documentation.",
+            "fail_criteria": "No identification or documentation of measurable performance improvements or declines exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MEASURE, Subcategory MEASURE 4.3"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "manage",
+        "title": "MANAGE — Prioritize and act on AI risks",
+        "description": "The MANAGE function allocates resources to mapped and measured risks on a regular basis and as defined by the GOVERN function. Risk treatment includes plans to respond to, recover from, and communicate about incidents or events, and to monitor systems post-deployment (NIST AI RMF 1.0, §5.4).",
+        "requirements": [
+          {
+            "identifier": "NISTAIRMF-MANAGE-1.3",
+            "title": "Responses to high-priority AI risks are developed, planned, and documented",
+            "description": "Responses to the AI risks deemed high priority (as identified by MAP) are developed, planned, and documented; response options include mitigating, transferring, avoiding, or accepting the risk.",
+            "control": "Maintain a risk treatment plan/register that records each high-priority risk, the selected response (mitigate/transfer/avoid/accept), the rationale, an assigned owner, and target dates.",
+            "weight": 4,
+            "category": "Risk Response & Treatment",
+            "risk_domain": "Safe",
+            "evidence_expectations": [
+              "Risk treatment plan or register for high-priority AI risks",
+              "Documented response option (mitigate/transfer/avoid/accept) with rationale per risk",
+              "Assigned owners and target completion dates"
+            ],
+            "pass_criteria": "High-priority AI risks each have a documented, planned response (mitigate/transfer/avoid/accept) with an assigned owner.",
+            "partial_criteria": "Responses exist for some high-priority risks but are undocumented, lack assigned owners, or omit response rationale.",
+            "fail_criteria": "No documented responses to high-priority AI risks exist.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MANAGE, Subcategory MANAGE 1.3",
+              "NIST AI RMF 1.0, Subcategory MANAGE 1.2 (prioritization)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MANAGE-2.4",
+            "title": "Mechanisms exist to supersede, disengage, or deactivate AI systems",
+            "description": "Mechanisms are in place and applied, and responsibilities are assigned and understood, to supersede, disengage, or deactivate AI systems that demonstrate performance or outcomes inconsistent with intended use.",
+            "control": "Implement and periodically test override/deactivation ('kill-switch') mechanisms with assigned responsibilities and defined trigger conditions for disengaging or shutting down AI systems that behave inconsistently with intended use.",
+            "weight": 5,
+            "category": "Fail-Safe & Deactivation",
+            "risk_domain": "Safe",
+            "evidence_expectations": [
+              "Documented deactivation/override procedure with trigger conditions",
+              "Assigned responsibilities for invoking supersede/disengage/deactivate actions",
+              "Evidence of testing or exercising the mechanism"
+            ],
+            "pass_criteria": "Documented mechanisms to supersede, disengage, or deactivate AI systems exist, responsibilities are assigned, and the mechanism has been applied or tested.",
+            "partial_criteria": "A deactivation/override capability is described but responsibilities are unassigned or it has not been tested/exercised.",
+            "fail_criteria": "No mechanism exists to supersede, disengage, or deactivate AI systems that behave inconsistently with intended use.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MANAGE, Subcategory MANAGE 2.4"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MANAGE-3.1",
+            "title": "Third-party AI risks and benefits are regularly monitored and controlled",
+            "description": "AI risks and benefits from third-party resources are regularly monitored, and risk controls are applied and documented, including monitoring of pre-trained models used in development.",
+            "control": "Establish ongoing monitoring of third-party AI resources (data, software, pre-trained models) with documented risk controls, periodic reassessment, and tracking of vendor changes or advisories.",
+            "weight": 3,
+            "category": "Third-Party Risk Management",
+            "risk_domain": "Secure and Resilient",
+            "evidence_expectations": [
+              "Third-party AI monitoring records and schedule",
+              "Documented risk controls applied to third-party resources",
+              "Evidence of monitoring pre-trained models as part of maintenance (linkage to MANAGE 3.2)"
+            ],
+            "pass_criteria": "Third-party AI risks and benefits are regularly monitored with documented, applied risk controls, including pre-trained models.",
+            "partial_criteria": "Third-party monitoring occurs but is ad hoc, undocumented, or omits pre-trained model monitoring.",
+            "fail_criteria": "No monitoring or risk controls for third-party AI resources exist.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MANAGE, Subcategory MANAGE 3.1",
+              "NIST AI RMF 1.0, Subcategory MANAGE 3.2 (pre-trained models)"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MANAGE-4.1",
+            "title": "Post-deployment monitoring plans are implemented",
+            "description": "Post-deployment AI system monitoring plans are implemented, including mechanisms for capturing and evaluating input from users and relevant AI actors, appeal and override, decommissioning, incident response, recovery, and change management.",
+            "control": "Implement a post-deployment monitoring plan per system covering user/stakeholder feedback capture, appeal and override, incident response, recovery, decommissioning, and change management, with defined owners and cadence.",
+            "weight": 4,
+            "category": "Post-Deployment Monitoring",
+            "risk_domain": "Valid and Reliable",
+            "evidence_expectations": [
+              "Documented post-deployment monitoring plan and monitoring records",
+              "Mechanisms for user/stakeholder feedback, appeal, and override",
+              "Procedures for incident response, recovery, decommissioning, and change management"
+            ],
+            "pass_criteria": "An implemented post-deployment monitoring plan exists that covers feedback capture, appeal/override, incident response, recovery, decommissioning, and change management.",
+            "partial_criteria": "A monitoring plan exists but is missing one or more required components (e.g., appeal/override, decommissioning, or change management) or is not actively implemented.",
+            "fail_criteria": "No post-deployment monitoring plan is implemented.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MANAGE, Subcategory MANAGE 4.1"
+            ]
+          },
+          {
+            "identifier": "NISTAIRMF-MANAGE-4.3",
+            "title": "Incidents and errors are tracked, responded to, and communicated to relevant AI actors",
+            "description": "Incidents and errors are communicated to relevant AI actors, including affected communities, and processes for tracking, responding to, and recovering from incidents and errors are followed and documented.",
+            "control": "Operate an AI incident management process that logs, triages, responds to, and recovers from incidents/errors, and communicates them to relevant AI actors including affected communities; retain records demonstrating the process is followed.",
+            "weight": 4,
+            "category": "Incident Response & Communication",
+            "risk_domain": "Accountable and Transparent",
+            "evidence_expectations": [
+              "Documented AI incident/error response and recovery procedure",
+              "Incident log/register with tracking and resolution records",
+              "Evidence of communication to relevant AI actors, including affected communities"
+            ],
+            "pass_criteria": "A documented incident/error process for tracking, responding, and recovering is followed, and incidents are communicated to relevant AI actors including affected communities.",
+            "partial_criteria": "An incident process exists but is not consistently followed, lacks records, or does not include communication to affected communities.",
+            "fail_criteria": "No process for tracking, responding to, or communicating AI incidents and errors exists.",
+            "references": [
+              "NIST AI RMF 1.0, Core Function MANAGE, Subcategory MANAGE 4.3",
+              "NIST AI RMF 1.0, Subcategory GOVERN 4.3 (incident identification and information sharing)"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "framework": {
+    "id": "owasp_llm",
+    "name": "OWASP Top 10 for LLM Applications 2025",
+    "version": "2025",
+    "publisher": "OWASP Foundation — OWASP Gen AI Security Project",
+    "category": "AI/LLM Application Security",
+    "description": "Compliance control library derived from the OWASP Top 10 for Large Language Model Applications (2025 release). Each of the ten risk categories (LLM01–LLM10) is expressed as one or more auditable requirements built directly from that risk's documented Prevention and Mitigation Strategies. Controls target the technical and governance safeguards organizations must implement to reduce the likelihood and impact of the most critical LLM application security risks, including prompt injection, sensitive information disclosure, supply-chain compromise, data/model poisoning, improper output handling, excessive agency, system prompt leakage, vector/embedding weaknesses, misinformation, and unbounded consumption.",
+    "source_url": "https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/",
+    "scoring": {
+      "status_scores": {
+        "PASS": 1,
+        "PARTIAL": 0.5,
+        "FAIL": 0,
+        "CANNOT_DETERMINE": 0
+      },
+      "aggregation": "weighted_mean",
+      "cannot_determine_policy": "exclude"
+    },
+    "controls": [
+      {
+        "id": "OWASPLLM-LLM01",
+        "title": "LLM01:2025 Prompt Injection",
+        "description": "Mitigations against direct and indirect prompt injection, where crafted inputs (from users or from external/retrieved content) manipulate the model into ignoring its instructions, exfiltrating data, or performing unintended actions.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM01-1",
+            "title": "Constrain Model Behavior and Filter/Segregate Untrusted Input",
+            "description": "The organization must constrain the model's role and behavior via the system instructions, apply input and output filtering against prompt-injection patterns, clearly segregate and identify untrusted external content (retrieved documents, tool outputs, third-party data) so it cannot be interpreted as trusted instructions, and validate that responses conform to expected output formats.",
+            "control": "System prompt defines strict persona/task boundaries and ignores attempts to alter core instructions; input and output filters (deny/allow lists, semantic classifiers, guardrails) are applied; untrusted external content is delimited/tagged and treated as data rather than instructions; expected output structure is defined and deterministically validated in code.",
+            "weight": 5,
+            "category": "Prompt Injection",
+            "risk_domain": "Input trust boundary / instruction manipulation",
+            "evidence_expectations": [
+              "System prompt / instruction templates showing explicit behavioral constraints and role boundaries",
+              "Documented input and output filtering rules or classifier/guardrail configuration",
+              "Design documentation showing segregation and tagging of untrusted/external content",
+              "Output schema validation code or test cases enforcing expected formats"
+            ],
+            "pass_criteria": "System instructions constrain model behavior AND both input and output filtering are implemented AND untrusted external content is explicitly segregated/identified AND expected output formats are validated — all documented and evidenced in the production pipeline.",
+            "partial_criteria": "Some but not all of these controls are implemented (e.g., filtering exists but external content is not segregated, or behavioral constraints are documented but output is not validated).",
+            "fail_criteria": "No input/output filtering and no segregation of untrusted content; the model consumes external or user content as trusted instructions without behavioral constraints or output validation.",
+            "references": [
+              "OWASP Top 10 for LLM Applications 2025 — LLM01:2025 Prompt Injection, Prevention and Mitigation Strategies #1 (Constrain model behavior)",
+              "LLM01:2025 Prevention and Mitigation Strategies #2 (Define and validate expected output formats)",
+              "LLM01:2025 Prevention and Mitigation Strategies #3 (Implement input and output filtering)",
+              "LLM01:2025 Prevention and Mitigation Strategies #6 (Segregate and identify external content)"
+            ]
+          },
+          {
+            "identifier": "OWASPLLM-LLM01-2",
+            "title": "Least-Privilege Access, Human Approval for High-Risk Actions, and Adversarial Testing",
+            "description": "The organization must enforce least-privilege on the LLM's access to backend systems and functions, require human approval before high-risk or privileged operations are executed, and conduct adversarial testing / attack simulations (red teaming) to validate resilience against direct and indirect prompt injection.",
+            "control": "The LLM is provisioned with its own API tokens scoped to the minimum privileges required for its function; high-risk or state-changing actions are gated by human-in-the-loop approval; periodic prompt-injection red-team exercises are performed with documented findings and tracked remediation.",
+            "weight": 4,
+            "category": "Prompt Injection",
+            "risk_domain": "Privilege control and assurance testing",
+            "evidence_expectations": [
+              "Access-control / IAM configuration showing scoped, least-privilege credentials for the LLM",
+              "Human approval workflow definition identifying which high-risk actions require sign-off",
+              "Adversarial testing / red-team reports covering prompt injection with dated findings and remediation status"
+            ],
+            "pass_criteria": "Least-privilege access is enforced for the LLM AND human approval is required for high-risk actions AND documented adversarial/red-team testing for prompt injection is performed at least periodically with findings tracked to remediation.",
+            "partial_criteria": "At least one but not all three controls are in place (e.g., least-privilege is enforced but no adversarial testing is performed, or approval gates exist without least-privilege scoping).",
+            "fail_criteria": "The LLM operates with broad privileges, no human approval is required for high-risk actions, and no adversarial/prompt-injection testing is performed.",
+            "references": [
+              "LLM01:2025 Prompt Injection, Prevention and Mitigation Strategies #4 (Enforce privilege control and least privilege access)",
+              "LLM01:2025 Prevention and Mitigation Strategies #5 (Require human approval for high-risk actions)",
+              "LLM01:2025 Prevention and Mitigation Strategies #7 (Conduct adversarial testing and attack simulations)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM02",
+        "title": "LLM02:2025 Sensitive Information Disclosure",
+        "description": "Mitigations preventing the model or its pipeline from exposing sensitive data (PII, credentials, proprietary or confidential information) through training data, prompts, retrieval sources, or generated outputs.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM02-1",
+            "title": "Sanitize Sensitive Data and Validate Inputs",
+            "description": "The organization must integrate data sanitization/scrubbing so that sensitive and personal data does not enter training/fine-tuning datasets or get returned in outputs, and must enforce robust input validation to detect and filter malicious or sensitive-data-eliciting inputs.",
+            "control": "Data sanitization, redaction, and tokenization are applied to training and fine-tuning datasets and to user prompts and model outputs; input validation methods filter harmful or crafted inputs that attempt to elicit sensitive data.",
+            "weight": 4,
+            "category": "Sensitive Information Disclosure",
+            "risk_domain": "Data protection / privacy",
+            "evidence_expectations": [
+              "Documented data sanitization / scrubbing / redaction methodology applied before training and fine-tuning",
+              "Input validation rules or code filtering harmful or sensitive-data-eliciting inputs",
+              "Output redaction/tokenization configuration for sensitive fields (PII, secrets)"
+            ],
+            "pass_criteria": "Documented data sanitization/scrubbing is applied before training/fine-tuning AND input validation is implemented AND sensitive data is redacted/tokenized in outputs.",
+            "partial_criteria": "Sanitization or input validation is implemented but not both, or it is applied inconsistently across only part of the data lifecycle.",
+            "fail_criteria": "No data sanitization and no input validation are in place; PII or sensitive data flows into training data or outputs unfiltered.",
+            "references": [
+              "LLM02:2025 Sensitive Information Disclosure, Prevention and Mitigation Strategies #1 (Integrate Data Sanitization Techniques)",
+              "LLM02:2025 Prevention and Mitigation Strategies #2 (Robust Input Validation)",
+              "LLM02:2025 Prevention and Mitigation Strategies #12 (Tokenization and Redaction)"
+            ]
+          },
+          {
+            "identifier": "OWASPLLM-LLM02-2",
+            "title": "Least-Privilege Data Access, Restricted Data Sources, and Usage Transparency",
+            "description": "The organization must enforce strict least-privilege access controls to sensitive data, restrict and limit the data sources the model can access at runtime to reduce over-exposure, and provide transparency about data usage together with user education and opt-out so users do not inadvertently disclose sensitive information.",
+            "control": "Role-based, least-privilege access controls on sensitive data; runtime restriction of external data sources; a published data-usage/privacy policy; and user guidance on safe use plus the ability to opt out of having their data used for training.",
+            "weight": 4,
+            "category": "Sensitive Information Disclosure",
+            "risk_domain": "Access control and transparency",
+            "evidence_expectations": [
+              "Access-control policy and configuration enforcing least privilege on sensitive data stores",
+              "Configuration or design docs restricting which data sources the model may access at runtime",
+              "User-facing data-usage / privacy notice and documented opt-out mechanism",
+              "User education or safe-usage guidance materials"
+            ],
+            "pass_criteria": "Least-privilege access controls on sensitive data are enforced AND data sources accessible to the model are restricted AND documented data-usage transparency plus user education/opt-out are present.",
+            "partial_criteria": "A subset is implemented (e.g., access controls exist but there is no data-usage transparency or user opt-out, or transparency exists without access restrictions).",
+            "fail_criteria": "No access controls on sensitive data and no transparency or user guidance regarding data usage.",
+            "references": [
+              "LLM02:2025 Sensitive Information Disclosure, Prevention and Mitigation Strategies #3 (Enforce Strict Access Controls)",
+              "LLM02:2025 Prevention and Mitigation Strategies #4 (Restrict Data Sources)",
+              "LLM02:2025 Prevention and Mitigation Strategies #7 (Educate Users on Safe LLM Usage)",
+              "LLM02:2025 Prevention and Mitigation Strategies #8 (Ensure Transparency in Data Usage)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM03",
+        "title": "LLM03:2025 Supply Chain",
+        "description": "Mitigations against vulnerabilities introduced through third-party models, datasets, pre-trained components, libraries, and suppliers, including tampering, poisoned or licensed-restricted models, and vulnerable/outdated components.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM03-1",
+            "title": "Vet Suppliers, Maintain Component Inventory, Verify Provenance, and Patch",
+            "description": "The organization must vet third-party data sources, models, and suppliers (terms & conditions, privacy, and security posture); maintain an up-to-date inventory of components via a Software Bill of Materials (SBOM); verify model and code integrity and provenance through signing and hashing; and operate a vulnerability-scanning and patching policy for vulnerable and outdated components.",
+            "control": "Supplier due-diligence and periodic access/security reviews; a Software Bill of Materials (SBOM) covering models, datasets, and libraries; model and code signing plus file-hash / provenance verification of third-party models; and vulnerability scanning with a documented patching policy.",
+            "weight": 4,
+            "category": "Supply Chain",
+            "risk_domain": "Third-party / supply-chain integrity",
+            "evidence_expectations": [
+              "Supplier vetting records including review of terms & conditions, privacy, and security posture",
+              "Up-to-date SBOM inventory covering models, datasets, and libraries",
+              "Model/code signing and hash-verification or provenance-check procedures",
+              "Vulnerability scanning results and a documented patching policy"
+            ],
+            "pass_criteria": "Documented supplier vetting AND a maintained SBOM component inventory AND model/code signing or provenance verification AND a vulnerability-scanning/patching policy are all in place.",
+            "partial_criteria": "Some controls exist (e.g., an inventory is maintained but there is no provenance/signing verification, or suppliers are vetted but no component inventory is kept).",
+            "fail_criteria": "No supplier vetting, no component inventory, and no model integrity/provenance verification are performed.",
+            "references": [
+              "LLM03:2025 Supply Chain, Prevention and Mitigation Strategies #1 (Carefully vet data sources and suppliers, including T&Cs and privacy policies; audit supplier security and access)",
+              "LLM03:2025 Prevention and Mitigation Strategies #2 (Apply OWASP A06:2021 Vulnerable and Outdated Components — vulnerability scanning and patching)",
+              "LLM03:2025 Prevention and Mitigation Strategies #4 (Maintain an up-to-date inventory of components using a Software Bill of Materials (SBOM))",
+              "LLM03:2025 Prevention and Mitigation Strategies #6 (Only use models from verifiable sources and use third-party model integrity checks with signing and file hashes)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM04",
+        "title": "LLM04:2025 Data and Model Poisoning",
+        "description": "Mitigations against manipulation of pre-training, fine-tuning, or embedding data (and of the model itself) to introduce backdoors, biases, or vulnerabilities that degrade integrity or produce harmful behavior.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM04-1",
+            "title": "Data Provenance Tracking, Vendor Vetting, and Poisoning Detection",
+            "description": "The organization must track data origin and transformations (e.g., using OWASP CycloneDX or ML-BOM), rigorously vet data vendors and validate against trusted sources, use sandboxing and strict data-source filtering to restrict unverified data, apply data version control, and detect poisoning through anomaly/behavior monitoring, robustness testing, and red teaming.",
+            "control": "Data provenance records (ML-BOM / CycloneDX); data version control (DVC); vendor validation against trusted sources; sandboxing and filtering of unverified data sources; monitoring of training loss and model behavior for anomalies; and adversarial robustness testing / red-team campaigns.",
+            "weight": 4,
+            "category": "Data and Model Poisoning",
+            "risk_domain": "Training-data and model integrity",
+            "evidence_expectations": [
+              "Data provenance / lineage records (OWASP CycloneDX or ML-BOM) and data version control history",
+              "Data vendor vetting and validation records against trusted sources",
+              "Sandboxing / data-source filtering configuration for unverified data",
+              "Poisoning-detection artifacts: training-loss/anomaly monitoring logs and adversarial-robustness or red-team test results"
+            ],
+            "pass_criteria": "Data provenance is tracked AND data sources/vendors are vetted and validated AND poisoning detection (anomaly monitoring and/or robustness testing) is implemented.",
+            "partial_criteria": "A subset is implemented (e.g., provenance is tracked but no poisoning detection exists, or vendors are vetted but there is no lineage tracking).",
+            "fail_criteria": "No data provenance tracking and no poisoning detection are performed; training/fine-tuning data is ingested from unvetted sources without monitoring.",
+            "references": [
+              "LLM04:2025 Data and Model Poisoning, Prevention and Mitigation Strategies #1 (Track data origins and transformations using OWASP CycloneDX / ML-BOM)",
+              "LLM04:2025 Prevention and Mitigation Strategies #2 (Vet data vendors rigorously and validate model outputs against trusted sources)",
+              "LLM04:2025 Prevention and Mitigation Strategies #3 (Implement strict sandboxing to limit exposure to unverified data sources)",
+              "LLM04:2025 Prevention and Mitigation Strategies #6 (Use data version control (DVC))",
+              "LLM04:2025 Prevention and Mitigation Strategies #8 (Test model robustness with red-team campaigns and adversarial techniques) and #9 (Monitor training loss and analyze model behavior for signs of poisoning)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM05",
+        "title": "LLM05:2025 Improper Output Handling",
+        "description": "Mitigations ensuring that LLM-generated output is validated, sanitized, and safely handled before being passed to downstream systems, browsers, interpreters, or databases, preventing XSS, CSRF, SSRF, privilege escalation, SQL injection, and remote code execution.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM05-1",
+            "title": "Zero-Trust Output Validation, Context-Aware Encoding, and Parameterized Downstream Calls",
+            "description": "The organization must treat LLM output as untrusted, validating and sanitizing it before it reaches backend functions; apply context-aware output encoding based on the destination (HTML, JavaScript, SQL, shell) in line with OWASP ASVS; use parameterized queries/prepared statements for all database operations involving model output; and enforce Content Security Policy where model output is rendered.",
+            "control": "A zero-trust approach applies input validation to model responses per OWASP ASVS; context-aware output encoding is applied based on where output is used; parameterized queries/prepared statements are used for DB operations; strict Content Security Policy is enforced; and output handling is logged and monitored.",
+            "weight": 5,
+            "category": "Improper Output Handling",
+            "risk_domain": "Downstream injection / code execution",
+            "evidence_expectations": [
+              "Code or design docs showing validation/sanitization of model responses before backend use (zero-trust handling)",
+              "Context-aware output encoding implementation for each output destination (HTML/JS/SQL/shell)",
+              "Evidence of parameterized queries / prepared statements for DB operations involving LLM output",
+              "Content Security Policy configuration and output-handling logging/monitoring"
+            ],
+            "pass_criteria": "Model output is validated/sanitized before downstream use AND context-aware encoding is applied per destination AND parameterized queries/prepared statements are used for database operations AND CSP is enforced where output is rendered.",
+            "partial_criteria": "Some controls are implemented (e.g., output encoding is applied but database calls are not parameterized, or validation exists without CSP).",
+            "fail_criteria": "LLM output is passed directly to interpreters, databases, shells, or browsers without validation, context-aware encoding, or parameterization.",
+            "references": [
+              "LLM05:2025 Improper Output Handling, Prevention and Mitigation Strategies #1 (Treat the model as untrusted; adopt a zero-trust approach and validate model responses to backend functions)",
+              "LLM05:2025 Prevention and Mitigation Strategies #2 (Follow the OWASP ASVS guidelines for input validation and sanitization)",
+              "LLM05:2025 Prevention and Mitigation Strategies #3 (Encode model output back to users) and #4 (Implement context-aware output encoding based on where the output is used)",
+              "LLM05:2025 Prevention and Mitigation Strategies #5 (Use parameterized queries or prepared statements for all database operations involving LLM output)",
+              "LLM05:2025 Prevention and Mitigation Strategies #6 (Employ strict Content Security Policies)",
+              "LLM05:2025 Prevention and Mitigation Strategies #7 (Implement robust logging and monitoring to detect unusual patterns in LLM output)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM06",
+        "title": "LLM06:2025 Excessive Agency",
+        "description": "Mitigations limiting the damaging actions an LLM-based agent can take through excessive functionality, permissions, or autonomy when interfacing with tools, extensions, and downstream systems.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM06-1",
+            "title": "Minimize Extensions, Functionality, and Permissions (Least Privilege for Agents)",
+            "description": "The organization must limit the number and functionality of tools/extensions available to the LLM agent, avoid open-ended extensions, grant each extension only the minimum permissions required, and execute extensions in the user's security context to constrain potential impact.",
+            "control": "A curated, minimal set of extensions/tools is exposed to the agent; each extension's functionality is limited to what is necessary; open-ended extensions (e.g., arbitrary shell, fetch-any-URL) are avoided; extension permissions are minimized and scoped; and extensions execute in the invoking user's context.",
+            "weight": 4,
+            "category": "Excessive Agency",
+            "risk_domain": "Agent autonomy / least privilege",
+            "evidence_expectations": [
+              "Inventory of extensions/tools available to the agent with justification for each",
+              "Configuration showing limited functionality and scoped permissions per extension",
+              "Evidence that open-ended/high-risk extensions are excluded or tightly constrained",
+              "Design docs showing extensions execute in the user's security context"
+            ],
+            "pass_criteria": "Extensions are minimized to a necessary set AND each extension's functionality is minimized AND minimal scoped permissions are granted AND unnecessary open-ended extensions are avoided.",
+            "partial_criteria": "Some minimization is applied but open-ended extensions or excessive permissions remain, or functionality is not constrained.",
+            "fail_criteria": "The agent has broad, open-ended tools with excessive permissions and no functionality limits or context isolation.",
+            "references": [
+              "LLM06:2025 Excessive Agency, Prevention and Mitigation Strategies #1 (Minimize extensions)",
+              "LLM06:2025 Prevention and Mitigation Strategies #2 (Minimize extension functionality)",
+              "LLM06:2025 Prevention and Mitigation Strategies #3 (Avoid open-ended extensions)",
+              "LLM06:2025 Prevention and Mitigation Strategies #4 (Minimize extension permissions) and #5 (Execute extensions in user's context)"
+            ]
+          },
+          {
+            "identifier": "OWASPLLM-LLM06-2",
+            "title": "Human-in-the-Loop Approval, Downstream Authorization, and Monitoring",
+            "description": "The organization must require human/user approval before high-impact actions, enforce complete mediation by authorizing every request in downstream systems rather than relying on the LLM, and log and monitor agent activity with rate-limiting to detect and limit damage from excessive agency.",
+            "control": "Human-in-the-loop approval gates for high-impact actions; downstream systems independently authorize each requested action (complete mediation); comprehensive activity logging and monitoring of agent behavior; and rate-limiting on agent actions.",
+            "weight": 4,
+            "category": "Excessive Agency",
+            "risk_domain": "Authorization and oversight",
+            "evidence_expectations": [
+              "Human approval workflow definitions for high-impact agent actions",
+              "Downstream authorization/access-control design showing requests are authorized outside the LLM (complete mediation)",
+              "Agent activity logs and monitoring/alerting configuration",
+              "Rate-limiting configuration for agent actions"
+            ],
+            "pass_criteria": "Human approval is required for high-impact actions AND downstream authorization / complete mediation is enforced AND agent activity is logged and monitored with rate-limiting.",
+            "partial_criteria": "A subset is implemented (e.g., downstream authorization exists but there is no human approval, or monitoring exists without approval gates).",
+            "fail_criteria": "The LLM autonomously executes high-impact actions with no human approval, no independent downstream authorization, and no monitoring.",
+            "references": [
+              "LLM06:2025 Excessive Agency, Prevention and Mitigation Strategies #6 (Require user approval)",
+              "LLM06:2025 Prevention and Mitigation Strategies #7 (Complete mediation — enforce authorization in downstream systems, not the LLM)",
+              "LLM06:2025 Damage-limitation measures — log and monitor agent/extension activity and implement rate-limiting"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM07",
+        "title": "LLM07:2025 System Prompt Leakage",
+        "description": "Mitigations ensuring system prompts do not contain sensitive data and are not relied upon as the sole security control, so that disclosure of the system prompt does not compromise the application.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM07-1",
+            "title": "Separate Sensitive Data from System Prompts and Enforce Controls Independently",
+            "description": "The organization must not embed sensitive data (credentials, API keys, connection strings, secret rules) in system prompts, must not rely on system prompts alone for strict behavior or authorization control, and must enforce security controls such as authorization and privilege separation independently of the LLM, with guardrails to detect and prevent prompt leakage.",
+            "control": "Sensitive data is externalized to secure stores and never placed in system prompts; behavioral and authorization controls are enforced by systems external to the LLM; privilege separation is applied; and guardrails detect and block attempts to extract the system prompt.",
+            "weight": 3,
+            "category": "System Prompt Leakage",
+            "risk_domain": "Secret handling / control independence",
+            "evidence_expectations": [
+              "Review of system prompt content confirming absence of secrets/credentials",
+              "Secrets-management configuration showing sensitive data stored outside prompts",
+              "Architecture docs showing authorization/privilege controls enforced independently of the LLM",
+              "Guardrail configuration to detect/prevent system-prompt leakage"
+            ],
+            "pass_criteria": "No sensitive data is present in system prompts AND critical controls (authorization, privilege separation) are enforced independently of the LLM AND guardrails against prompt leakage are in place.",
+            "partial_criteria": "Sensitive data has been removed from system prompts but authorization still depends on the system prompt (or vice versa), or guardrails are absent.",
+            "fail_criteria": "Sensitive data or credentials are embedded in system prompts and security controls depend on the system prompt remaining secret.",
+            "references": [
+              "LLM07:2025 System Prompt Leakage, Prevention and Mitigation Strategies #1 (Separate sensitive data from system prompts)",
+              "LLM07:2025 Prevention and Mitigation Strategies #2 (Avoid reliance on system prompts for strict behavior control)",
+              "LLM07:2025 Prevention and Mitigation Strategies #3 (Implement guardrails)",
+              "LLM07:2025 Prevention and Mitigation Strategies #4 (Ensure security controls are enforced independently from the LLM)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM08",
+        "title": "LLM08:2025 Vector and Embedding Weaknesses",
+        "description": "Mitigations addressing weaknesses in how vectors and embeddings are generated, stored, and retrieved in RAG systems, including unauthorized access, cross-tenant leakage, embedding inversion, and data-poisoning of knowledge bases.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM08-1",
+            "title": "Permission-Aware Vector Stores, Data Validation, Classification, and Logging",
+            "description": "The organization must implement fine-grained, permission-aware access controls on vector/embedding stores (partitioning by tenant/authorization), validate and authenticate the knowledge sources feeding RAG pipelines, review and classify/tag data combined from multiple sources to prevent leakage or conflict, and maintain detailed immutable logs of retrieval activity.",
+            "control": "Permission-aware partitioning of the vector database with access controls aligned to user authorization; a data-validation and source-authentication pipeline for knowledge-base ingestion; data classification/tagging when data from different sources is combined; and immutable logging and monitoring of retrieval activity.",
+            "weight": 3,
+            "category": "Vector and Embedding Weaknesses",
+            "risk_domain": "RAG / knowledge-base access control",
+            "evidence_expectations": [
+              "Vector-store access-control configuration showing permission-aware partitioning by tenant/authorization",
+              "Data-validation and source-authentication pipeline documentation for knowledge-base ingestion",
+              "Data classification/tagging scheme applied when combining sources",
+              "Immutable retrieval activity logs and monitoring configuration"
+            ],
+            "pass_criteria": "Permission-aware access controls on the vector store AND data validation/source authentication AND classification of combined data AND retrieval-activity logging are all implemented.",
+            "partial_criteria": "A subset is implemented (e.g., access controls exist but there is no data validation or classification, or logging is absent).",
+            "fail_criteria": "A shared vector store is used with no permission segmentation, no source validation, and no retrieval logging.",
+            "references": [
+              "LLM08:2025 Vector and Embedding Weaknesses, Prevention and Mitigation Strategies #1 (Permission and access control — fine-grained, permission-aware vector and embedding stores)",
+              "LLM08:2025 Prevention and Mitigation Strategies #2 (Data validation & source authentication)",
+              "LLM08:2025 Prevention and Mitigation Strategies #3 (Data review for combination & classification)",
+              "LLM08:2025 Prevention and Mitigation Strategies #4 (Monitoring and Logging — detailed immutable logs of retrieval activity)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM09",
+        "title": "LLM09:2025 Misinformation",
+        "description": "Mitigations reducing the generation and impact of false, misleading, or fabricated (hallucinated) information, including overreliance by users on unverified model output.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM09-1",
+            "title": "Grounding (RAG), Cross-Verification/Human Oversight, and Limitation Disclosure",
+            "description": "The organization must reduce misinformation and hallucination by grounding outputs with retrieval-augmented generation from verified sources, applying cross-verification and human oversight for high-stakes or critical information, providing automatic validation of key outputs, and communicating model limitations and risks to users to counter overreliance.",
+            "control": "Retrieval-augmented generation from trusted, verified knowledge sources; human review / cross-verification of critical or high-stakes outputs; automatic validation mechanisms for key facts; user-facing disclosures of model limitations and responsible-use guidance; and user training.",
+            "weight": 3,
+            "category": "Misinformation",
+            "risk_domain": "Output accuracy / overreliance",
+            "evidence_expectations": [
+              "RAG architecture documentation identifying trusted/verified knowledge sources",
+              "Human-oversight / cross-verification procedure with named roles for critical outputs",
+              "Automatic validation or fact-checking mechanism configuration",
+              "User-interface disclosures of model limitations and responsible-use / training materials"
+            ],
+            "pass_criteria": "RAG/grounding is used AND human oversight/cross-verification is applied to critical outputs AND model limitations are communicated to users.",
+            "partial_criteria": "A subset is implemented (e.g., RAG is used but there is no human oversight, or limitations are disclosed without grounding).",
+            "fail_criteria": "Model outputs are used for consequential decisions with no grounding, no human oversight, and no disclosure of limitations.",
+            "references": [
+              "LLM09:2025 Misinformation, Prevention and Mitigation Strategies #1 (Retrieval-Augmented Generation)",
+              "LLM09:2025 Prevention and Mitigation Strategies #3 (Cross-verification and human oversight)",
+              "LLM09:2025 Prevention and Mitigation Strategies #4 (Automatic validation mechanisms) and #5 (Risk communication)",
+              "LLM09:2025 Prevention and Mitigation Strategies #7 (User interface design) and #8 (Training and education)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OWASPLLM-LLM10",
+        "title": "LLM10:2025 Unbounded Consumption",
+        "description": "Mitigations preventing uncontrolled resource consumption — denial of service, denial of wallet, resource exhaustion, and model extraction/theft — by controlling inputs, resources, exposure, and monitoring.",
+        "requirements": [
+          {
+            "identifier": "OWASPLLM-LLM10-1",
+            "title": "Input Validation, Rate Limiting, Resource Allocation, and Timeouts/Throttling",
+            "description": "The organization must prevent unbounded consumption by validating inputs and enforcing size limits, applying rate limiting and quotas per user/request, managing and capping resource allocation with controlled scaling, and enforcing timeouts and throttling on resource-intensive operations.",
+            "control": "Input size/format validation; API rate limits and per-user quotas; resource-allocation management with caps and controlled/graceful scaling; request timeouts and throttling; and limits on queued or concurrent actions.",
+            "weight": 3,
+            "category": "Unbounded Consumption",
+            "risk_domain": "Availability / cost / resource exhaustion",
+            "evidence_expectations": [
+              "Input validation rules enforcing size and format limits on prompts/requests",
+              "Rate-limiting and per-user quota configuration",
+              "Resource-allocation / scaling limits and queued-action caps",
+              "Timeout and throttling configuration for resource-intensive operations"
+            ],
+            "pass_criteria": "Input validation with size limits AND rate limiting/quotas AND resource management with timeouts/throttling are all implemented.",
+            "partial_criteria": "A subset is implemented (e.g., rate limiting exists but there are no timeouts, or no input size limits are enforced).",
+            "fail_criteria": "No rate limiting, no resource caps, and no timeouts; unbounded requests are accepted without input size limits.",
+            "references": [
+              "LLM10:2025 Unbounded Consumption, Prevention and Mitigation Strategies #1 (Input validation)",
+              "LLM10:2025 Prevention and Mitigation Strategies #3 (Rate limiting) and #4 (Resource allocation management)",
+              "LLM10:2025 Prevention and Mitigation Strategies #5 (Timeouts and throttling)",
+              "LLM10:2025 Prevention and Mitigation Strategies #10 (Limit queued actions and scale robustly)"
+            ]
+          },
+          {
+            "identifier": "OWASPLLM-LLM10-2",
+            "title": "Consumption Monitoring/Anomaly Detection, Restricted Logit Exposure, and Access Controls",
+            "description": "The organization must continuously log, monitor, and apply anomaly detection to resource usage to detect abuse and model-extraction attempts, limit the exposure of logits and log-probabilities, enforce access controls including sandboxing of the LLM's access to network and internal resources, and maintain a centralized ML model inventory with governance.",
+            "control": "Comprehensive usage logging and monitoring with anomaly detection and alerting; suppression or limitation of logit/logprob outputs; authenticated access plus sandboxing restricting the LLM's access to network, internal services, and APIs; and a centralized ML model inventory with access governance.",
+            "weight": 3,
+            "category": "Unbounded Consumption",
+            "risk_domain": "Abuse detection / model theft",
+            "evidence_expectations": [
+              "Logging, monitoring, and anomaly-detection configuration for consumption and abuse",
+              "Configuration limiting or suppressing exposure of logits/log-probabilities",
+              "Access-control and sandboxing configuration restricting LLM access to network/internal resources",
+              "Centralized ML model inventory with access governance records"
+            ],
+            "pass_criteria": "Consumption monitoring with anomaly detection AND restricted logit/logprob exposure AND access controls/sandboxing AND a centralized model inventory are all in place.",
+            "partial_criteria": "A subset is implemented (e.g., monitoring exists but logits are exposed, or access controls exist without anomaly detection).",
+            "fail_criteria": "No monitoring or anomaly detection and no access controls limiting consumption or model extraction are in place.",
+            "references": [
+              "LLM10:2025 Unbounded Consumption, Prevention and Mitigation Strategies #2 (Limit exposure of logits and logprobs)",
+              "LLM10:2025 Prevention and Mitigation Strategies #6 (Sandbox — restrict LLM access to network resources, internal services, and APIs)",
+              "LLM10:2025 Prevention and Mitigation Strategies #7 (Comprehensive logging, monitoring, and anomaly detection)",
+              "LLM10:2025 Prevention and Mitigation Strategies #13 (Access controls) and #14 (Centralized ML model inventory)"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,748 @@
+{
+  "framework": {
+    "id": "eu_ai_act",
+    "name": "EU AI Act — High-Risk AI System Compliance Control Library",
+    "version": "Regulation (EU) 2024/1689 (OJ L, 2024/1689, 12.7.2024)",
+    "publisher": "European Parliament and Council of the European Union",
+    "category": "AI Regulation / Trustworthy AI Governance",
+    "description": "Auditable control library derived from Regulation (EU) 2024/1689 (the EU AI Act), focused on the requirements for high-risk AI systems in Chapter III Section 2 (Articles 9-15); provider obligations in Chapter III Section 3 (Articles 16-21); conformity assessment, EU declaration of conformity, CE marking and registration in Chapter III Section 5 (Articles 43, 47, 48, 49); post-market monitoring and serious-incident reporting in Chapter IX (Articles 72-73); the transparency obligations for certain AI systems in Article 50; and the general-purpose AI model obligations in Articles 53 and 55. Each requirement maps to specific Articles and, where relevant, Annexes (III, IV, V, VI, VII, VIII, XI, XII), with precise auditor pass/partial/fail criteria and concrete evidence expectations. The library is provider-focused; deployer obligations (Article 26) and the fundamental rights impact assessment (Article 27) are out of scope.",
+    "source_url": "http://data.europa.eu/eli/reg/2024/1689/oj",
+    "scoring": {
+      "status_scores": {
+        "PASS": 1,
+        "PARTIAL": 0.5,
+        "FAIL": 0,
+        "CANNOT_DETERMINE": 0
+      },
+      "aggregation": "weighted_mean",
+      "cannot_determine_policy": "exclude"
+    },
+    "controls": [
+      {
+        "id": "rms",
+        "title": "Risk Management System (Article 9)",
+        "description": "A documented, continuous and iterative risk management system running across the entire lifecycle of the high-risk AI system, covering risk identification, estimation, evaluation of post-market data, adoption of targeted risk management measures, testing, and specific consideration of vulnerable groups.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART9-1",
+            "title": "Establishment and continuous operation of a risk management system",
+            "description": "The provider must establish, implement, document and maintain a risk management system for the high-risk AI system, run as a continuous iterative process throughout the entire lifecycle and subject to regular systematic review and updating. It must cover identification and analysis of known and reasonably foreseeable risks to health, safety and fundamental rights, estimation and evaluation of risks emerging under intended use and reasonably foreseeable misuse, evaluation of risks arising from post-market monitoring data, and adoption of appropriate and targeted risk management measures.",
+            "control": "A documented lifecycle risk management procedure covering the four steps of Art 9(2)(a)-(d), with a maintained risk register, defined review cadence, and evidence of updates driven by post-market monitoring.",
+            "weight": 5,
+            "category": "Risk Management",
+            "risk_domain": "Health, safety and fundamental rights",
+            "evidence_expectations": [
+              "Documented risk management methodology/procedure covering the full AI lifecycle",
+              "Risk register identifying known and reasonably foreseeable risks to health, safety and fundamental rights under intended purpose and reasonably foreseeable misuse",
+              "Records of periodic systematic review and updates to the risk management system",
+              "Documented linkage between post-market monitoring data (Art 72) and risk re-evaluation"
+            ],
+            "pass_criteria": "A documented risk management system exists that addresses all four elements of Art 9(2)(a)-(d), is explicitly maintained as a continuous iterative process across the lifecycle, and shows dated evidence of at least one systematic review/update including consideration of post-market monitoring data.",
+            "partial_criteria": "A risk management system is documented but is missing one or more of the Art 9(2) elements (e.g., no evaluation of post-market data or no reasonably foreseeable misuse analysis), or exists as a one-off assessment with no evidence of iterative review/update.",
+            "fail_criteria": "No documented risk management system exists, or it does not address risks to health, safety and fundamental rights of the high-risk AI system.",
+            "references": [
+              "Article 9(1)",
+              "Article 9(2)",
+              "Article 9(3)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART9-2",
+            "title": "Adoption of risk management measures, residual risk acceptability, testing and vulnerable groups",
+            "description": "Risk management measures must be such that the relevant residual risk of each hazard and the overall residual risk are judged acceptable, prioritising elimination/reduction by design, then mitigation/control measures, then provision of information and training to deployers per Art 13. The system must be tested against prior defined metrics and probabilistic thresholds to identify the most appropriate measures, and the design must give consideration to whether the system is likely to have an adverse impact on persons under 18 and, as appropriate, other vulnerable groups.",
+            "control": "A documented risk-treatment and testing protocol defining acceptance criteria, target metrics and thresholds, hierarchy of mitigation measures, and a documented vulnerable-group impact consideration.",
+            "weight": 4,
+            "category": "Risk Management",
+            "risk_domain": "Residual risk and vulnerable populations",
+            "evidence_expectations": [
+              "Documented residual-risk acceptance criteria and sign-off records",
+              "Test plans and test reports referencing prior defined metrics and probabilistic thresholds",
+              "Documented hierarchy of risk-mitigation measures (design elimination, mitigation/controls, deployer information/training)",
+              "Assessment of adverse impact on persons under 18 and other vulnerable groups where relevant"
+            ],
+            "pass_criteria": "Documented residual-risk acceptance decisions exist, testing against prior defined metrics/thresholds is evidenced, the mitigation hierarchy of Art 9(4) is applied, and an explicit consideration of impact on minors/vulnerable groups is documented (or reasoned as not applicable).",
+            "partial_criteria": "Risk-treatment measures and some testing are documented but residual-risk acceptance criteria are undefined, testing lacks predefined metrics/thresholds, or the vulnerable-group consideration is absent.",
+            "fail_criteria": "No risk-treatment measures, no residual-risk evaluation, or no testing of the system prior to placing on the market.",
+            "references": [
+              "Article 9(4)",
+              "Article 9(5)",
+              "Article 9(7)",
+              "Article 9(8)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "data_gov",
+        "title": "Data and Data Governance (Article 10)",
+        "description": "Data governance and management practices for training, validation and testing datasets, dataset quality criteria, bias examination and mitigation, and the conditional processing of special categories of personal data for bias correction.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART10-2",
+            "title": "Data governance and management practices for datasets",
+            "description": "Training, validation and testing datasets must be subject to data governance and management practices appropriate to the intended purpose, addressing in particular: design choices; data collection processes and origin (and, for personal data, the original purpose of collection); relevant data-preparation operations (annotation, labelling, cleaning, updating, enrichment, aggregation); formulation of assumptions about what the data measures/represents; assessment of availability, quantity and suitability of datasets; and identification of relevant data gaps or shortcomings and how they are addressed.",
+            "control": "A documented data governance procedure covering dataset design choices, provenance, preparation operations, assumptions, suitability assessment and data-gap handling for all datasets used.",
+            "weight": 5,
+            "category": "Data Governance",
+            "risk_domain": "Data quality and provenance",
+            "evidence_expectations": [
+              "Documented data governance policy covering Art 10(2)(a)-(e),(h)",
+              "Data provenance/lineage records including collection origin and, for personal data, original collection purpose",
+              "Data preparation records (annotation, labelling, cleaning, enrichment, aggregation)",
+              "Documented assumptions about the data and a dataset suitability/availability assessment",
+              "Documented identification of data gaps and remediation actions"
+            ],
+            "pass_criteria": "A documented data governance practice addresses design choices, data collection/origin, data-preparation operations, assumptions, dataset suitability assessment, and data-gap identification/handling for training, validation and testing datasets.",
+            "partial_criteria": "Data governance practices are documented but omit one or more required aspects of Art 10(2) (e.g., no provenance records or no documented assumptions), or cover only some of the datasets.",
+            "fail_criteria": "No documented data governance and management practices exist for the datasets used, for a system that uses data-training techniques.",
+            "references": [
+              "Article 10(1)",
+              "Article 10(2)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART10-3",
+            "title": "Dataset quality criteria — relevance, representativeness, correctness, completeness",
+            "description": "Training, validation and testing datasets must be relevant, sufficiently representative, and to the best extent possible free of errors and complete in view of the intended purpose. They must have appropriate statistical properties, including, where applicable, as regards the persons or groups of persons in relation to whom the system is intended to be used, and must take into account the characteristics of the specific geographical, contextual, behavioural or functional setting.",
+            "control": "Documented dataset quality assessments demonstrating relevance, representativeness, error/completeness controls, statistical property analysis for target populations, and consideration of the operational setting.",
+            "weight": 4,
+            "category": "Data Governance",
+            "risk_domain": "Dataset representativeness and correctness",
+            "evidence_expectations": [
+              "Dataset quality reports evidencing relevance, representativeness, error rates and completeness relative to intended purpose",
+              "Statistical property analysis, including for persons/groups the system will be used on",
+              "Documented consideration of the geographical, contextual, behavioural or functional setting"
+            ],
+            "pass_criteria": "Documented evidence shows datasets are assessed for relevance, representativeness, correctness and completeness for the intended purpose, with statistical-property analysis for the relevant target populations and consideration of the operational setting.",
+            "partial_criteria": "Some dataset quality dimensions are assessed but the analysis is incomplete (e.g., no representativeness/statistical-property analysis for target groups, or no consideration of the operational setting).",
+            "fail_criteria": "No evidence that datasets were assessed against the quality criteria of Art 10(3)-(4).",
+            "references": [
+              "Article 10(3)",
+              "Article 10(4)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART10-4",
+            "title": "Bias examination, mitigation and lawful special-category data processing",
+            "description": "Datasets must be examined in view of possible biases likely to affect health, safety or fundamental rights or lead to prohibited discrimination, and appropriate measures must be adopted to detect, prevent and mitigate identified biases. Where strictly necessary for bias detection and correction, the provider may exceptionally process special categories of personal data, subject to appropriate safeguards for fundamental rights and freedoms (including technical limitations on re-use, state-of-the-art security and pseudonymisation, and restrictions on transmission/access).",
+            "control": "A documented bias examination and mitigation procedure, plus a documented lawful basis and safeguards framework where special-category personal data is processed for bias correction.",
+            "weight": 4,
+            "category": "Data Governance",
+            "risk_domain": "Bias and non-discrimination",
+            "evidence_expectations": [
+              "Bias examination reports identifying possible biases affecting health/safety/fundamental rights",
+              "Documented bias detection, prevention and mitigation measures",
+              "Where special-category data is used: documented necessity justification and safeguards (pseudonymisation, access restrictions, security, non-transmission conditions)"
+            ],
+            "pass_criteria": "Datasets have been examined for possible biases and documented detection/prevention/mitigation measures are in place; where special-category data is processed for bias correction, necessity and the Art 10(5) safeguards are documented.",
+            "partial_criteria": "Bias examination is documented but mitigation measures are not evidenced, or special-category data is processed for bias correction without the full set of documented safeguards.",
+            "fail_criteria": "No bias examination is performed, or special-category personal data is processed for bias correction without documented necessity or safeguards.",
+            "references": [
+              "Article 10(2)(f)",
+              "Article 10(2)(g)",
+              "Article 10(5)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tech_doc",
+        "title": "Technical Documentation (Article 11 / Annex IV)",
+        "description": "Technical documentation drawn up before the system is placed on the market and kept up to date, containing at least the elements of Annex IV.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART11-1",
+            "title": "Technical documentation per Annex IV drawn up and kept up to date",
+            "description": "The provider must draw up the technical documentation for the high-risk AI system before it is placed on the market or put into service and keep it up to date. The documentation must demonstrate compliance with the Chapter III Section 2 requirements and contain at least the elements set out in Annex IV, including a general description of the system, detailed description of its elements and development process, monitoring/functioning/control information, performance metrics, the risk management system, applied standards, and a copy of the EU declaration of conformity.",
+            "control": "A maintained technical documentation file structured against the Annex IV element list, version-controlled and dated before market placement.",
+            "weight": 4,
+            "category": "Technical Documentation",
+            "risk_domain": "Demonstrability of conformity",
+            "evidence_expectations": [
+              "Technical documentation file mapped to the Annex IV element list",
+              "Version history/dates showing it was completed before placing on the market and is kept up to date",
+              "General and detailed system description, performance metrics, and description of the risk management system",
+              "Reference to harmonised standards or common specifications applied"
+            ],
+            "pass_criteria": "Technical documentation exists that covers all Annex IV headings, is dated prior to market placement, and shows evidence of being kept up to date.",
+            "partial_criteria": "Technical documentation exists but omits one or more Annex IV elements, or is not demonstrably maintained/updated after initial drafting.",
+            "fail_criteria": "No technical documentation exists, or it does not follow the Annex IV structure and cannot demonstrate compliance with the Section 2 requirements.",
+            "references": [
+              "Article 11(1)",
+              "Annex IV"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "logging",
+        "title": "Record-Keeping and Logging (Articles 12 & 19)",
+        "description": "Automatic event logging capability over the system lifetime and provider retention of automatically generated logs.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART12-1",
+            "title": "Automatic recording of events (logging) over the system lifetime",
+            "description": "The high-risk AI system must technically allow for the automatic recording of events (logs) over its lifetime. The logging capabilities must enable the recording of events relevant for identifying situations that may result in the system presenting a risk within the meaning of Art 79(1) or leading to a substantial modification, facilitating post-market monitoring, and monitoring the operation of the system. For remote biometric identification systems (Annex III point 1(a)), logging must at minimum record the period of each use, the reference database, the input data for which a search led to a match, and the identification of the natural persons involved in verifying results per Art 14(5).",
+            "control": "Built-in logging functionality with a documented log schema covering risk-relevant events, plus the enhanced logging fields for biometric identification systems where applicable.",
+            "weight": 3,
+            "category": "Record-Keeping",
+            "risk_domain": "Traceability and post-market monitoring",
+            "evidence_expectations": [
+              "System design/technical documentation describing automatic logging capability",
+              "Log schema/specification showing captured event types relevant to risk and substantial modification",
+              "For remote biometric ID systems: evidence logs capture usage period, reference database, matched input data and verifier identities"
+            ],
+            "pass_criteria": "The system automatically records events over its lifetime with a documented capability covering risk-relevant events and (for biometric ID systems) the specific Art 12(3) fields.",
+            "partial_criteria": "Logging exists but the captured events are not clearly tied to risk/substantial-modification detection, or a biometric ID system lacks one or more of the mandatory Art 12(3) fields.",
+            "fail_criteria": "The system has no automatic event logging capability.",
+            "references": [
+              "Article 12(1)",
+              "Article 12(2)",
+              "Article 12(3)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART19-1",
+            "title": "Retention of automatically generated logs",
+            "description": "The provider must keep the logs automatically generated by the high-risk AI system, to the extent such logs are under its control, for a period appropriate to the intended purpose of the system and of at least six months, unless provided otherwise in applicable Union or national law (in particular Union law on protection of personal data).",
+            "control": "A log retention policy specifying retention periods of at least six months (or longer per intended purpose/law) with documented storage and access controls.",
+            "weight": 2,
+            "category": "Record-Keeping",
+            "risk_domain": "Log retention and auditability",
+            "evidence_expectations": [
+              "Documented log retention policy specifying retention period",
+              "Evidence that retained logs cover at least six months where under provider control",
+              "Reference to any Union/national law imposing a different retention period"
+            ],
+            "pass_criteria": "A retention policy exists and evidences retention of automatically generated logs (under the provider's control) for at least six months or a longer period justified by intended purpose/law.",
+            "partial_criteria": "Logs are retained but the retention period is undefined, shorter than six months, or the policy does not address logs under provider control.",
+            "fail_criteria": "Automatically generated logs are not retained by the provider.",
+            "references": [
+              "Article 19(1)",
+              "Article 12(1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "transparency_deployers",
+        "title": "Transparency and Information to Deployers (Article 13)",
+        "description": "System transparency enabling deployers to interpret outputs, and instructions for use containing the mandated content.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART13-1",
+            "title": "Transparency and instructions for use for deployers",
+            "description": "The high-risk AI system must be designed and developed to ensure that its operation is sufficiently transparent to enable deployers to interpret the output and use it appropriately, and must be accompanied by instructions for use in an appropriate digital or other format. The instructions must contain at least: provider identity and contact details; the system's characteristics, capabilities and limitations of performance (intended purpose; level of accuracy including metrics, robustness and cybersecurity; foreseeable circumstances that may lead to risks; performance regarding specific persons/groups; input data specifications); any pre-determined changes; the human oversight measures under Art 14; the computational/hardware resources, expected lifetime and maintenance; and, where relevant, the log-collection mechanisms.",
+            "control": "Published instructions-for-use documentation structured against Art 13(3)(a)-(f), delivered with the system in an appropriate format.",
+            "weight": 4,
+            "category": "Transparency",
+            "risk_domain": "Appropriate use by deployers",
+            "evidence_expectations": [
+              "Instructions for use document delivered with the system",
+              "Coverage of provider identity/contact, intended purpose, accuracy/robustness/cybersecurity metrics, limitations and foreseeable risks",
+              "Description of human oversight measures, expected lifetime/maintenance, and log mechanisms where relevant"
+            ],
+            "pass_criteria": "Instructions for use exist and contain all required Art 13(3) elements, and the system's operation is documented as sufficiently transparent for deployers to interpret and appropriately use outputs.",
+            "partial_criteria": "Instructions for use exist but omit one or more required Art 13(3) elements (e.g., no accuracy metrics, no limitations, or no human-oversight description).",
+            "fail_criteria": "No instructions for use accompany the system, or they lack the essential information needed for appropriate use.",
+            "references": [
+              "Article 13(1)",
+              "Article 13(2)",
+              "Article 13(3)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "human_oversight",
+        "title": "Human Oversight (Article 14)",
+        "description": "Design and measures enabling effective human oversight of the high-risk AI system during use, including specialized verification for biometric identification.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART14-1",
+            "title": "Effective human oversight design and measures",
+            "description": "The high-risk AI system must be designed and developed, including with appropriate human-machine interface tools, such that it can be effectively overseen by natural persons during the period it is in use, in order to prevent or minimise risks to health, safety or fundamental rights. Oversight measures (built in by the provider and/or identified for the deployer to implement) must enable the assigned persons to understand the system's capacities and limitations and monitor operation (including anomaly detection), remain aware of automation bias, correctly interpret output, decide not to use or to disregard/override/reverse output, and intervene or interrupt operation via a 'stop' function.",
+            "control": "A documented human oversight design and procedure defining assigned roles, human-machine interface controls, and the specific oversight capabilities of Art 14(4)(a)-(e), including a stop/override mechanism.",
+            "weight": 5,
+            "category": "Human Oversight",
+            "risk_domain": "Human agency and fundamental rights",
+            "evidence_expectations": [
+              "Documented human oversight procedure identifying named roles/responsibilities",
+              "Design documentation of human-machine interface tools and a stop/override capability",
+              "Evidence that oversight measures cover Art 14(4)(a)-(e), including automation-bias awareness and output-interpretation support"
+            ],
+            "pass_criteria": "Human oversight measures are documented and built in and/or specified for the deployer, covering all Art 14(4) capabilities including intervention/stop, and roles are assigned to competent persons.",
+            "partial_criteria": "Human oversight measures exist but are incomplete (e.g., no stop/override mechanism, no automation-bias consideration, or no assigned roles).",
+            "fail_criteria": "The system is not designed to be effectively overseen by natural persons and no oversight measures are defined.",
+            "references": [
+              "Article 14(1)",
+              "Article 14(2)",
+              "Article 14(3)",
+              "Article 14(4)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART14-5",
+            "title": "Separate two-person verification for remote biometric identification",
+            "description": "For high-risk AI systems referred to in Annex III point 1(a) (remote biometric identification systems), the oversight measures must be such that no action or decision is taken by the deployer on the basis of the identification resulting from the system unless that identification has been separately verified and confirmed by at least two natural persons with the necessary competence, training and authority (subject to the exceptions foreseen for certain law enforcement, migration, border control or asylum contexts).",
+            "control": "A documented four-eyes verification procedure for biometric identification outputs, defining the two competent verifiers and any lawful exceptions.",
+            "weight": 3,
+            "category": "Human Oversight",
+            "risk_domain": "Biometric identification and rights",
+            "evidence_expectations": [
+              "Documented two-person verification procedure for biometric identification results",
+              "Role definitions evidencing competence, training and authority of verifiers",
+              "Documentation of any applicable Art 14(5) exception where relied upon"
+            ],
+            "pass_criteria": "For an applicable remote biometric identification system, a documented procedure ensures identification results are separately verified and confirmed by at least two competent, trained and authorised persons before any action/decision (or a lawful exception is documented). For non-applicable systems, this is reasoned as not applicable.",
+            "partial_criteria": "A verification procedure exists but does not clearly require two competent verifiers, or verifier competence/authority is not evidenced.",
+            "fail_criteria": "An in-scope remote biometric identification system allows actions/decisions on identification results without separate two-person verification.",
+            "references": [
+              "Article 14(5)",
+              "Annex III point 1(a)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "accuracy_robustness_cyber",
+        "title": "Accuracy, Robustness and Cybersecurity (Article 15)",
+        "description": "Appropriate and consistent levels of accuracy (with declared metrics), robustness including fail-safe design and feedback-loop control, and cybersecurity resilience against AI-specific attacks.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART15-1",
+            "title": "Appropriate accuracy with declared metrics",
+            "description": "The high-risk AI system must be designed and developed to achieve an appropriate level of accuracy and to perform consistently in that respect throughout its lifecycle. The levels of accuracy and the relevant accuracy metrics must be declared in the accompanying instructions for use.",
+            "control": "Documented accuracy target-setting, measurement methodology and validation results, with the accuracy levels and metrics declared in the instructions for use.",
+            "weight": 4,
+            "category": "Accuracy & Robustness",
+            "risk_domain": "Model performance and reliability",
+            "evidence_expectations": [
+              "Documented accuracy metrics and test/validation results",
+              "Declaration of accuracy levels and metrics in the instructions for use",
+              "Evidence of monitoring accuracy consistency over the lifecycle"
+            ],
+            "pass_criteria": "An appropriate accuracy level is defined, measured and validated, and the accuracy levels and relevant metrics are declared in the instructions for use.",
+            "partial_criteria": "Accuracy is measured internally but the levels/metrics are not declared in the instructions for use, or there is no evidence of lifecycle consistency monitoring.",
+            "fail_criteria": "No accuracy metrics are defined or measured for the system.",
+            "references": [
+              "Article 15(1)",
+              "Article 15(3)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART15-2",
+            "title": "Robustness, fail-safe design and control of feedback loops",
+            "description": "The system must achieve an appropriate level of robustness and perform consistently, being resilient against errors, faults or inconsistencies within the system or its operating environment; robustness may be achieved through technical redundancy solutions such as backup or fail-safe plans. High-risk AI systems that continue to learn after being placed on the market must be developed to eliminate or reduce as far as possible the risk of possibly biased outputs influencing input for future operations (feedback loops), with appropriate mitigation measures.",
+            "control": "Documented robustness engineering measures (redundancy/backup/fail-safe) and, for continuously-learning systems, documented feedback-loop mitigation controls.",
+            "weight": 4,
+            "category": "Accuracy & Robustness",
+            "risk_domain": "System resilience and feedback bias",
+            "evidence_expectations": [
+              "Documented robustness/redundancy and backup or fail-safe measures",
+              "Test evidence of resilience to errors, faults and environmental inconsistencies",
+              "For continuously-learning systems: documented feedback-loop mitigation measures"
+            ],
+            "pass_criteria": "Robustness is addressed with documented technical measures (e.g., redundancy/fail-safe) and resilience testing, and continuously-learning systems have documented feedback-loop mitigation.",
+            "partial_criteria": "Robustness measures are documented but resilience testing is missing, or a continuously-learning system lacks documented feedback-loop controls.",
+            "fail_criteria": "No robustness or fail-safe measures are implemented for the system.",
+            "references": [
+              "Article 15(1)",
+              "Article 15(4)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART15-3",
+            "title": "Cybersecurity resilience against AI-specific attacks",
+            "description": "The high-risk AI system must be resilient against attempts by unauthorised third parties to alter its use, outputs or performance by exploiting vulnerabilities. Technical solutions must be appropriate to the circumstances and risks and must include, as appropriate, measures to prevent, detect, respond to, resolve and control attacks trying to manipulate the training dataset (data poisoning), pre-trained components used in training (model poisoning), inputs designed to cause the model to make mistakes (adversarial examples or model evasion), confidentiality attacks, and model flaws.",
+            "control": "An AI-specific cybersecurity control set addressing data poisoning, model poisoning, adversarial/evasion inputs, confidentiality attacks and model flaws, backed by threat modelling and testing.",
+            "weight": 5,
+            "category": "Cybersecurity",
+            "risk_domain": "Adversarial resilience and integrity",
+            "evidence_expectations": [
+              "AI-specific threat model / security risk assessment",
+              "Documented technical measures against data poisoning, model poisoning, adversarial examples and confidentiality attacks",
+              "Security testing/penetration-testing evidence and vulnerability management records"
+            ],
+            "pass_criteria": "Documented cybersecurity measures address the AI-specific attack classes of Art 15(5) (data poisoning, model poisoning, adversarial/evasion, confidentiality, model flaws) proportionate to risk, with supporting testing.",
+            "partial_criteria": "General cybersecurity controls exist but do not specifically address the AI-specific attack classes, or there is no supporting testing/threat modelling.",
+            "fail_criteria": "No cybersecurity measures are implemented for the system's resilience against unauthorised alteration.",
+            "references": [
+              "Article 15(1)",
+              "Article 15(5)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "provider_obligations",
+        "title": "Provider Obligations and Quality Management (Articles 16-21)",
+        "description": "Provider-level obligations including a quality management system, documentation keeping, corrective actions and duty of information, and cooperation with competent authorities.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART17-1",
+            "title": "Quality management system (QMS)",
+            "description": "The provider must put in place a quality management system that ensures compliance with the Regulation, documented in a systematic and orderly manner in the form of written policies, procedures and instructions, and including at least: a regulatory compliance strategy (including conformity assessment and management of modifications); design and development control/verification procedures; quality control and quality assurance; examination, test and validation procedures; technical specifications and standards applied; data management systems and procedures; the risk management system (Art 9); post-market monitoring (Art 72); serious-incident reporting procedures (Art 73); communication with authorities; record-keeping; resource management (including security-of-supply); and an accountability framework.",
+            "control": "A documented QMS with written policies, procedures and instructions mapped to Art 17(1)(a)-(m), with defined ownership and an accountability framework.",
+            "weight": 5,
+            "category": "Quality Management",
+            "risk_domain": "Organisational compliance governance",
+            "evidence_expectations": [
+              "QMS manual with written policies, procedures and instructions",
+              "Mapping of QMS elements to Art 17(1)(a)-(m)",
+              "Evidence of a regulatory compliance strategy, post-market monitoring and serious-incident reporting procedures",
+              "Defined accountability framework and management responsibilities"
+            ],
+            "pass_criteria": "A documented QMS exists with written policies/procedures covering all Art 17(1) elements, including compliance strategy, risk management, post-market monitoring, serious-incident reporting and an accountability framework.",
+            "partial_criteria": "A QMS exists but is missing one or more Art 17(1) elements or is not documented in a systematic/orderly written form.",
+            "fail_criteria": "No quality management system is in place.",
+            "references": [
+              "Article 16",
+              "Article 17(1)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART18-1",
+            "title": "Documentation keeping for 10 years",
+            "description": "For a period ending 10 years after the high-risk AI system has been placed on the market or put into service, the provider must keep at the disposal of the national competent authorities: the technical documentation (Art 11); the QMS documentation (Art 17); documentation on changes approved by notified bodies where applicable; decisions and other documents issued by notified bodies where applicable; and the EU declaration of conformity (Art 47).",
+            "control": "A records-retention policy ensuring the specified documentation set is retained and retrievable for 10 years and available to national competent authorities.",
+            "weight": 2,
+            "category": "Documentation Retention",
+            "risk_domain": "Accountability and traceability",
+            "evidence_expectations": [
+              "Records-retention policy specifying a 10-year retention period for the Art 18 document set",
+              "Evidence of stored technical documentation, QMS documentation and EU declaration of conformity",
+              "Notified body decisions/approvals on file where applicable"
+            ],
+            "pass_criteria": "A retention policy and stored records demonstrate that the full Art 18 documentation set is kept and retrievable for 10 years at the disposal of national competent authorities.",
+            "partial_criteria": "Some documentation is retained but the retention period is under 10 years or part of the required document set is missing.",
+            "fail_criteria": "The required documentation is not retained or cannot be made available to competent authorities.",
+            "references": [
+              "Article 18(1)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART20-1",
+            "title": "Corrective actions and duty of information",
+            "description": "Providers who consider or have reason to consider that a high-risk AI system they have placed on the market or put into service is not in conformity with the Regulation must immediately take the necessary corrective actions to bring it into conformity, withdraw it, disable it or recall it as appropriate, and inform the relevant distributors, deployers, authorised representative and importers. Where the system presents a risk within the meaning of Art 79(1), the provider must immediately investigate the causes (in collaboration with the reporting deployer where applicable) and inform the relevant market surveillance authorities.",
+            "control": "A documented non-conformity/corrective-action procedure with defined triggers, actions (withdraw/disable/recall), stakeholder notification and market-surveillance reporting.",
+            "weight": 3,
+            "category": "Market Surveillance",
+            "risk_domain": "Non-conformity remediation",
+            "evidence_expectations": [
+              "Documented corrective-action procedure covering withdrawal, disabling and recall",
+              "Stakeholder notification process (distributors, deployers, authorised representative, importers)",
+              "Process for informing market surveillance authorities where a risk under Art 79(1) exists"
+            ],
+            "pass_criteria": "A documented procedure defines corrective actions, stakeholder notification and market-surveillance reporting for non-conforming or risk-presenting systems, and is invoked as evidenced where relevant.",
+            "partial_criteria": "A corrective-action procedure exists but omits stakeholder notification or the duty to inform market surveillance authorities.",
+            "fail_criteria": "No corrective-action or information-duty process exists for non-conforming systems.",
+            "references": [
+              "Article 20(1)",
+              "Article 20(2)",
+              "Article 16"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART21-1",
+            "title": "Cooperation with competent authorities",
+            "description": "Upon a reasoned request from a competent authority, the provider must provide all the information and documentation necessary to demonstrate the conformity of the high-risk AI system with the Section 2 requirements, in a language which can be easily understood by the authority, and must grant the requesting authority access to the automatically generated logs (Art 12(1)) to the extent such logs are under the provider's control.",
+            "control": "A documented authority-cooperation procedure ensuring timely provision of conformity documentation and log access in an accessible language.",
+            "weight": 2,
+            "category": "Market Surveillance",
+            "risk_domain": "Regulatory cooperation",
+            "evidence_expectations": [
+              "Documented procedure for responding to reasoned requests from competent authorities",
+              "Evidence documentation can be provided in an official language easily understood by the authority",
+              "Mechanism to provide authorities access to automatically generated logs under provider control"
+            ],
+            "pass_criteria": "A documented process ensures conformity information/documentation and log access can be provided to competent authorities on reasoned request in an accessible language.",
+            "partial_criteria": "A cooperation process exists but does not address log access or the language accessibility requirement.",
+            "fail_criteria": "No process exists to cooperate with competent authorities or provide conformity documentation/logs on request.",
+            "references": [
+              "Article 21(1)",
+              "Article 21(2)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "post_market",
+        "title": "Post-Market Monitoring and Serious Incident Reporting (Articles 72 & 73)",
+        "description": "Provider post-market monitoring system and plan across the deployed lifetime of the high-risk AI system, and reporting of serious incidents to market surveillance authorities within the statutory deadlines.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART72-1",
+            "title": "Post-market monitoring system and plan",
+            "description": "The provider must establish and document a post-market monitoring system proportionate to the nature of the AI technologies and the risks of the high-risk AI system. The system must actively and systematically collect, document and analyse relevant data on the performance of the high-risk AI system throughout its lifetime, enabling the provider to evaluate continuous compliance with the Chapter III Section 2 requirements. The post-market monitoring system must be based on a post-market monitoring plan that forms part of the technical documentation referred to in Annex IV, following the template to be provided by the Commission.",
+            "control": "A documented post-market monitoring system and a post-market monitoring plan (part of the Annex IV technical documentation) defining data to be collected, analysis cadence and the feedback loop into the risk management system.",
+            "weight": 3,
+            "category": "Post-Market Monitoring",
+            "risk_domain": "Continuous conformity and field performance",
+            "evidence_expectations": [
+              "Documented post-market monitoring system proportionate to risk",
+              "Post-market monitoring plan included in the Annex IV technical documentation",
+              "Records of systematic collection and analysis of field performance data",
+              "Evidence that monitoring findings feed the risk management system (Art 9) and corrective actions (Art 20)"
+            ],
+            "pass_criteria": "A documented post-market monitoring system and a post-market monitoring plan (part of the Annex IV documentation) exist, and there is evidence of active, systematic collection and analysis of performance data feeding compliance re-evaluation.",
+            "partial_criteria": "A post-market monitoring system is documented but lacks a formal monitoring plan, is not part of the technical documentation, or shows no evidence of active data collection/analysis.",
+            "fail_criteria": "No post-market monitoring system or plan exists for the high-risk AI system.",
+            "references": [
+              "Article 72(1)",
+              "Article 72(2)",
+              "Article 72(3)",
+              "Annex IV"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART73-1",
+            "title": "Reporting of serious incidents",
+            "description": "Providers of high-risk AI systems placed on the Union market must report any serious incident to the market surveillance authorities of the Member States where the incident occurred. The report must be made immediately after the provider has established a causal link (or its reasonable likelihood) between the AI system and the serious incident, and in any event not later than 15 days after becoming aware of it, with shorter deadlines for incidents involving the death of a person (Art 73(4)) and for widespread infringements or serious incidents affecting critical infrastructure (Art 73(3)).",
+            "control": "A documented serious-incident detection, assessment and reporting procedure defining reporting channels to market surveillance authorities and the applicable statutory deadlines.",
+            "weight": 4,
+            "category": "Serious Incident Reporting",
+            "risk_domain": "Safety incident escalation and market surveillance",
+            "evidence_expectations": [
+              "Documented serious-incident reporting procedure identifying the competent market surveillance authority",
+              "Defined reporting deadlines aligned with Art 73(2)-(4) (general 15 days; accelerated for death or critical-infrastructure/widespread cases)",
+              "Records of any serious incidents and reports submitted, or a reasoned nil return",
+              "Process linking incident findings to causal investigation and corrective measures"
+            ],
+            "pass_criteria": "A documented procedure ensures serious incidents are reported to the relevant market surveillance authorities within the Art 73 deadlines, and any actual incidents are evidenced as reported (or a reasoned nil return exists).",
+            "partial_criteria": "A reporting procedure exists but does not define the correct authority, omits the accelerated deadlines, or lacks evidence of application where incidents occurred.",
+            "fail_criteria": "No serious-incident reporting procedure exists, or a known serious incident was not reported to the market surveillance authorities.",
+            "references": [
+              "Article 73(1)",
+              "Article 73(2)",
+              "Article 73(3)",
+              "Article 73(4)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "conformity_market",
+        "title": "Conformity Assessment and Market Placement (Articles 43, 47, 48, 49)",
+        "description": "Conformity assessment procedure, EU declaration of conformity, CE marking, and registration in the EU database prior to placing on the market.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART43-1",
+            "title": "Conformity assessment procedure",
+            "description": "Before placing a high-risk AI system on the market or putting it into service, the provider must undergo the applicable conformity assessment procedure. For Annex III point 1 (biometrics) systems, where the provider has applied harmonised standards or common specifications the provider may choose between the internal-control procedure (Annex VI) and the assessment involving a notified body (Annex VII); where such standards/specifications have not been applied, the notified body procedure (Annex VII) is required. For Annex III points 2-8, the internal-control procedure (Annex VI) applies. Systems covered by Annex I Union harmonisation legislation follow the relevant sectoral conformity assessment.",
+            "control": "A documented determination of the applicable conformity assessment route and completed assessment records (internal control or notified body) prior to market placement.",
+            "weight": 5,
+            "category": "Conformity Assessment",
+            "risk_domain": "Pre-market conformity",
+            "evidence_expectations": [
+              "Documented determination of the applicable conformity assessment route",
+              "Completed internal-control (Annex VI) assessment records or notified-body (Annex VII) certificate",
+              "Reference to harmonised standards/common specifications applied where relevant"
+            ],
+            "pass_criteria": "The correct conformity assessment procedure for the system's Annex III category has been identified and completed (with a notified-body certificate where required) before market placement.",
+            "partial_criteria": "A conformity assessment has been started or partially documented, or the wrong route was applied but assessment activity is evidenced.",
+            "fail_criteria": "No conformity assessment has been carried out, or a notified-body assessment required by Art 43 is absent.",
+            "references": [
+              "Article 43(1)",
+              "Article 43(2)",
+              "Annex VI",
+              "Annex VII"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART47-1",
+            "title": "EU declaration of conformity",
+            "description": "The provider must draw up a written, machine-readable, physical or electronically signed EU declaration of conformity for each high-risk AI system, keep it at the disposal of national competent authorities for 10 years after the system is placed on the market or put into service, and provide a copy to the relevant authorities upon request. The declaration must state that the system meets the Section 2 requirements, contain the information set out in Annex V, and be translated as required by the Member States where the system is placed on the market or made available.",
+            "control": "A signed EU declaration of conformity per system, structured against Annex V, retained for 10 years and translated as required.",
+            "weight": 3,
+            "category": "Conformity Assessment",
+            "risk_domain": "Declared conformity",
+            "evidence_expectations": [
+              "Signed EU declaration of conformity containing the Annex V information",
+              "Statement that the system meets the Section 2 requirements",
+              "Evidence of translation into required languages and 10-year retention"
+            ],
+            "pass_criteria": "A signed EU declaration of conformity exists per system with all Annex V content and is retained/translated as required.",
+            "partial_criteria": "An EU declaration of conformity exists but is missing Annex V elements, is unsigned, or lacks required translations.",
+            "fail_criteria": "No EU declaration of conformity has been drawn up.",
+            "references": [
+              "Article 47(1)",
+              "Article 47(2)",
+              "Annex V"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART48-1",
+            "title": "CE marking of conformity",
+            "description": "The provider must affix the CE marking to the high-risk AI system (or, where not possible, to its packaging or accompanying documentation) visibly, legibly and indelibly to indicate conformity with the Regulation; for digitally provided systems, a digital CE marking must be used where it can be easily accessed. Where a notified body is involved in the conformity assessment, the CE marking must be followed by that notified body's identification number.",
+            "control": "CE marking affixed per Art 48 requirements, including notified body identification number where applicable, and, for digital systems, a digital CE marking.",
+            "weight": 3,
+            "category": "Conformity Assessment",
+            "risk_domain": "Market conformity signalling",
+            "evidence_expectations": [
+              "Evidence of the CE marking on the system, packaging or documentation (or digital CE marking)",
+              "Notified body identification number displayed with the CE marking where applicable",
+              "Confirmation the marking is visible, legible and indelible"
+            ],
+            "pass_criteria": "The CE marking is affixed per Art 48 (including a digital CE marking for digital systems and the notified body number where a notified body was involved).",
+            "partial_criteria": "A CE marking is affixed but does not meet all requirements (e.g., missing notified body number where required, or not accessible for a digital system).",
+            "fail_criteria": "No CE marking is affixed to the high-risk AI system.",
+            "references": [
+              "Article 48(1)",
+              "Article 48(2)",
+              "Article 48(3)",
+              "Article 48(4)",
+              "Article 48(5)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART49-1",
+            "title": "Registration in the EU database",
+            "description": "Before placing on the market or putting into service a high-risk AI system listed in Annex III (other than the Annex III point 2 critical-infrastructure systems), the provider or, where applicable, the authorised representative must register themselves and their system in the EU database referred to in Art 71, providing the information specified in Annex VIII.",
+            "control": "Completed EU database registration record for the provider and the system with the Annex VIII information, dated before market placement.",
+            "weight": 3,
+            "category": "Conformity Assessment",
+            "risk_domain": "Market transparency and traceability",
+            "evidence_expectations": [
+              "EU database registration confirmation for the provider and the system",
+              "Annex VIII registration information provided",
+              "Registration dated prior to placing on the market/putting into service"
+            ],
+            "pass_criteria": "The provider (or authorised representative) and the in-scope Annex III system are registered in the EU database with the Annex VIII information before market placement (or the system is reasoned to be exempt, e.g., Annex III point 2).",
+            "partial_criteria": "Registration has been initiated but is incomplete, or occurred after the system was placed on the market.",
+            "fail_criteria": "An in-scope Annex III system is placed on the market without EU database registration.",
+            "references": [
+              "Article 49(1)",
+              "Article 71",
+              "Annex VIII"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "transparency_art50",
+        "title": "Transparency Obligations for Certain AI Systems (Article 50)",
+        "description": "Transparency duties for AI systems that interact with people, generate synthetic content, or are used for emotion recognition, biometric categorisation or deep fakes.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART50-1",
+            "title": "Disclosure of interaction with an AI system",
+            "description": "Providers must ensure that AI systems intended to interact directly with natural persons are designed and developed so that the natural persons concerned are informed that they are interacting with an AI system, unless this is obvious from the point of view of a reasonably well-informed, observant and circumspect natural person, taking into account the circumstances and context of use. This does not affect the exception for law-enforcement uses subject to safeguards.",
+            "control": "A design/UX measure that clearly informs users they are interacting with an AI system at or before first interaction.",
+            "weight": 3,
+            "category": "Transparency",
+            "risk_domain": "User awareness / manipulation risk",
+            "evidence_expectations": [
+              "Screenshots or UX documentation of the AI-interaction disclosure",
+              "Documented assessment of whether the AI nature is 'obvious' where no disclosure is shown",
+              "Confirmation the disclosure appears at the latest at first interaction"
+            ],
+            "pass_criteria": "For AI systems that interact directly with natural persons, a clear disclosure that the user is interacting with an AI system is provided (or a documented justification exists that this is obvious/exempt).",
+            "partial_criteria": "A disclosure exists but is unclear, not provided at first interaction, or the 'obvious'/exemption justification is undocumented.",
+            "fail_criteria": "An AI system interacting directly with natural persons provides no disclosure and no valid exemption applies.",
+            "references": [
+              "Article 50(1)",
+              "Article 50(5)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART50-2",
+            "title": "Marking of AI-generated synthetic content",
+            "description": "Providers of AI systems (including general-purpose AI systems) that generate synthetic audio, image, video or text content must ensure that the outputs are marked in a machine-readable format and detectable as artificially generated or manipulated. The technical solutions must be effective, interoperable, robust and reliable as far as technically feasible, taking into account specificities and limitations of content types, costs of implementation and generally acknowledged state of the art (with limited exceptions, e.g., assistive/standard-editing functions).",
+            "control": "Technical marking/watermarking of AI-generated outputs in a machine-readable, detectable format meeting state-of-the-art interoperability and robustness.",
+            "weight": 3,
+            "category": "Transparency",
+            "risk_domain": "Synthetic media provenance",
+            "evidence_expectations": [
+              "Technical documentation of the content marking/watermarking mechanism",
+              "Evidence outputs are machine-readable and detectable as artificially generated/manipulated",
+              "Assessment of effectiveness, interoperability, robustness and reliability against state of the art"
+            ],
+            "pass_criteria": "AI-generated synthetic audio/image/video/text outputs are marked in a machine-readable, detectable format using effective, interoperable and robust technical solutions (or a documented exemption applies).",
+            "partial_criteria": "Marking exists but is not machine-readable/detectable, or its effectiveness, interoperability or robustness is not evidenced.",
+            "fail_criteria": "AI-generated synthetic content is not marked as artificially generated or manipulated.",
+            "references": [
+              "Article 50(2)"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART50-3",
+            "title": "Deployer disclosure for emotion recognition, biometric categorisation and deep fakes",
+            "description": "Deployers of an emotion recognition system or a biometric categorisation system must inform the natural persons exposed to it of its operation and process personal data per applicable law. Deployers of an AI system that generates or manipulates image, audio or video content constituting a deep fake must disclose that the content has been artificially generated or manipulated; where the content is part of an artistic/creative/satirical work, disclosure may be limited to a manner not hampering the work. Deployers of AI systems generating or manipulating text published to inform the public on matters of public interest must disclose that the text has been artificially generated or manipulated, unless human editorial review/responsibility applies.",
+            "control": "Deployer-side disclosure procedures for emotion recognition/biometric categorisation exposure and deep-fake/public-interest text labelling, provided at the latest at first exposure.",
+            "weight": 3,
+            "category": "Transparency",
+            "risk_domain": "Informed exposure and disinformation",
+            "evidence_expectations": [
+              "Disclosure notices for emotion recognition/biometric categorisation exposure",
+              "Deep fake labelling evidence and public-interest text disclosure labels",
+              "Documented handling of artistic/creative or editorial-review exceptions"
+            ],
+            "pass_criteria": "Applicable deployer disclosures for emotion recognition, biometric categorisation, deep fakes and public-interest text are provided at the latest at first exposure (or documented exceptions apply).",
+            "partial_criteria": "Some disclosures are provided but one applicable obligation (e.g., deep-fake labelling or emotion-recognition notice) is missing or not timely.",
+            "fail_criteria": "No transparency disclosures are provided for in-scope emotion recognition, biometric categorisation, deep-fake or public-interest text use.",
+            "references": [
+              "Article 50(3)",
+              "Article 50(4)",
+              "Article 50(5)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "gpai",
+        "title": "General-Purpose AI Model Obligations (Articles 53 & 55)",
+        "description": "Obligations for providers of general-purpose AI (GPAI) models, and additional obligations for GPAI models with systemic risk.",
+        "requirements": [
+          {
+            "identifier": "EUAIACT-ART53-1",
+            "title": "GPAI model provider obligations",
+            "description": "Providers of general-purpose AI models must: draw up and keep up to date technical documentation of the model (including its training and testing process and evaluation results) containing at least the information in Annex XI, to be provided to the AI Office and national competent authorities on request; draw up, keep up to date and make available information and documentation to downstream providers who intend to integrate the model, containing at least the elements of Annex XII while respecting intellectual property and trade secrets; put in place a policy to comply with Union copyright law (in particular to identify and comply with reservations of rights under Article 4(3) of Directive (EU) 2019/790); and draw up and make publicly available a sufficiently detailed summary of the content used for training, according to the AI Office template.",
+            "control": "GPAI model documentation set (Annex XI + Annex XII), a documented copyright-compliance policy, and a published training-content summary per the AI Office template.",
+            "weight": 3,
+            "category": "GPAI Governance",
+            "risk_domain": "GPAI transparency and IP",
+            "evidence_expectations": [
+              "GPAI model technical documentation per Annex XI",
+              "Downstream-integrator information/documentation per Annex XII",
+              "Documented Union copyright compliance policy referencing Art 4(3) of Directive (EU) 2019/790",
+              "Publicly available training-content summary per the AI Office template"
+            ],
+            "pass_criteria": "The GPAI model provider maintains Annex XI technical documentation and Annex XII downstream documentation, has a documented copyright-compliance policy, and has published a training-content summary (or a valid open-source exemption under Art 53(2) applies to the documentation obligations).",
+            "partial_criteria": "Some GPAI obligations are met but one is missing (e.g., no training-content summary or no copyright policy), or documentation is incomplete against Annex XI/XII.",
+            "fail_criteria": "No GPAI model documentation, copyright policy or training-content summary exists for a GPAI model placed on the market.",
+            "references": [
+              "Article 53(1)",
+              "Article 53(2)",
+              "Annex XI",
+              "Annex XII"
+            ]
+          },
+          {
+            "identifier": "EUAIACT-ART55-1",
+            "title": "Systemic-risk GPAI model obligations",
+            "description": "Providers of general-purpose AI models with systemic risk must, in addition to the Article 53 obligations: perform model evaluation in accordance with standardised protocols and tools reflecting the state of the art, including conducting and documenting adversarial testing to identify and mitigate systemic risks; assess and mitigate possible systemic risks at Union level, including their sources; keep track of, document and report without undue delay to the AI Office and, as appropriate, national competent authorities, relevant information about serious incidents and possible corrective measures; and ensure an adequate level of cybersecurity protection for the model and its physical infrastructure.",
+            "control": "A systemic-risk management programme covering model evaluation and adversarial testing, systemic-risk assessment/mitigation, serious-incident tracking/reporting to the AI Office, and model-and-infrastructure cybersecurity.",
+            "weight": 4,
+            "category": "GPAI Governance",
+            "risk_domain": "Systemic risk at Union level",
+            "evidence_expectations": [
+              "Model evaluation and documented adversarial testing (red-teaming) reports",
+              "Union-level systemic-risk assessment and mitigation documentation",
+              "Serious-incident tracking and reporting procedure referencing the AI Office",
+              "Cybersecurity protection measures for the model and its physical infrastructure"
+            ],
+            "pass_criteria": "For a GPAI model designated/qualifying as systemic-risk, all four Art 55(1) obligations are documented and evidenced: state-of-the-art evaluation with adversarial testing, systemic-risk assessment/mitigation, serious-incident tracking/reporting to the AI Office, and adequate model/infrastructure cybersecurity. For non-systemic-risk models, reasoned as not applicable.",
+            "partial_criteria": "The GPAI model has systemic risk and some obligations are met (e.g., evaluation and cybersecurity) but one or more are missing (e.g., no documented adversarial testing or no serious-incident reporting process).",
+            "fail_criteria": "A GPAI model with systemic risk meets none of the Art 55(1) obligations.",
+            "references": [
+              "Article 55(1)",
+              "Article 51",
+              "Article 53"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

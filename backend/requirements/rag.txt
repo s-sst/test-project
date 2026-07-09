@@ -1,0 +1,6 @@
+-r base.txt
+# ---------------------------------------------------------------------------
+# Retrieval-Augmented Generation stack (Phase 2). Vector store + embeddings.
+# ---------------------------------------------------------------------------
+chromadb==0.5.0
+sentence-transformers==2.7.0

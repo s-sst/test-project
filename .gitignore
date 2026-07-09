@@ -1,0 +1,44 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.Python
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Django ---
+*.log
+*.sqlite3
+*.sqlite3-journal
+backend/media/
+backend/staticfiles/
+backend/.chroma/
+
+# --- Secrets / environment ---
+.env
+.env.*
+!.env.example
+
+# --- Test / coverage ---
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# --- Tooling / OS ---
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+.idea/
+.vscode/
+
+# --- Node / frontend (future phases) ---
+node_modules/
+frontend/dist/

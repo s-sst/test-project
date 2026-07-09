@@ -1,0 +1,37 @@
+Assess a single governance requirement against the retrieved document context.
+
+FRAMEWORK: $framework_name
+REQUIREMENT ID: $requirement_id
+REQUIREMENT TITLE: $requirement_title
+REQUIREMENT DESCRIPTION:
+$requirement_description
+
+EXPECTED CONTROL:
+$requirement_control
+
+PASS CRITERIA: $pass_criteria
+PARTIAL CRITERIA: $partial_criteria
+FAIL CRITERIA: $fail_criteria
+
+EVIDENCE EXPECTATIONS:
+$evidence_expectations
+
+RETRIEVED DOCUMENT CONTEXT (each block is tagged with its source document and page):
+$context
+
+TASK:
+Decide the status of this requirement using ONLY the retrieved context above.
+Quote the exact supporting text and cite its page. If the context is
+insufficient, return "CANNOT_DETERMINE" and enumerate the missing information.
+
+Return STRICT JSON ONLY, matching exactly this shape:
+{
+  "requirement_id": "$requirement_id",
+  "status": "PASS | PARTIAL | FAIL | CANNOT_DETERMINE",
+  "confidence": 0.0,
+  "evidence": [
+    { "quote": "verbatim text from the context", "page": 0 }
+  ],
+  "reasoning": "why this status follows from the quoted evidence",
+  "missing_information": []
+}

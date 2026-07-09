@@ -1,0 +1,832 @@
+{
+  "framework": {
+    "id": "iso_42001",
+    "name": "ISO/IEC 42001:2023 — Artificial Intelligence Management System (AIMS)",
+    "version": "2023",
+    "publisher": "International Organization for Standardization / International Electrotechnical Commission (ISO/IEC)",
+    "category": "AI Governance / Management System",
+    "description": "Compliance control library for ISO/IEC 42001:2023, the first international management system standard for artificial intelligence. It covers the mandatory management-system requirements of Clauses 4-10 (context; leadership incl. commitment, policy and roles; planning incl. AI risk assessment/treatment, AI system impact assessment, AI objectives and planning of changes; support incl. resources, competence, awareness, communication and documented information; operation; performance evaluation incl. monitoring/measurement, internal audit and management review; improvement) and the reference controls of Annex A organized by objectives A.2 (AI policy), A.3 (internal organization), A.4 (resources), A.5 (assessing impacts of AI systems), A.6 (AI system life cycle), A.7 (data for AI systems), A.8 (information for interested parties), A.9 (use of AI systems) and A.10 (third-party and customer relationships). Requirements are written for auditor use with precise pass/partial/fail criteria and concrete evidence expectations.",
+    "source_url": "https://www.iso.org/standard/81230.html",
+    "scoring": {
+      "status_scores": {
+        "PASS": 1,
+        "PARTIAL": 0.5,
+        "FAIL": 0,
+        "CANNOT_DETERMINE": 0
+      },
+      "aggregation": "weighted_mean",
+      "cannot_determine_policy": "exclude"
+    },
+    "controls": [
+      {
+        "id": "aims_leadership_policy",
+        "title": "Leadership, AI Policy and Internal Organization",
+        "description": "Top-management leadership and commitment expressed through a documented AI policy, clearly assigned AIMS roles/responsibilities/authorities, and a channel for interested parties to report concerns about AI systems (Clause 5.1-5.3; Annex A.2, A.3).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-5.1",
+            "title": "Leadership and Commitment",
+            "description": "Top management must demonstrate leadership and commitment with respect to the AIMS: ensuring the AI policy and AI objectives are established and compatible with the strategic direction; ensuring integration of AIMS requirements into business processes; ensuring resources are available; communicating the importance of effective AI management and of conforming to AIMS requirements; ensuring the AIMS achieves its intended results; directing and supporting persons; promoting continual improvement; and supporting other relevant management roles.",
+            "control": "Documented evidence of top-management commitment to the AIMS: resource-allocation decisions, integration of the AIMS into governance/business processes, leadership communications and accountability for AIMS effectiveness.",
+            "weight": 3,
+            "category": "Governance / Leadership",
+            "risk_domain": "Governance and accountability",
+            "evidence_expectations": [
+              "Records (e.g., board/management minutes) evidencing top-management engagement with the AIMS",
+              "Decisions allocating resources to the AIMS",
+              "Evidence that AIMS requirements are integrated into business processes",
+              "Leadership communications on the importance of effective AI management and conformance"
+            ],
+            "pass_criteria": "Top management demonstrably fulfils the leadership-and-commitment duties of Clause 5.1 (policy/objectives aligned to strategic direction, AIMS integrated into business processes, resources provided, importance communicated, continual improvement promoted, other management roles supported), evidenced by records.",
+            "partial_criteria": "Some evidence of top-management commitment exists but key duties (resourcing, integration into business processes, communication of importance, support of management roles) are not consistently evidenced.",
+            "fail_criteria": "There is no evidence of top-management leadership or commitment to the AIMS.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 5.1"
+            ]
+          },
+          {
+            "identifier": "ISO42001-5.2",
+            "title": "AI Policy Establishment and Communication",
+            "description": "Top management must establish and document an AI policy that is appropriate to the organization's purpose, provides a framework for setting AI objectives, includes commitments to satisfy applicable requirements and to continually improve the AIMS, and is communicated internally and made available to relevant interested parties.",
+            "control": "A documented AI policy approved by top management that states responsible-AI commitments, aligns to organizational purpose, provides the framework for AI objectives, and is communicated to staff and available to relevant interested parties.",
+            "weight": 4,
+            "category": "Governance / Leadership",
+            "risk_domain": "Governance and accountability",
+            "evidence_expectations": [
+              "Documented AI policy approved/signed by top management",
+              "Records of internal communication of the policy (intranet, onboarding, training) and availability to interested parties",
+              "Explicit commitments to meeting applicable requirements and to continual improvement",
+              "Traceability from the AI policy to documented AI objectives"
+            ],
+            "pass_criteria": "A documented AI policy exists, is approved by top management, is appropriate to the organization's purpose, contains commitments to fulfil applicable requirements and to continually improve the AIMS, provides a framework for AI objectives, and there is evidence it is communicated internally and available to relevant interested parties.",
+            "partial_criteria": "An AI policy exists but is missing one or more mandatory elements (top-management approval, commitment to continual improvement, framework for objectives, applicable-requirements commitment) or evidence of communication/availability is incomplete.",
+            "fail_criteria": "No documented AI policy exists, or it has not been established/endorsed by top management.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 5.2",
+              "ISO/IEC 42001:2023 Annex A.2.2 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-5.3",
+            "title": "AI Roles, Responsibilities and Authorities",
+            "description": "Top management must assign and communicate responsibilities and authorities for roles relevant to the AIMS — including responsibility for AIMS conformance and reporting on its performance to top management — and AI-specific roles and responsibilities must be defined and allocated across the AI system life cycle.",
+            "control": "A documented allocation of AIMS roles (e.g., RACI / role descriptions) covering AI governance ownership, risk ownership and human-oversight roles, formally assigned by top management and communicated.",
+            "weight": 3,
+            "category": "Governance / Leadership",
+            "risk_domain": "Governance and accountability",
+            "evidence_expectations": [
+              "Organization chart and/or RACI matrix for the AIMS",
+              "Documented role descriptions or terms of reference (e.g., AI governance body, risk owners, human-oversight roles)",
+              "Records of appointment/assignment and communication of roles",
+              "Assignment of responsibility for AIMS conformance and for reporting AIMS performance to top management"
+            ],
+            "pass_criteria": "Roles, responsibilities and authorities for the AIMS are documented, formally assigned by top management (including responsibility for AIMS conformance and for reporting on performance to top management), and communicated; AI-specific roles across the life cycle are allocated per Annex A.3.2.",
+            "partial_criteria": "Some roles are defined but assignment or communication is incomplete, or key roles (AIMS performance reporting, risk ownership, human oversight) are not clearly allocated.",
+            "fail_criteria": "Roles, responsibilities and authorities for the AIMS are not defined or not assigned.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 5.3",
+              "ISO/IEC 42001:2023 Annex A.3.2 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.3.3",
+            "title": "Reporting of Concerns",
+            "description": "The organization must define and put in place a process for personnel and other relevant interested parties to report concerns about the organization's AI systems throughout their life cycle, in a timely manner and, where appropriate, with protection for those who report.",
+            "control": "A documented concern-reporting mechanism (e.g., whistleblowing/raise-a-concern channel) covering AI systems, communicated to personnel, with defined handling and protection for reporters.",
+            "weight": 2,
+            "category": "Governance / Internal Organization",
+            "risk_domain": "Accountability and ethics",
+            "evidence_expectations": [
+              "Documented concern-reporting process/channel for AI systems",
+              "Communication of the channel to personnel and relevant interested parties",
+              "Records of reported concerns and how they were handled",
+              "Any protections/anti-retaliation provisions for reporters"
+            ],
+            "pass_criteria": "A documented process exists for personnel and relevant interested parties to report concerns about AI systems throughout the life cycle, is communicated, and concerns are handled and recorded.",
+            "partial_criteria": "A reporting mechanism exists but is informal, not communicated, lacks defined handling, or does not cover the AI system life cycle.",
+            "fail_criteria": "No process exists for reporting concerns about the organization's AI systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.3.3 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_context_risk",
+        "title": "Organizational Context and AI Risk Management",
+        "description": "Determination of context, interested parties and AIMS scope; the planning-stage AI risk assessment, AI risk treatment (with Statement of Applicability), AI objectives, and planned management of changes (Clause 4; Clause 6.1-6.3; Clause 8.2-8.3).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-4.1",
+            "title": "Organizational Context, Interested Parties and AIMS Scope",
+            "description": "The organization must determine relevant external and internal issues and its role(s) with respect to AI (e.g., developer, provider, user), the interested parties relevant to the AIMS and their needs and expectations, and must determine and document the boundaries and applicability of the AIMS.",
+            "control": "Documented context analysis, an interested-party register capturing relevant needs/expectations and requirements, determination of the organization's AI role(s), and a documented AIMS scope statement.",
+            "weight": 3,
+            "category": "Governance / Context",
+            "risk_domain": "Governance and accountability",
+            "evidence_expectations": [
+              "Documented analysis of internal/external issues relevant to the AI purpose",
+              "Interested-parties register with their relevant needs, expectations and requirements",
+              "Determination of the organization's role(s) regarding AI systems",
+              "Documented AIMS scope statement defining boundaries and applicability"
+            ],
+            "pass_criteria": "There is documented determination of internal/external issues, the organization's AI role(s), interested parties and their relevant needs/expectations, and a documented AIMS scope defining boundaries and applicability, maintained as documented information.",
+            "partial_criteria": "Context, interested parties or scope are only partly documented, outdated, or the scope does not clearly state boundaries/applicability.",
+            "fail_criteria": "No documented AIMS scope exists, or context and interested parties have not been determined.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 4.1",
+              "ISO/IEC 42001:2023 Clause 4.2",
+              "ISO/IEC 42001:2023 Clause 4.3",
+              "ISO/IEC 42001:2023 Clause 4.4"
+            ]
+          },
+          {
+            "identifier": "ISO42001-6.1.2",
+            "title": "AI Risk Assessment Process",
+            "description": "The organization must define and apply an AI risk assessment process that establishes and maintains risk criteria (including risk acceptance criteria), identifies AI risks, and analyses and evaluates them to produce consistent, valid and comparable results; assessments must be retained as documented information and performed at planned intervals and when significant changes occur.",
+            "control": "A documented AI risk assessment methodology with defined risk criteria and identification/analysis/evaluation steps, applied to each in-scope AI system and re-run on change and at planned intervals, with retained results.",
+            "weight": 5,
+            "category": "Risk Management",
+            "risk_domain": "AI risk (safety, security, fairness, rights, robustness)",
+            "evidence_expectations": [
+              "Documented AI risk assessment methodology/procedure",
+              "Defined risk criteria including risk acceptance criteria",
+              "Completed and retained AI risk assessments per in-scope AI system with risk ratings",
+              "Records of re-assessment on significant change and at planned intervals"
+            ],
+            "pass_criteria": "A documented AI risk assessment process exists defining risk criteria (including acceptance criteria) and identify/analyse/evaluate steps; completed, retained AI risk assessments exist for in-scope AI systems; the process is applied at planned intervals and on significant change and yields consistent, comparable results.",
+            "partial_criteria": "A methodology exists but is not consistently applied (some in-scope systems lack assessments), risk criteria are undefined, or reassessment on change/at intervals is not evidenced.",
+            "fail_criteria": "No documented AI risk assessment process exists, or no AI risk assessments have been performed for in-scope systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 6.1.2",
+              "ISO/IEC 42001:2023 Clause 6.1.1",
+              "ISO/IEC 42001:2023 Clause 8.2"
+            ]
+          },
+          {
+            "identifier": "ISO42001-6.1.3",
+            "title": "AI Risk Treatment and Statement of Applicability",
+            "description": "The organization must define and apply an AI risk treatment process that selects treatment options and determines necessary controls, compares the determined controls with those in Annex A, produces a Statement of Applicability with justification for inclusions/exclusions and implementation status, formulates a risk treatment plan, and obtains risk owners' approval of the plan and acceptance of residual AI risks.",
+            "control": "A documented AI risk treatment plan, a Statement of Applicability referencing all Annex A controls, and records of risk-owner approval of the plan and acceptance of residual AI risk.",
+            "weight": 5,
+            "category": "Risk Management",
+            "risk_domain": "AI risk treatment and residual-risk acceptance",
+            "evidence_expectations": [
+              "Statement of Applicability covering all Annex A controls with justification for inclusion/exclusion and implementation status",
+              "Documented AI risk treatment plan",
+              "Records of risk-owner approval of the treatment plan",
+              "Records of residual AI risk acceptance signed by risk owners"
+            ],
+            "pass_criteria": "A documented risk treatment process produces a Statement of Applicability addressing all Annex A controls with justification for inclusion/exclusion and implementation status, plus a risk treatment plan; risk owners have approved the plan and accepted residual AI risks, with records retained.",
+            "partial_criteria": "An SoA and/or treatment plan exists but is incomplete (e.g., not all Annex A controls justified, missing implementation status) or residual-risk acceptance by risk owners is not evidenced.",
+            "fail_criteria": "No Statement of Applicability or risk treatment plan exists, or necessary controls were not determined by reference to Annex A.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 6.1.3",
+              "ISO/IEC 42001:2023 Clause 8.3",
+              "ISO/IEC 42001:2023 Annex A (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-6.2",
+            "title": "AI Objectives and Planning to Achieve Them",
+            "description": "The organization must establish AI objectives at relevant functions and levels that are consistent with the AI policy, measurable where practicable, monitored, communicated and updated, and must plan how to achieve them (what will be done, resources, responsible persons, timeframe and how results are evaluated).",
+            "control": "Documented, measurable AI objectives with achievement plans defining actions, resources, responsibilities, timelines and evaluation methods.",
+            "weight": 2,
+            "category": "Governance / Planning",
+            "risk_domain": "Governance and accountability",
+            "evidence_expectations": [
+              "Documented AI objectives, measurable where practicable, at relevant levels/functions",
+              "Achievement plans specifying actions, resources, owners and timeframes",
+              "Defined method for evaluating results against objectives",
+              "Records showing objectives are monitored and updated"
+            ],
+            "pass_criteria": "Measurable AI objectives consistent with the AI policy are documented at relevant levels, with plans defining actions, resources, responsibility, timeframe and how results are evaluated; objectives are monitored and updated.",
+            "partial_criteria": "AI objectives exist but are not measurable, not clearly linked to the AI policy, or lack complete achievement plans/evaluation methods.",
+            "fail_criteria": "No documented AI objectives exist.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 6.2"
+            ]
+          },
+          {
+            "identifier": "ISO42001-6.3",
+            "title": "Planning of Changes to the AIMS",
+            "description": "When the organization determines the need for changes to the AI management system, the changes must be carried out in a planned manner, considering their purpose and potential consequences, the integrity of the AIMS, availability of resources, and allocation/reallocation of responsibilities and authorities.",
+            "control": "A documented change-management approach ensuring AIMS changes are planned, impact-assessed, resourced, approved and controlled, with linkage to risk/impact reassessment.",
+            "weight": 2,
+            "category": "Governance / Planning",
+            "risk_domain": "Change management",
+            "evidence_expectations": [
+              "Documented change-management procedure for the AIMS",
+              "Records of planned AIMS changes with purpose and impact assessment",
+              "Evidence of approval and resource/responsibility allocation for changes",
+              "Linkage of significant changes to AI risk and impact reassessment"
+            ],
+            "pass_criteria": "AIMS changes are carried out in a planned manner, with documented consideration of purpose, potential consequences, AIMS integrity, resources and responsibilities.",
+            "partial_criteria": "Changes are managed informally or planning is inconsistent (some changes not assessed, resourced or approved).",
+            "fail_criteria": "AIMS changes are made in an unplanned, uncontrolled manner, or no change-management approach exists.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 6.3"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_impact_assessment",
+        "title": "AI System Impact Assessment",
+        "description": "Assessment of the potential consequences of AI systems for individuals, groups of individuals and society, integrated with AI risk management (Clause 6.1.4; Annex A.5).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-A.5.2",
+            "title": "AI System Impact Assessment Process",
+            "description": "The organization must establish and maintain a process to assess the potential consequences (impacts) of AI systems to individuals, groups of individuals and society throughout the AI system life cycle, defining when the assessment is triggered and how its results feed the AI risk assessment and treatment.",
+            "control": "A documented AI system impact assessment procedure with defined triggers and scope, integrated with the AI risk assessment (Clause 6.1.4), and applied to in-scope AI systems.",
+            "weight": 5,
+            "category": "Impact Assessment / Fundamental Rights",
+            "risk_domain": "Rights, safety and societal harm",
+            "evidence_expectations": [
+              "Documented AI system impact assessment procedure/methodology",
+              "Trigger and scoping criteria for when assessments are required",
+              "Description of how impact-assessment results feed AI risk assessment and treatment",
+              "Register of AI systems requiring impact assessment"
+            ],
+            "pass_criteria": "A documented AI system impact assessment process exists, defines triggers/scope, considers impacts to individuals, groups and society across the life cycle, is integrated with the AI risk assessment (6.1.4), and is applied to in-scope AI systems.",
+            "partial_criteria": "A process exists but is not integrated with risk management, has unclear triggers/scope, or is not consistently applied to all in-scope systems.",
+            "fail_criteria": "No documented AI system impact assessment process exists.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.5.2 (Table A.1)",
+              "ISO/IEC 42001:2023 Clause 6.1.4",
+              "ISO/IEC 42001:2023 Clause 8.4"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.5.4",
+            "title": "Assessing AI Impacts on Individuals or Groups of Individuals",
+            "description": "The organization must assess and document the potential impacts of AI systems on individuals or groups of individuals throughout the life cycle, including impacts on rights, health and safety, privacy, and fairness/non-discrimination, and record mitigations.",
+            "control": "Completed, documented impact assessments addressing effects on individuals and groups (privacy, fairness/bias, safety, other rights) with identified mitigations.",
+            "weight": 5,
+            "category": "Impact Assessment / Fundamental Rights",
+            "risk_domain": "Individual rights, privacy and non-discrimination",
+            "evidence_expectations": [
+              "Completed impact assessment reports per in-scope AI system covering effects on individuals/groups",
+              "Bias/fairness analysis and privacy analysis",
+              "Identification of affected individuals or groups",
+              "Documented mitigations for identified impacts"
+            ],
+            "pass_criteria": "For in-scope AI systems, documented impact assessments address potential impacts on individuals/groups (including privacy, fairness/non-discrimination, health/safety and other rights), identify affected parties, and record mitigations.",
+            "partial_criteria": "Impact on individuals/groups is assessed only for some systems, or assessments omit key dimensions (e.g., fairness or privacy) or fail to record mitigations.",
+            "fail_criteria": "No documented assessment of AI impacts on individuals or groups exists for in-scope systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.5.4 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.5.3 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.5.5",
+            "title": "Assessing Societal Impacts of AI Systems",
+            "description": "The organization must assess and document the potential societal impacts of its AI systems, such as environmental, economic, public-safety and broader social or democratic effects, with results feeding decision-making and risk treatment.",
+            "control": "A documented societal-impact analysis considering effects beyond individuals, with results linked to risk treatment and decisions.",
+            "weight": 4,
+            "category": "Impact Assessment / Societal",
+            "risk_domain": "Societal and environmental harm",
+            "evidence_expectations": [
+              "Documented societal impact analysis per in-scope AI system",
+              "Consideration of environmental, economic, public-safety and broader social effects",
+              "Linkage of societal-impact findings to risk treatment/decisions",
+              "Sign-off of the societal impact assessment"
+            ],
+            "pass_criteria": "For in-scope AI systems, potential societal impacts (e.g., environmental, economic, public-safety, social/democratic effects) are documented and considered, with results feeding risk treatment and decisions.",
+            "partial_criteria": "Societal impacts are considered only superficially, for some systems only, or are not linked to decisions/treatment.",
+            "fail_criteria": "Societal impacts of AI systems are not assessed or documented.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.5.5 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_lifecycle",
+        "title": "Operation and AI System Life Cycle",
+        "description": "Operational planning and control, responsible-development objectives, and life-cycle controls covering verification and validation, operation and monitoring, and event logging (Clause 8.1; Annex A.6).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-8.1",
+            "title": "Operational Planning and Control",
+            "description": "The organization must plan, implement and control the processes needed to meet AIMS requirements and to implement the actions determined in Clause 6, by establishing criteria for those processes and implementing control in accordance with the criteria, keeping documented information to have confidence the processes have been carried out as planned, controlling planned changes and reviewing the consequences of unintended changes, and controlling externally provided processes, products and services relevant to the AIMS.",
+            "control": "Documented operational processes with defined criteria and applied control, change control, and management of externally provided processes/products/services, retained as documented information.",
+            "weight": 3,
+            "category": "Operation",
+            "risk_domain": "Operational control",
+            "evidence_expectations": [
+              "Documented operational processes and process criteria for AI activities",
+              "Records evidencing processes are carried out as planned",
+              "Control of planned changes and review of unintended changes",
+              "Evidence of control over externally provided processes, products and services relevant to the AIMS"
+            ],
+            "pass_criteria": "Operational processes needed to meet AIMS requirements and to implement Clause 6 actions are planned, controlled against defined criteria and documented; planned changes are controlled, unintended changes reviewed, and externally provided processes/products/services are controlled.",
+            "partial_criteria": "Operational processes exist but lack defined criteria, documented control, change control, or control of externally provided processes/products/services.",
+            "fail_criteria": "Operational processes to implement AIMS requirements and Clause 6 actions are not planned or controlled.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 8.1"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.6.1.2",
+            "title": "Objectives for Responsible Development of AI Systems",
+            "description": "The organization must identify and document objectives to guide the responsible development of AI systems (e.g., fairness, accountability, transparency, explainability, reliability, safety, security, robustness, privacy) and reflect them across development activities.",
+            "control": "Documented responsible-development objectives/principles integrated into design and development processes and guidelines.",
+            "weight": 4,
+            "category": "AI Lifecycle / Responsible Development",
+            "risk_domain": "Responsible design and development",
+            "evidence_expectations": [
+              "Documented objectives/principles for responsible development of AI systems",
+              "Design and development guidelines that reference these objectives",
+              "Mapping of objectives to development-process stages/gates"
+            ],
+            "pass_criteria": "Documented objectives for responsible development (covering relevant properties such as fairness, transparency, safety, security, robustness and privacy) exist and are demonstrably reflected in development processes/guidelines.",
+            "partial_criteria": "Objectives exist but are generic, not documented as guidance, or not evidenced within development processes.",
+            "fail_criteria": "No documented objectives for responsible development of AI systems exist.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.6.1.2 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.6.1.3 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.6.2.4",
+            "title": "AI System Verification and Validation",
+            "description": "The organization must define and document verification and validation measures for AI systems (including test and acceptance criteria and methods) and retain results, verifying the system before deployment and after significant change against relevant properties such as performance, robustness, fairness and security.",
+            "control": "A documented V&V plan with acceptance criteria and retained test/evaluation results, with review gates before deployment and re-testing on significant change.",
+            "weight": 4,
+            "category": "AI Lifecycle / Assurance",
+            "risk_domain": "System reliability, safety and robustness",
+            "evidence_expectations": [
+              "Documented V&V methodology with test and acceptance criteria",
+              "Retained test and model-evaluation results (performance, robustness, fairness/bias, security)",
+              "Deployment sign-off/gate records referencing V&V outcomes",
+              "Evidence of re-verification after significant changes"
+            ],
+            "pass_criteria": "V&V measures and acceptance criteria are documented and applied; test/validation results are retained for in-scope AI systems covering relevant properties (performance, robustness, fairness, security), reviewed before deployment and re-run after significant change.",
+            "partial_criteria": "V&V is performed but criteria are undocumented, coverage is incomplete, or results are not retained/reviewed for all in-scope systems.",
+            "fail_criteria": "No documented V&V process exists, or no V&V results are retained for in-scope AI systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.6.2.4 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.6.2.6",
+            "title": "AI System Operation and Monitoring",
+            "description": "The organization must define operational elements for and monitor AI systems in production — including performance and drift monitoring against defined thresholds, anomaly/error/misuse detection, and human oversight — with defined response and escalation.",
+            "control": "Documented operating procedures plus ongoing production monitoring (metrics, drift detection, thresholds, escalation) with defined human-oversight roles and retained monitoring records.",
+            "weight": 4,
+            "category": "AI Lifecycle / Operations and Human Oversight",
+            "risk_domain": "Operational failure, drift and human oversight",
+            "evidence_expectations": [
+              "Documented operating procedures for in-scope AI systems",
+              "Monitoring metrics/dashboards with defined performance and drift thresholds",
+              "Human-oversight procedure with named roles and escalation paths",
+              "Retained monitoring and intervention records"
+            ],
+            "pass_criteria": "Documented procedures define how in-scope AI systems are operated and monitored in production, including performance/drift monitoring against thresholds, anomaly/incident detection, defined human-oversight roles and response/escalation; monitoring records are retained.",
+            "partial_criteria": "Monitoring is informal or partial (no thresholds, no drift monitoring, unclear human-oversight roles) or not applied to all in-scope systems.",
+            "fail_criteria": "In-scope AI systems in production are not monitored, or no operating/monitoring procedures exist.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.6.2.6 (Table A.1)",
+              "ISO/IEC 42001:2023 Clause 9.1"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.6.2.8",
+            "title": "Recording of AI System Event Logs",
+            "description": "The organization must determine and document which events are automatically recorded during AI system operation and ensure logging is enabled with adequate content, retention and protection to support traceability, incident investigation and accountability.",
+            "control": "Automatic event logging configured for in-scope AI systems with defined content, retention and protection sufficient for traceability and investigation.",
+            "weight": 3,
+            "category": "AI Lifecycle / Traceability",
+            "risk_domain": "Traceability and accountability",
+            "evidence_expectations": [
+              "Logging design/specification defining which events are recorded",
+              "Sample event logs from in-scope AI systems",
+              "Documented log retention and protection settings",
+              "Example of logs used in an incident investigation or review"
+            ],
+            "pass_criteria": "The organization has determined and documented which events are logged during operation, logging is enabled for in-scope AI systems with defined retention/protection, and logs are sufficient for traceability and incident investigation.",
+            "partial_criteria": "Logging exists but content or retention is undefined/incomplete, or logging is not enabled for all in-scope systems.",
+            "fail_criteria": "No event logging has been determined or implemented for in-scope AI systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.6.2.8 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_data",
+        "title": "Data for AI Systems",
+        "description": "Governance of data used to develop, operate and enhance AI systems: data quality, provenance and preparation (Annex A.7).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-A.7.4",
+            "title": "Quality of Data for AI Systems",
+            "description": "The organization must define and document data quality requirements (such as relevance, representativeness, accuracy, completeness and freedom from harmful bias) for data used to develop and operate AI systems, and verify that data meets those requirements.",
+            "control": "Documented data-quality criteria plus verification records for training, validation and operational data, including representativeness/bias analysis.",
+            "weight": 4,
+            "category": "Data Governance",
+            "risk_domain": "Data quality and bias",
+            "evidence_expectations": [
+              "Documented data-quality requirements/criteria for AI data",
+              "Data-quality assessment reports against those criteria",
+              "Representativeness and bias analysis of datasets",
+              "Evidence linking data-quality checks to specific AI systems/datasets"
+            ],
+            "pass_criteria": "Data-quality requirements (e.g., relevance, representativeness, accuracy, completeness, bias) are documented for AI data, and there is evidence that data used for development/operation is assessed against them.",
+            "partial_criteria": "Data-quality requirements exist but are not consistently applied/verified, or omit key dimensions such as representativeness/bias.",
+            "fail_criteria": "No documented data-quality requirements exist, or data quality is not verified.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.7.4 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.7.2 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.7.5",
+            "title": "Data Provenance",
+            "description": "The organization must determine and document the provenance of data used in AI systems — origin, collection method, licensing/authorization and processing history — and retain provenance records sufficient to trace data back to its source.",
+            "control": "Documented data provenance/lineage records (e.g., dataset datasheets) maintained for datasets used by in-scope AI systems.",
+            "weight": 4,
+            "category": "Data Governance",
+            "risk_domain": "Data lineage and lawful/authorized use",
+            "evidence_expectations": [
+              "Data provenance/lineage records or dataset datasheets",
+              "Records of data source, collection method and licensing/authorization",
+              "Processing history from source to training/operational dataset"
+            ],
+            "pass_criteria": "Provenance (origin, collection method, licensing/authorization and processing history) is documented and retained for data used in in-scope AI systems, sufficient to trace data to its source and confirm authorized use.",
+            "partial_criteria": "Provenance is recorded for some datasets only, or lineage is incomplete (e.g., processing history or licensing missing).",
+            "fail_criteria": "Data provenance is not documented for in-scope AI systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.7.5 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.7.3 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.7.6",
+            "title": "Data Preparation",
+            "description": "The organization must define and document the data-preparation methods used for AI systems (e.g., cleaning, labelling, transformation, feature engineering) so that preparation is consistent and reproducible.",
+            "control": "Documented, repeatable data-preparation procedures with labelling guidelines/QA and retained preparation records.",
+            "weight": 3,
+            "category": "Data Governance",
+            "risk_domain": "Data preparation integrity and reproducibility",
+            "evidence_expectations": [
+              "Documented data-preparation procedures (cleaning, transformation, feature engineering)",
+              "Labelling/annotation guidelines and quality-assurance records",
+              "Records enabling reproduction of prepared datasets"
+            ],
+            "pass_criteria": "Data-preparation methods (cleaning, labelling, transformation, feature selection) are documented and applied consistently, with records enabling reproducibility for in-scope AI systems.",
+            "partial_criteria": "Data preparation is performed but undocumented or inconsistent (e.g., no labelling guidelines or QA).",
+            "fail_criteria": "No documented data-preparation methods exist.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.7.6 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_transparency",
+        "title": "Transparency and Information for Interested Parties",
+        "description": "Provision of adequate information to users and affected parties and communication of AI incidents (Annex A.8).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-A.8.2",
+            "title": "System Documentation and Information for Users",
+            "description": "The organization must provide adequate information to users and deployers of AI systems — including intended purpose, capabilities, limitations, and instructions for appropriate use — and, where relevant, disclose the use of AI to affected persons, to enable safe and appropriate use.",
+            "control": "User-facing documentation (instructions for use, capability/limitation statements, model/system cards) and, where relevant, disclosure that AI is in use.",
+            "weight": 4,
+            "category": "Transparency",
+            "risk_domain": "Transparency and appropriate use",
+            "evidence_expectations": [
+              "User documentation / instructions for use for in-scope AI systems",
+              "Statements of capabilities and limitations (e.g., model/system cards)",
+              "Guidance on appropriate use and known constraints",
+              "Where relevant, evidence of disclosure that AI is being used"
+            ],
+            "pass_criteria": "Documentation is provided to users/deployers covering intended purpose, capabilities, limitations and instructions for appropriate use of in-scope AI systems, and where relevant AI use is disclosed to affected persons.",
+            "partial_criteria": "User documentation exists but omits limitations or appropriate-use instructions, or is not provided for all in-scope systems.",
+            "fail_criteria": "No user-facing documentation/information is provided for in-scope AI systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.8.2 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.8.5 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.8.4",
+            "title": "Communication of AI Incidents",
+            "description": "The organization must define processes to report and communicate AI system incidents and failures to relevant interested parties (users, affected parties and authorities as applicable), specifying criteria, responsible roles, channels and timeframes.",
+            "control": "A documented AI incident communication/notification procedure with defined criteria, channels, responsible roles and timelines, integrated with incident management.",
+            "weight": 4,
+            "category": "Transparency / Incident Management",
+            "risk_domain": "Incident response and accountability",
+            "evidence_expectations": [
+              "Documented AI incident communication/notification procedure",
+              "Notification criteria, responsible roles, channels and timeframes",
+              "Integration with the broader incident-management process",
+              "Records of past incident communications or a test/tabletop exercise"
+            ],
+            "pass_criteria": "A documented process defines how AI incidents are communicated to relevant interested parties, with criteria, responsible roles, channels and timeframes, and it is operational (evidenced by records or testing).",
+            "partial_criteria": "An incident-communication process exists but lacks defined criteria, timelines or roles, or is not integrated with incident management.",
+            "fail_criteria": "No process exists for communicating AI incidents to interested parties.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.8.4 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.8.3 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_use",
+        "title": "Responsible Use of AI Systems",
+        "description": "Controls ensuring AI systems are used within their intended purpose and according to responsible-use processes (Annex A.9).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-A.9.2",
+            "title": "Processes for Responsible Use of AI Systems",
+            "description": "As a user/deployer of AI, the organization must establish and document processes for the responsible use of AI systems, consistent with its documented responsible-use objectives, and communicate them to relevant users.",
+            "control": "Documented responsible-use processes/policies aligned to responsible-use objectives, communicated to and acknowledged by staff who use AI systems.",
+            "weight": 3,
+            "category": "Responsible Use",
+            "risk_domain": "Responsible operation and human accountability",
+            "evidence_expectations": [
+              "Documented responsible-use process or guidelines for AI users",
+              "Documented responsible-use objectives the process aligns to",
+              "Records of communication, staff training or acknowledgement"
+            ],
+            "pass_criteria": "Documented processes for responsible use of AI systems exist, align with documented responsible-use objectives, and are communicated to relevant users.",
+            "partial_criteria": "Responsible-use processes exist but are informal, not linked to objectives, or not communicated.",
+            "fail_criteria": "No processes exist for the responsible use of AI systems.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.9.2 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.9.3 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.9.4",
+            "title": "Intended Use of the AI System",
+            "description": "The organization must ensure AI systems are used in accordance with their intended purpose and the terms and documentation provided, and must implement measures to prevent and detect misuse or out-of-scope use.",
+            "control": "Documented intended-use / acceptable-use definitions plus controls (access controls, terms, monitoring) that keep operation within intended purpose and detect misuse.",
+            "weight": 4,
+            "category": "Responsible Use",
+            "risk_domain": "Misuse and out-of-scope use",
+            "evidence_expectations": [
+              "Documented intended-use / acceptable-use statements per in-scope AI system",
+              "Controls that prevent out-of-scope use (e.g., access controls, usage terms)",
+              "Monitoring for misuse or out-of-scope use",
+              "User acknowledgement of intended-use terms"
+            ],
+            "pass_criteria": "Intended use is documented for in-scope AI systems and controls exist to keep use within the intended purpose (e.g., acceptable-use terms, access controls, monitoring for misuse).",
+            "partial_criteria": "Intended use is documented but not enforced or monitored, or is defined for only some systems.",
+            "fail_criteria": "Intended use is not defined, or systems are used outside documented intended purpose without controls.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.9.4 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.9.2 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_third_party",
+        "title": "Third-Party and Customer Relationships",
+        "description": "Management of suppliers and allocation of responsibilities across the AI value chain including customers (Annex A.10).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-A.10.2",
+            "title": "Allocating Responsibilities Across the AI Value Chain",
+            "description": "The organization must allocate responsibilities between itself and other parties (suppliers, partners and customers) across the AI system life cycle, so that roles and accountability throughout the value chain are clearly defined.",
+            "control": "A documented allocation of responsibilities across the AI value chain (organization, suppliers, customers) covering relevant life-cycle activities.",
+            "weight": 3,
+            "category": "Third-Party Management / Accountability",
+            "risk_domain": "Value-chain accountability",
+            "evidence_expectations": [
+              "Documented responsibility matrix across the AI value chain",
+              "Contract clauses defining each party's responsibilities",
+              "Customer-facing documentation of responsibilities and obligations"
+            ],
+            "pass_criteria": "Responsibilities across the AI value chain (organization, suppliers, customers) are documented and allocated for relevant life-cycle activities, with clear accountability.",
+            "partial_criteria": "Responsibility allocation exists but has gaps (e.g., customer or supplier responsibilities undefined for some activities).",
+            "fail_criteria": "Responsibilities across the AI value chain are not allocated or documented.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.10.2 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.10.4 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-A.10.3",
+            "title": "AI Suppliers and Third-Party Providers",
+            "description": "The organization must establish processes to ensure that suppliers and providers of AI systems, components or services align with its responsible-AI approach, setting relevant requirements (typically contractually) and verifying supplier conformance through the relationship.",
+            "control": "Supplier due diligence, contractual responsible-AI requirements, and monitoring/review of supplier conformance.",
+            "weight": 4,
+            "category": "Third-Party Management",
+            "risk_domain": "Supply-chain and third-party AI risk",
+            "evidence_expectations": [
+              "AI-related requirements embedded in supplier contracts/agreements",
+              "Supplier due-diligence or assessment records",
+              "Supplier-provided documentation (e.g., model cards, evaluation results)",
+              "Records of ongoing supplier monitoring/review"
+            ],
+            "pass_criteria": "Processes exist to set AI-related requirements for suppliers and to verify them; contracts/agreements include relevant responsible-AI requirements, responsibilities are allocated, and supplier conformance is assessed and monitored.",
+            "partial_criteria": "Some supplier requirements/assessments exist but are inconsistent, not contractually embedded, or not monitored.",
+            "fail_criteria": "No process exists to manage AI suppliers/third parties or to set and verify AI-related requirements.",
+            "references": [
+              "ISO/IEC 42001:2023 Annex A.10.3 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.10.2 (Table A.1)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_support",
+        "title": "Support: Resources, Competence, Communication and Documented Information",
+        "description": "Provision of resources and resource documentation for AI systems, competence and awareness of AI personnel, AIMS-relevant communication, and control of documented information (Clause 7; Annex A.4).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-7.1",
+            "title": "Resources and Resource Documentation for AI Systems",
+            "description": "The organization must determine and provide the resources needed to establish, implement, maintain and continually improve the AIMS, and must document information about the resources for AI systems — including data resources, tooling resources, system and computing resources, and human resources — relevant to the AI system life cycle.",
+            "control": "A documented determination of AIMS resources plus resource documentation covering data, tooling, system/computing and human resources for in-scope AI systems.",
+            "weight": 3,
+            "category": "Support / Resources",
+            "risk_domain": "Resource adequacy and traceability",
+            "evidence_expectations": [
+              "Documented determination of resources needed for the AIMS",
+              "Resource documentation for AI systems covering data, tooling and system/computing resources",
+              "Records of allocated human resources for AI work",
+              "Mapping of documented resources to in-scope AI systems"
+            ],
+            "pass_criteria": "Resources needed for the AIMS are determined and provided, and resources for AI systems (data, tooling, system/computing and human) are documented per Annex A.4 for in-scope AI systems.",
+            "partial_criteria": "Resources are provided but resource documentation is incomplete (e.g., data, tooling or computing resources not documented) or covers only some AI systems.",
+            "fail_criteria": "Resources for the AIMS/AI systems are not determined or are not documented.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 7.1",
+              "ISO/IEC 42001:2023 Annex A.4.2 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.4.3 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.4.4 (Table A.1)",
+              "ISO/IEC 42001:2023 Annex A.4.5 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-7.2",
+            "title": "Competence, Human Resources and Awareness",
+            "description": "The organization must determine and ensure the competence of persons doing work under its control that affects AI performance, provide the necessary human resources, retain documented evidence of competence, and ensure relevant persons are aware of the AI policy and their contribution to the AIMS.",
+            "control": "Defined competence requirements per AI role, training/qualification records, allocated human resources, and awareness communications on the AI policy and responsibilities.",
+            "weight": 3,
+            "category": "Support / Human Resources",
+            "risk_domain": "Competence and human capacity",
+            "evidence_expectations": [
+              "Defined competence requirements per AI-related role",
+              "Training, education or qualification records evidencing competence",
+              "Resourcing plan showing adequate human resources for AI work",
+              "Awareness communications covering the AI policy and individual responsibilities"
+            ],
+            "pass_criteria": "Competence requirements for AI-related roles are defined, persons are competent (evidenced by training/qualification records), adequate human resources are allocated, and relevant staff are aware of the AI policy and their responsibilities.",
+            "partial_criteria": "Competence or awareness is addressed only partially (e.g., requirements undefined, incomplete training records, awareness not evidenced).",
+            "fail_criteria": "Competence is not determined, or there is no evidence of competent human resources for AI-related work.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 7.2",
+              "ISO/IEC 42001:2023 Clause 7.3",
+              "ISO/IEC 42001:2023 Annex A.4.6 (Table A.1)"
+            ]
+          },
+          {
+            "identifier": "ISO42001-7.4",
+            "title": "Communication",
+            "description": "The organization must determine the internal and external communications relevant to the AIMS, including on what it will communicate, when, with whom, how, and who communicates.",
+            "control": "A documented communication plan/matrix for AIMS-relevant internal and external communications, with records of communications performed.",
+            "weight": 1,
+            "category": "Support / Communication",
+            "risk_domain": "Governance and accountability",
+            "evidence_expectations": [
+              "Documented communication plan or matrix specifying what, when, with whom, how and by whom",
+              "Records of internal AIMS communications",
+              "Records of external AIMS communications where relevant"
+            ],
+            "pass_criteria": "The organization has determined and documented AIMS-relevant internal and external communications (what, when, with whom, how, by whom) and communicates accordingly.",
+            "partial_criteria": "Communications occur but are not fully determined (e.g., missing audience, timing, method or responsibility).",
+            "fail_criteria": "AIMS communication needs have not been determined.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 7.4"
+            ]
+          },
+          {
+            "identifier": "ISO42001-7.5",
+            "title": "Documented Information",
+            "description": "The AIMS must include the documented information required by ISO/IEC 42001 and that determined by the organization as necessary for AIMS effectiveness; the organization must control the creation and updating of documented information (identification, format, review and approval) and its control (availability, protection, distribution, access, storage, retention and disposition).",
+            "control": "A documented-information control procedure covering identification, versioning, review/approval, access/protection and retention/disposition of AIMS documents and records.",
+            "weight": 2,
+            "category": "Support / Documented Information",
+            "risk_domain": "Records integrity and control",
+            "evidence_expectations": [
+              "Document and records control procedure",
+              "Version control and review/approval evidence on AIMS documents",
+              "Access and protection controls for documented information",
+              "Defined retention and disposition rules and a document register/index"
+            ],
+            "pass_criteria": "Required and necessary documented information exists and is controlled per Clause 7.5 (creation/updating with identification, format and review/approval; availability, protection, distribution, access, storage, retention and disposition).",
+            "partial_criteria": "Documented information exists but control is incomplete (e.g., no version control, unclear retention, or inconsistent review/approval).",
+            "fail_criteria": "Required documented information is missing or is not controlled.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 7.5.1",
+              "ISO/IEC 42001:2023 Clause 7.5.2",
+              "ISO/IEC 42001:2023 Clause 7.5.3"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aims_performance_improvement",
+        "title": "Performance Evaluation and Improvement",
+        "description": "Monitoring and measurement, internal audit, management review, and nonconformity/corrective-action processes that drive continual improvement of the AIMS (Clause 9; Clause 10).",
+        "requirements": [
+          {
+            "identifier": "ISO42001-9.1",
+            "title": "Monitoring, Measurement, Analysis and Evaluation",
+            "description": "The organization must determine what needs to be monitored and measured, the methods for monitoring, measurement, analysis and evaluation to ensure valid results, and when monitoring/measurement and evaluation are performed; it must evaluate the AI performance and the effectiveness of the AIMS and retain appropriate documented information as evidence.",
+            "control": "A documented monitoring-and-measurement plan defining metrics, methods and timing for AIMS performance and effectiveness, with retained results and documented evaluation.",
+            "weight": 3,
+            "category": "Performance Evaluation",
+            "risk_domain": "Assurance and performance",
+            "evidence_expectations": [
+              "Defined monitoring/measurement metrics and methods for the AIMS",
+              "Schedule for when monitoring, measurement and evaluation are performed",
+              "Retained monitoring/measurement results",
+              "Documented evaluation of AI performance and AIMS effectiveness"
+            ],
+            "pass_criteria": "The organization has determined what, how and when to monitor and measure, performs monitoring and evaluation of AI performance and AIMS effectiveness, and retains documented results.",
+            "partial_criteria": "Monitoring/measurement occurs but metrics, methods or timing are not fully defined, or evaluation of effectiveness is not evidenced.",
+            "fail_criteria": "The organization does not monitor, measure or evaluate AI performance and AIMS effectiveness.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 9.1"
+            ]
+          },
+          {
+            "identifier": "ISO42001-9.2",
+            "title": "Internal Audit of the AIMS",
+            "description": "The organization must conduct internal audits at planned intervals to determine whether the AIMS conforms to its own requirements and to ISO/IEC 42001 and is effectively implemented and maintained, using a documented audit programme with defined criteria/scope and impartial auditors, and retain audit results.",
+            "control": "A documented internal-audit programme with defined criteria and scope, impartial auditors, retained audit reports, and reporting of results to management.",
+            "weight": 3,
+            "category": "Performance Evaluation",
+            "risk_domain": "Assurance and conformity",
+            "evidence_expectations": [
+              "Internal-audit programme/schedule",
+              "Defined audit criteria and scope for each audit",
+              "Audit reports with findings and follow-up actions",
+              "Evidence of auditor impartiality/independence"
+            ],
+            "pass_criteria": "A documented internal-audit programme exists and audits are conducted at planned intervals against defined criteria/scope by impartial auditors; audit reports and results are retained and reported to management.",
+            "partial_criteria": "Internal audits occur but are ad hoc, incomplete in scope/coverage, or lack a documented programme or auditor independence.",
+            "fail_criteria": "No internal audits of the AIMS have been conducted.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 9.2"
+            ]
+          },
+          {
+            "identifier": "ISO42001-9.3",
+            "title": "Management Review of the AIMS",
+            "description": "Top management must review the AIMS at planned intervals, considering the required inputs (status of prior actions, changes in issues and interested-party needs, AIMS performance, results of AI risk and impact assessments, and opportunities for improvement), and must document decisions and actions arising from the review.",
+            "control": "Documented management reviews at planned intervals covering the mandated inputs, with recorded decisions, actions and resource determinations.",
+            "weight": 3,
+            "category": "Performance Evaluation / Leadership",
+            "risk_domain": "Governance oversight",
+            "evidence_expectations": [
+              "Management review minutes/records",
+              "Agenda evidencing the mandated inputs (performance, risk/impact results, changes, improvement opportunities)",
+              "Documented decisions, actions and resource determinations",
+              "Schedule showing reviews at planned intervals"
+            ],
+            "pass_criteria": "Top management reviews the AIMS at planned intervals; records show the mandated inputs were considered (including AI risk/impact assessment results, performance and improvement opportunities) and decisions/actions are documented.",
+            "partial_criteria": "Management reviews occur but omit required inputs, are irregular, or outputs/decisions are not documented.",
+            "fail_criteria": "No management review of the AIMS has taken place.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 9.3"
+            ]
+          },
+          {
+            "identifier": "ISO42001-10.2",
+            "title": "Nonconformity and Corrective Action",
+            "description": "When a nonconformity occurs, the organization must react to control and correct it, evaluate the need to eliminate its causes (including root-cause analysis), implement corrective action, review the effectiveness of that action, and retain documented information on the nonconformities and actions taken, pursuing continual improvement of the AIMS.",
+            "control": "A documented nonconformity/corrective-action process with root-cause analysis, corrective actions, effectiveness review, retained records, and evidence of continual improvement.",
+            "weight": 3,
+            "category": "Improvement",
+            "risk_domain": "Corrective action and continual improvement",
+            "evidence_expectations": [
+              "Nonconformity / corrective-action (CAPA) register",
+              "Root-cause analyses for recorded nonconformities",
+              "Corrective-action records and effectiveness reviews",
+              "Evidence of continual improvement of the AIMS"
+            ],
+            "pass_criteria": "A documented process handles nonconformities including correction, root-cause analysis, corrective action and effectiveness review, with records retained; there is evidence of continual improvement of the AIMS.",
+            "partial_criteria": "Nonconformities are handled inconsistently (e.g., no root-cause analysis or effectiveness review) or records are incomplete.",
+            "fail_criteria": "No process exists for managing nonconformities and corrective actions, or none are recorded despite known issues.",
+            "references": [
+              "ISO/IEC 42001:2023 Clause 10.2",
+              "ISO/IEC 42001:2023 Clause 10.1"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

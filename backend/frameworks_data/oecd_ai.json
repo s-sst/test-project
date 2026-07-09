@@ -1,0 +1,388 @@
+{
+  "framework": {
+    "id": "oecd_ai",
+    "name": "OECD AI Principles",
+    "version": "2024 (OECD/LEGAL/0449, revised at Ministerial level 3 May 2024; AI-system definition revised 8 November 2023)",
+    "publisher": "Organisation for Economic Co-operation and Development (OECD)",
+    "category": "AI Governance / Responsible AI Principles",
+    "description": "Control library derived from the OECD Recommendation of the Council on Artificial Intelligence (OECD/LEGAL/0449), the first intergovernmental standard on AI (adopted 22 May 2019; AI-system definition updated November 2023; revised at Ministerial level May 2024). Section 1 sets five values-based principles for responsible stewardship of trustworthy AI: (1.1) inclusive growth, sustainable development and well-being; (1.2) respect for the rule of law, human rights and democratic values, including fairness and privacy; (1.3) transparency and explainability; (1.4) robustness, security and safety; and (1.5) accountability. Section 2 provides five recommendations addressed to governments (investing in AI R&D; fostering an inclusive AI-enabling ecosystem; shaping an enabling interoperable governance and policy environment; building human capacity and preparing for labour-market transformation; and international co-operation), adapted here as organisational expectations for AI actors. This library reflects the 2024 revisions: the updated AI-system definition; information integrity against AI-amplified mis/disinformation (Principles 1.2(a) and 1.4(c)); safe override/repair/decommissioning (1.4(b)); and the relocation of traceability and systematic risk management to the Accountability principle (1.5(b) and 1.5(c)). Note that environmental sustainability and 'protecting natural environments' under Principle 1.1, as well as 'sustainable development', have been part of the standard since its 2019 adoption and were not introduced by the 2024 revision.",
+    "source_url": "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0449",
+    "scoring": {
+      "status_scores": {
+        "PASS": 1,
+        "PARTIAL": 0.5,
+        "FAIL": 0,
+        "CANNOT_DETERMINE": 0
+      },
+      "aggregation": "weighted_mean",
+      "cannot_determine_policy": "exclude"
+    },
+    "controls": [
+      {
+        "id": "OECD-P1.1",
+        "title": "Inclusive Growth, Sustainable Development and Well-being",
+        "description": "Principle 1.1: stakeholders should proactively engage in responsible stewardship of trustworthy AI in pursuit of beneficial outcomes for people and the planet, including augmenting human capabilities, advancing inclusion of underrepresented populations, reducing inequalities, and protecting natural environments.",
+        "requirements": [
+          {
+            "identifier": "OECD-1.1-WELLBEING",
+            "title": "Pursuit of beneficial outcomes for people and the planet",
+            "description": "The organisation demonstrates that it proactively steers its AI systems toward beneficial outcomes - augmenting human capabilities and creativity, advancing inclusion of underrepresented populations, reducing economic, social, gender and other inequalities, and protecting natural environments and environmental sustainability - rather than merely avoiding harm.",
+            "control": "A documented responsible/trustworthy-AI policy or charter committing the organisation to inclusive growth, well-being and environmental sustainability, with these objectives translated into design goals and applied through a benefit/impact assessment for AI use cases that evaluates effects on inclusion, distributional impact across populations, and environmental footprint (e.g. compute/energy or emissions of training and inference).",
+            "weight": 3,
+            "category": "Sustainable & Inclusive AI",
+            "risk_domain": "Societal well-being, inequality and environmental impact",
+            "evidence_expectations": [
+              "Responsible/trustworthy-AI policy explicitly referencing inclusive growth, well-being, sustainable development and environmental sustainability",
+              "Benefit/impact assessments for AI use cases addressing effects on underrepresented or vulnerable populations and on inequality",
+              "Records addressing the environmental footprint of AI (e.g. energy/compute or emissions estimates for model training and operation)"
+            ],
+            "pass_criteria": "Organisation maintains an approved policy committing to inclusive-growth AND environmental-sustainability outcomes, and applies a documented benefit/impact assessment to AI use cases that evaluates effects on inclusion, inequality and the environment, with evidence it informed a design or deployment decision.",
+            "partial_criteria": "A high-level commitment to beneficial or sustainable AI exists but is not operationalised - e.g. no benefit/impact assessment is applied, or environmental impact is not considered - so the commitment remains aspirational.",
+            "fail_criteria": "No documented commitment to inclusive growth, well-being or environmental sustainability, and no assessment of AI systems' distributional or environmental effects.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.1 (Inclusive growth, sustainable development and well-being)",
+              "OECD/LEGAL/0449, Section 1, Principle 1.1 - 'protecting natural environments' and 'sustainable development' have been in the principle text since the 2019 adoption (not introduced by the 2024 revision)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OECD-P1.2",
+        "title": "Respect for the Rule of Law, Human Rights and Democratic Values (incl. Fairness and Privacy)",
+        "description": "Principle 1.2: AI actors should respect the rule of law, human rights and democratic and human-centred values throughout the AI system lifecycle (1.2a), and implement mechanisms and safeguards such as capacity for human agency and oversight, including to address misuse (1.2b).",
+        "requirements": [
+          {
+            "identifier": "OECD-1.2-HUMANRIGHTS",
+            "title": "Respect for rule of law, human rights, non-discrimination, fairness and privacy",
+            "description": "Throughout the AI system lifecycle the organisation respects the rule of law, human rights and democratic and human-centred values - including non-discrimination and equality, freedom, dignity, individual autonomy, privacy and data protection, diversity, fairness, social justice and internationally recognised labour rights.",
+            "control": "Human-rights and fairness controls embedded across the lifecycle: a human-rights/fundamental-rights impact assessment; bias/fairness testing across relevant protected attributes with defined metrics, thresholds and remediation; and privacy-by-design/data-protection controls (lawful basis, data minimisation, DPIA) aligned to applicable law.",
+            "weight": 5,
+            "category": "Human Rights & Fairness",
+            "risk_domain": "Discrimination, privacy violation and rights infringement",
+            "evidence_expectations": [
+              "Human-rights or fundamental-rights impact assessment for AI systems",
+              "Bias/fairness test reports across relevant protected groups, with defined metrics, thresholds and remediation actions",
+              "Data-protection documentation (DPIA, lawful basis, data-minimisation and retention controls)",
+              "Non-discrimination / fairness policy referencing applicable law"
+            ],
+            "pass_criteria": "For in-scope AI systems the organisation documents a human-rights/fairness assessment, performs bias testing with defined metrics and remediation, and applies privacy/data-protection controls consistent with applicable law, covering the full lifecycle.",
+            "partial_criteria": "Some rights protections exist (e.g. privacy controls OR bias testing) but coverage is incomplete - e.g. fairness testing is ad hoc or not tied to protected attributes, or human-rights impacts are not formally assessed.",
+            "fail_criteria": "No documented assessment or controls for discrimination, fairness or privacy in AI systems; rights impacts are not evaluated.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.2(a)"
+            ]
+          },
+          {
+            "identifier": "OECD-1.2-OVERSIGHT",
+            "title": "Human agency, oversight and safeguards against misuse",
+            "description": "The organisation implements mechanisms and safeguards - including capacity for human agency and human oversight - to protect the values in 1.2(a), including addressing risks arising from uses outside the intended purpose, intentional misuse or unintentional misuse, appropriate to context and consistent with the state of the art.",
+            "control": "A documented human-oversight procedure defining the intended purpose/scope of each AI system, named oversight roles with authority to intervene or override, and misuse-risk controls (acceptable-use restrictions, monitoring for out-of-scope or misuse patterns, escalation paths).",
+            "weight": 5,
+            "category": "Human Oversight",
+            "risk_domain": "Loss of human control, misuse and out-of-scope use",
+            "evidence_expectations": [
+              "Human-oversight procedure with named roles and defined intervention/override authority",
+              "Documented statement of intended purpose / acceptable-use policy per AI system",
+              "Misuse-risk analysis covering intended-purpose deviation, unintentional misuse and intentional misuse, with mitigations"
+            ],
+            "pass_criteria": "Each in-scope AI system has a documented intended purpose, assigned human-oversight roles with authority to intervene/override, and a misuse-risk analysis addressing intended-purpose deviation, unintentional and intentional misuse with implemented safeguards.",
+            "partial_criteria": "Human oversight is asserted but roles/authority are undefined, OR misuse scenarios are only partially considered (e.g. intended purpose documented but no misuse analysis).",
+            "fail_criteria": "No human-oversight mechanism or safeguards are defined and misuse risks are not considered.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.2(b)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OECD-P1.3",
+        "title": "Transparency and Explainability",
+        "description": "Principle 1.3: AI actors should commit to transparency and responsible disclosure and provide meaningful information to foster general understanding of AI systems (i), make stakeholders aware of interactions with AI (ii), provide plain information on the logic behind outputs (iii), and enable those adversely affected to challenge outputs (iv).",
+        "requirements": [
+          {
+            "identifier": "OECD-1.3-TRANSPARENCY",
+            "title": "Transparency and responsible disclosure of AI systems",
+            "description": "The organisation provides meaningful information, appropriate to context, to foster a general understanding of its AI systems (including their capabilities and limitations) and to make stakeholders - including workers - aware when they are interacting with an AI system.",
+            "control": "Documented and, where relevant, published disclosures: AI system documentation describing purpose, capabilities and limitations (e.g. model/system cards), and user-facing notices that a person is interacting with AI, including in the workplace.",
+            "weight": 4,
+            "category": "Transparency",
+            "risk_domain": "Opacity and undisclosed AI interaction",
+            "evidence_expectations": [
+              "System/model documentation describing capabilities and limitations",
+              "User-facing AI-interaction disclosures/notices (including workplace notifications)",
+              "Inventory of AI systems mapping each system to its disclosure"
+            ],
+            "pass_criteria": "Documented, current disclosures exist for in-scope AI systems describing capabilities and limitations, AND stakeholders (including workers) are notified when interacting with AI.",
+            "partial_criteria": "Some transparency exists (e.g. internal documentation of capabilities) but interaction disclosure to affected stakeholders is missing or inconsistent, or limitations are not documented.",
+            "fail_criteria": "No documentation of AI capabilities/limitations and no disclosure to stakeholders that they are interacting with AI.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.3(i)-(ii)"
+            ]
+          },
+          {
+            "identifier": "OECD-1.3-EXPLAINABILITY",
+            "title": "Explainability of outputs and ability to challenge",
+            "description": "Where feasible and useful, the organisation provides plain, easy-to-understand information on the sources of data/input, factors, processes and/or logic that led to an AI prediction, content, recommendation or decision so those affected can understand the output, and provides information enabling those adversely affected to challenge the output.",
+            "control": "An explanation capability (e.g. reason codes or plain-language explanations of the main factors) for consequential decisions, plus a documented contestation/appeal/redress process telling adversely affected individuals how to challenge an AI output and obtain human review.",
+            "weight": 4,
+            "category": "Explainability & Redress",
+            "risk_domain": "Unexplained or unchallengeable automated decisions",
+            "evidence_expectations": [
+              "Sample plain-language explanations / reason codes for consequential AI outputs",
+              "Documented contestation/appeal/redress procedure with a human-review step",
+              "Records of challenges received and how they were handled"
+            ],
+            "pass_criteria": "For consequential AI decisions the organisation provides plain-language explanations of the main factors/logic AND operates a documented process letting adversely affected persons challenge outputs and obtain human review.",
+            "partial_criteria": "Explanations are provided but no contestation mechanism exists (or vice versa), or explanations are too technical/generic to be understood by affected persons.",
+            "fail_criteria": "No explanation of AI outputs is provided and no mechanism exists for affected persons to challenge them.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.3(iii)-(iv)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OECD-P1.4",
+        "title": "Robustness, Security and Safety",
+        "description": "Principle 1.4: AI systems should be robust, secure and safe throughout their entire lifecycle (1.4a); mechanisms should allow harmful or misbehaving systems to be overridden, repaired and/or decommissioned safely (1.4b); and, where technically feasible, mechanisms should bolster information integrity while respecting freedom of expression (1.4c).",
+        "requirements": [
+          {
+            "identifier": "OECD-1.4-ROBUSTNESS",
+            "title": "Robustness, security and safety across the lifecycle",
+            "description": "AI systems are robust, secure and safe throughout their entire lifecycle so that, in conditions of normal use, foreseeable use or misuse, or other adverse conditions, they function appropriately and do not pose unreasonable safety and/or security risks.",
+            "control": "Lifecycle robustness and security engineering: pre-deployment testing, evaluation, verification and validation (including adversarial, stress and edge-case testing), digital-security controls for models, data and pipelines, and ongoing monitoring of performance and drift in production.",
+            "weight": 5,
+            "category": "Safety & Security",
+            "risk_domain": "System failure, unsafe behaviour and security compromise",
+            "evidence_expectations": [
+              "Test/evaluation/validation reports including adversarial, stress and edge-case testing",
+              "Security controls for models, data and pipelines (access control, integrity protection, threat mitigation)",
+              "Production monitoring records for performance, drift and incidents"
+            ],
+            "pass_criteria": "In-scope AI systems undergo documented robustness/security testing and validation before deployment AND are monitored in operation, with security controls protecting AI assets across the lifecycle.",
+            "partial_criteria": "Some testing or security controls exist but coverage is incomplete - e.g. no adversarial/misuse-condition testing, or no ongoing production monitoring.",
+            "fail_criteria": "No documented robustness, security or safety testing or monitoring of AI systems.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.4(a)"
+            ]
+          },
+          {
+            "identifier": "OECD-1.4-OVERRIDE",
+            "title": "Override, repair and safe decommissioning mechanisms",
+            "description": "Mechanisms are in place, as appropriate, so that if an AI system risks causing undue harm or exhibits undesired behaviour it can be overridden, repaired and/or decommissioned safely as needed, by human interaction.",
+            "control": "Documented fail-safe controls: a human override/disengagement (kill-switch) capability, incident-triggered rollback/repair procedures, and a safe decommissioning/retirement runbook, each with defined triggers and responsible roles.",
+            "weight": 5,
+            "category": "Safety & Human Control",
+            "risk_domain": "Uncontrolled harm from malfunctioning or misbehaving AI",
+            "evidence_expectations": [
+              "Documented override/disengagement (kill-switch) procedure with triggers and owners",
+              "Incident-response / rollback / repair procedures for AI systems",
+              "Safe decommissioning/retirement runbook"
+            ],
+            "pass_criteria": "Documented mechanisms exist to override, repair and safely decommission in-scope AI systems, with defined triggers and responsible roles, and evidence they have been tested or exercised.",
+            "partial_criteria": "Some capability exists (e.g. the ability to disable a system) but it is undocumented, untested, or lacks defined triggers/roles, or repair and decommissioning are not addressed.",
+            "fail_criteria": "No means to override, repair or safely decommission AI systems that cause harm or misbehave.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.4(b)"
+            ]
+          },
+          {
+            "identifier": "OECD-1.4-INFOINTEGRITY",
+            "title": "Safeguarding information integrity",
+            "description": "Where technically feasible, mechanisms are in place to bolster information integrity and to address misinformation and disinformation amplified by AI, while ensuring respect for freedom of expression and other rights protected by applicable law. Applicability note: where the organisation operates no content-generating or content-curating AI, this requirement is not applicable and should be marked CANNOT_DETERMINE.",
+            "control": "Information-integrity controls for content-generating or content-curating AI: provenance/watermarking or content-credential labelling of AI-generated content, safeguards against generating or amplifying mis/disinformation, and documented freedom-of-expression safeguards in content/moderation policy.",
+            "weight": 3,
+            "category": "Information Integrity",
+            "risk_domain": "AI-amplified misinformation and disinformation",
+            "evidence_expectations": [
+              "AI-content provenance, watermarking or labelling implementation",
+              "Policy and technical safeguards against generation or amplification of mis/disinformation",
+              "Documented consideration of freedom-of-expression impacts within content controls"
+            ],
+            "pass_criteria": "For AI systems that generate or curate content, the organisation implements documented information-integrity measures (e.g. provenance/labelling and mis/disinformation safeguards) that also consider freedom of expression.",
+            "partial_criteria": "Information-integrity risk is acknowledged but measures are limited or only planned, or freedom-of-expression impacts are not considered.",
+            "fail_criteria": "For AI systems that generate or curate content, no measures are in place to bolster information integrity or to address mis/disinformation, and freedom-of-expression impacts are not considered.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.4(c)",
+              "OECD/LEGAL/0449, Section 1, Principle 1.2(a) (addressing misinformation and disinformation amplified by AI)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OECD-P1.5",
+        "title": "Accountability",
+        "description": "Principle 1.5: AI actors should be accountable for the proper functioning of AI systems and for respect of the principles (1.5a); ensure traceability of datasets, processes and decisions (1.5b); and apply a systematic risk-management approach to each phase of the lifecycle on an ongoing basis and adopt responsible business conduct (1.5c).",
+        "requirements": [
+          {
+            "identifier": "OECD-1.5-ACCOUNTABILITY",
+            "title": "Accountability of AI actors for proper functioning and principle compliance",
+            "description": "AI actors are accountable for the proper functioning of AI systems and for the respect of the OECD principles, based on their roles, the context and the state of the art.",
+            "control": "A defined AI governance and accountability structure: an AI system inventory mapping each system to accountable owners/roles, documented responsibilities across the lifecycle, and a governance body or policy that holds actors accountable for compliance with the principles.",
+            "weight": 5,
+            "category": "Accountability & Governance",
+            "risk_domain": "Diffused responsibility and governance gaps",
+            "evidence_expectations": [
+              "AI governance policy assigning accountability by role",
+              "AI system inventory/register mapping systems to accountable owners",
+              "Terms of reference of an AI governance/oversight body or committee"
+            ],
+            "pass_criteria": "A documented accountability structure assigns named owners/roles responsible for each in-scope AI system's proper functioning and principle compliance, supported by a governance body or defined escalation path.",
+            "partial_criteria": "Accountability is only partly defined - e.g. a policy references responsibility generally but ownership per system is unassigned, or no governance body/escalation exists.",
+            "fail_criteria": "No defined accountability for AI systems; ownership and responsibility for proper functioning and compliance are unassigned.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.5(a)"
+            ]
+          },
+          {
+            "identifier": "OECD-1.5-TRACEABILITY",
+            "title": "Traceability of datasets, processes and decisions",
+            "description": "AI actors ensure traceability - including in relation to datasets, processes and decisions made during the AI system lifecycle - to enable analysis of the AI system's outputs and responses to inquiry, appropriate to context and consistent with the state of the art.",
+            "control": "Traceability records maintained across the lifecycle: data provenance/lineage documentation, versioning of datasets, models and code, and logging of key design decisions and of system outputs/decisions sufficient to reconstruct and analyse behaviour and respond to inquiries.",
+            "weight": 4,
+            "category": "Traceability & Logging",
+            "risk_domain": "Inability to audit or explain AI behaviour after the fact",
+            "evidence_expectations": [
+              "Data provenance/lineage records",
+              "Version control for datasets, models and code",
+              "Decision/output logs and documentation of key lifecycle decisions, with defined retention"
+            ],
+            "pass_criteria": "The organisation maintains data-provenance, versioning and decision/output logging across the lifecycle sufficient to reconstruct and analyse AI outputs and to respond to inquiries.",
+            "partial_criteria": "Some traceability exists (e.g. model versioning) but material gaps remain - e.g. no data provenance, or output/decision logs are absent or not retained.",
+            "fail_criteria": "No traceability of datasets, processes or decisions; AI behaviour cannot be reconstructed or analysed.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.5(b)"
+            ]
+          },
+          {
+            "identifier": "OECD-1.5-RISKMGMT",
+            "title": "Systematic, ongoing AI risk management and responsible business conduct",
+            "description": "AI actors apply a systematic risk-management approach to each phase of the AI system lifecycle on an ongoing basis and adopt responsible business conduct - including, as appropriate, via co-operation with other AI actors, suppliers of AI knowledge and resources, and users - to address risks including harmful bias, human rights (safety, security, privacy) and labour and intellectual-property rights.",
+            "control": "A documented AI risk-management framework (e.g. aligned to ISO/IEC 23894 or the NIST AI RMF) applied at each lifecycle phase with periodic re-assessment; a risk register covering harmful bias, safety, security, privacy, labour and IP risks; and supplier/third-party AI risk controls (due diligence and contractual clauses).",
+            "weight": 5,
+            "category": "Risk Management",
+            "risk_domain": "Unmanaged, evolving AI risks across the lifecycle and supply chain",
+            "evidence_expectations": [
+              "Documented AI risk-management methodology applied per lifecycle phase",
+              "AI risk register covering harmful bias, safety, security, privacy, labour and IP risks, with a defined review cadence",
+              "Third-party/supplier AI risk-management controls (due diligence, contract clauses)"
+            ],
+            "pass_criteria": "A systematic AI risk-management approach is documented and applied at each lifecycle phase on an ongoing (periodically reviewed) basis, covers the specified risk categories, and extends to suppliers/third parties.",
+            "partial_criteria": "Risk management exists but is one-off rather than ongoing, omits key risk categories (e.g. harmful bias or IP), or does not address suppliers/third parties.",
+            "fail_criteria": "No systematic AI risk-management process; risks are not identified, assessed or monitored across the lifecycle.",
+            "references": [
+              "OECD/LEGAL/0449, Section 1, Principle 1.5(c)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "OECD-S2",
+        "title": "National Policies and International Co-operation (Organisational Adaptation)",
+        "description": "Section 2 recommendations - addressed to governments (Adherents) - adapted as organisational expectations for AI actors: investing in AI R&D (2.1); fostering an inclusive AI-enabling ecosystem (2.2); shaping an enabling interoperable governance and policy environment (2.3); building human capacity and preparing for labour-market transformation (2.4); and international co-operation for trustworthy AI (2.5).",
+        "requirements": [
+          {
+            "identifier": "OECD-2.1-RESEARCH",
+            "title": "Investment in trustworthy AI R&D and representative, bias-free data",
+            "description": "Adapted from Recommendation 2.1: the organisation invests in trustworthy-AI research and development - including attention to social, legal and ethical implications - and uses representative datasets that respect privacy and data protection and are free of harmful bias, supporting interoperability and the use of standards.",
+            "control": "R&D/innovation practices that allocate resources to trustworthy-AI methods and to studying ethical, legal and social implications; dataset governance ensuring representativeness, privacy and freedom from harmful bias; and use of open tools, open datasets or standards where appropriate.",
+            "weight": 2,
+            "category": "Investment & Innovation",
+            "risk_domain": "Under-investment in trustworthy AI and biased/unrepresentative data",
+            "evidence_expectations": [
+              "Evidence of investment in trustworthy-AI R&D or methods, including ethical/legal/social-implications work",
+              "Dataset governance records demonstrating representativeness, privacy protection and bias mitigation",
+              "Use of open standards, open tools or open datasets where appropriate"
+            ],
+            "pass_criteria": "The organisation documents investment in trustworthy-AI R&D or capability AND applies dataset governance ensuring representative, privacy-respecting and bias-mitigated data.",
+            "partial_criteria": "Either investment in trustworthy-AI capability OR representative/bias-free data governance is evidenced, but not both.",
+            "fail_criteria": "No investment in trustworthy-AI development and no governance of dataset representativeness, privacy or bias.",
+            "references": [
+              "OECD/LEGAL/0449, Section 2, Recommendation 2.1(a)-(b)"
+            ]
+          },
+          {
+            "identifier": "OECD-2.2-ECOSYSTEM",
+            "title": "Fostering an inclusive, interoperable AI ecosystem and responsible data sharing",
+            "description": "Adapted from Recommendation 2.2: the organisation supports an inclusive, dynamic, sustainable and interoperable digital ecosystem for trustworthy AI - including responsible mechanisms for the safe, fair, legal and ethical sharing of data (e.g. data trusts) and interoperable technologies and infrastructure.",
+            "control": "Participation in or provision of interoperable AI infrastructure and AI-knowledge sharing, and documented data-sharing governance (e.g. data-sharing agreements or data trusts) that ensures safe, fair, legal and ethical sharing.",
+            "weight": 2,
+            "category": "Ecosystem & Data Sharing",
+            "risk_domain": "Fragmented, closed or unsafe data/AI ecosystems",
+            "evidence_expectations": [
+              "Data-sharing agreements or data-trust arrangements with documented safeguards",
+              "Use of interoperable standards, formats or infrastructure for AI",
+              "Records of AI-knowledge sharing or contribution to the wider ecosystem"
+            ],
+            "pass_criteria": "The organisation participates in an interoperable AI ecosystem and governs data sharing through documented mechanisms ensuring safe, fair, legal and ethical sharing.",
+            "partial_criteria": "Some ecosystem/interoperability or data-sharing practice exists but lacks documented safeguards, or data sharing is ad hoc.",
+            "fail_criteria": "No interoperability practices and no governed, lawful and ethical data-sharing mechanisms.",
+            "references": [
+              "OECD/LEGAL/0449, Section 2, Recommendation 2.2"
+            ]
+          },
+          {
+            "identifier": "OECD-2.3-GOVERNANCE",
+            "title": "Agile, outcome-based internal AI governance and controlled testing",
+            "description": "Adapted from Recommendation 2.3: the organisation maintains an agile internal governance approach that supports safe transition from research and development to deployment and operation - including controlled testing environments (sandboxes) and scale-up - and reviews and adapts its internal AI policies and assessment mechanisms, using outcome-based approaches, as AI systems and their context evolve.",
+            "control": "A staged AI development-to-deployment governance process with controlled/sandbox testing before scale-up, defined go/no-go gates, and a periodic review that keeps internal AI policies and assessment mechanisms current and outcome-focused.",
+            "weight": 3,
+            "category": "Governance & Policy",
+            "risk_domain": "Rigid or outdated governance that fails to control deployment",
+            "evidence_expectations": [
+              "Documented staged deployment/governance process with go/no-go gates",
+              "Controlled/sandbox testing procedure prior to scale-up",
+              "Records of periodic review and adaptation of internal AI policies and assessment mechanisms"
+            ],
+            "pass_criteria": "A documented governance process controls the transition from development to deployment (including sandbox/controlled testing and defined gates) AND internal AI policies/assessment mechanisms are periodically reviewed and updated.",
+            "partial_criteria": "A deployment process exists but lacks controlled testing or defined gates, OR policies are not reviewed and updated as systems evolve.",
+            "fail_criteria": "No structured governance for moving AI from development to deployment and no review or adaptation of internal AI policies.",
+            "references": [
+              "OECD/LEGAL/0449, Section 2, Recommendation 2.3(a)-(b)"
+            ]
+          },
+          {
+            "identifier": "OECD-2.4-CAPACITY",
+            "title": "Building human capacity and preparing for a fair labour-market transition",
+            "description": "Adapted from Recommendation 2.4: the organisation equips people with the skills to effectively use and interact with AI systems, promotes the responsible use of AI at work (enhancing worker safety and job quality), and supports a fair transition for workers as AI is deployed, including through social dialogue, reskilling and support for those affected by displacement.",
+            "control": "AI literacy/skills training programmes for affected staff; a responsible-AI-at-work policy addressing worker safety and job quality; and a fair-transition plan (reskilling, redeployment, consultation/social dialogue) for roles affected by AI.",
+            "weight": 3,
+            "category": "Human Capacity & Labour",
+            "risk_domain": "Workforce displacement, deskilling and degraded job quality",
+            "evidence_expectations": [
+              "AI skills/literacy training records for affected staff",
+              "Responsible-AI-at-work policy covering worker safety and job quality",
+              "Fair-transition / reskilling plan and evidence of worker consultation or social dialogue"
+            ],
+            "pass_criteria": "The organisation delivers AI skills training AND maintains a responsible-AI-at-work policy AND has a documented fair-transition approach (reskilling/consultation) for workers affected by AI.",
+            "partial_criteria": "One or two of the three elements exist (e.g. training but no fair-transition plan or worker consultation).",
+            "fail_criteria": "No AI workforce training, no responsible-use-at-work provisions, and no fair-transition support for affected workers.",
+            "references": [
+              "OECD/LEGAL/0449, Section 2, Recommendation 2.4(a)-(c)"
+            ]
+          },
+          {
+            "identifier": "OECD-2.5-COOPERATION",
+            "title": "International co-operation, standards and comparable metrics",
+            "description": "Adapted from Recommendation 2.5: the organisation co-operates across jurisdictions to advance trustworthy AI - adopting and contributing to multi-stakeholder, consensus-driven global technical standards for interoperable and trustworthy AI, sharing AI knowledge, and using internationally comparable indicators to measure AI development, deployment and progress against the principles.",
+            "control": "Adoption of and alignment to recognised international AI standards (e.g. ISO/IEC 42001, ISO/IEC 23894); participation in multi-stakeholder standards or knowledge-sharing initiatives; and use of comparable metrics/indicators to measure and report progress on trustworthy AI.",
+            "weight": 2,
+            "category": "Standards & Co-operation",
+            "risk_domain": "Non-interoperable, unbenchmarked AI practices",
+            "evidence_expectations": [
+              "Mapping to, or certification against, recognised international AI standards",
+              "Participation records in multi-stakeholder standards or knowledge-sharing bodies",
+              "Defined metrics/indicators and reporting on trustworthy-AI progress"
+            ],
+            "pass_criteria": "The organisation aligns to recognised international AI standards AND uses defined, comparable metrics to measure/report progress on trustworthy AI, with some knowledge-sharing or co-operation evidenced.",
+            "partial_criteria": "The organisation references or partially adopts international standards OR tracks some metrics, but not both, or its alignment is informal.",
+            "fail_criteria": "No alignment to international AI standards, no comparable metrics, and no co-operation or knowledge-sharing on trustworthy AI.",
+            "references": [
+              "OECD/LEGAL/0449, Section 2, Recommendation 2.5(a)-(d)"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
