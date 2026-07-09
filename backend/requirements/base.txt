@@ -1,9 +1,10 @@
 # ---------------------------------------------------------------------------
-# Core runtime dependencies (Phase 1 foundation).
-# These are the ONLY dependencies required to run the API, the framework
-# configuration engine, the scoring engine and the test suite.
-# Heavy, optional subsystems (OCR, vector DB, PDF reports) are split into
-# separate files so the foundation stays lightweight and CI stays fast.
+# Core runtime dependencies (backend through Phase 6).
+# Everything needed to run the API, config engine, scoring engine, document
+# ingestion, RAG (lightweight default), LLM assessment (mock default), report
+# generation, and the full test suite.
+# The only OPTIONAL extras (heavy, config-gated) live in requirements/rag.txt:
+# ChromaDB + sentence-transformers, needed only for the non-default RAG backend.
 # ---------------------------------------------------------------------------
 Django==5.0.6
 djangorestframework==3.15.1
@@ -12,3 +13,13 @@ django-filter==24.2
 python-dotenv==1.0.1
 PyYAML==6.0.1
 jsonschema==4.22.0
+
+# Document ingestion (Phase 2)
+PyMuPDF==1.24.5          # fitz — PDF text/image/layout extraction
+pdfplumber==0.11.0       # table detection + fine-grained layout
+python-docx==1.1.2       # DOCX parsing
+Pillow==10.3.0           # image handling for OCR / diagrams
+pytesseract==0.3.10      # OCR fallback for scanned pages (needs tesseract binary)
+
+# Report generation (Phase 6)
+reportlab==4.2.0

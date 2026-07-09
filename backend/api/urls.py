@@ -18,7 +18,7 @@ from audit_logs.views import AuditLogListView
 from dashboard.views import DashboardView
 from documents.views import DocumentDetailView, DocumentListView, DocumentUploadView
 from frameworks.views import FrameworkDetailView, FrameworkListView
-from reports.views import ReportDetailView
+from reports.views import ReportCreateView, ReportDetailView, ReportDownloadView
 
 from .views import HealthView, RootView
 
@@ -38,7 +38,9 @@ urlpatterns = [
     path("history", HistoryView.as_view(), name="history"),
     path("assessment/<uuid:assessment_id>", AssessmentDetailView.as_view(), name="assessment-detail"),
     # --- Reports & dashboard ---
+    path("report", ReportCreateView.as_view(), name="report-create"),
     path("report/<uuid:report_id>", ReportDetailView.as_view(), name="report-detail"),
+    path("report/<uuid:report_id>/download", ReportDownloadView.as_view(), name="report-download"),
     path("dashboard", DashboardView.as_view(), name="dashboard"),
     # --- Audit ---
     path("audit-logs", AuditLogListView.as_view(), name="audit-log-list"),

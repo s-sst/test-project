@@ -7,6 +7,7 @@ from .models import GeneratedReport
 
 class GeneratedReportSerializer(serializers.ModelSerializer):
     file_url = serializers.SerializerMethodField()
+    download_url = serializers.SerializerMethodField()
 
     class Meta:
         model = GeneratedReport
@@ -16,6 +17,7 @@ class GeneratedReportSerializer(serializers.ModelSerializer):
             "report_format",
             "status",
             "file_url",
+            "download_url",
             "checksum",
             "params",
             "generated_by",
@@ -29,3 +31,10 @@ class GeneratedReportSerializer(serializers.ModelSerializer):
             return None
         request = self.context.get("request")
         return request.build_absolute_uri(obj.file.url) if request else obj.file.url
+
+    def get_download_url(self, obj: GeneratedReport) -> str | None:
+        if not obj.file:
+            return None
+        path = f"/api/report/{obj.id}/download"
+        request = self.context.get("request")
+        return request.build_absolute_uri(path) if request else path

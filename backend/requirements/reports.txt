@@ -1,5 +1,2 @@
+# Report generation (reportlab) is now part of the core install (see base.txt).
 -r base.txt
-# ---------------------------------------------------------------------------
-# Report generation (Phase 5).
-# ---------------------------------------------------------------------------
-reportlab==4.2.0
