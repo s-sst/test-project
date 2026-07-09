@@ -10,18 +10,21 @@ def doc_and_framework(synced_frameworks, sample_document):
 
 
 @pytest.mark.django_db
-def test_process_creates_pending_assessment(api_client, doc_and_framework):
+def test_process_runs_pipeline_to_completion(api_client, doc_and_framework):
     doc = doc_and_framework
     resp = api_client.post(
         "/api/process",
         {"framework_id": "eu_ai_act", "document_ids": [str(doc.id)], "name": "Q3 review"},
         format="json",
     )
-    assert resp.status_code == 202
+    assert resp.status_code == 200
     data = resp.json()["data"]
-    assert data["status"] == "PENDING"
+    assert data["status"] == "COMPLETED"
     assert data["framework"] == "eu_ai_act"
     assert data["name"] == "Q3 review"
+    assert data["overall_score"] is not None
+    assert data["risk_level"]
+    assert len(data["scores"]) > 0  # requirement + rollup scores
     # config hash pinned for reproducibility
     assert data["config_snapshot"]["framework_config_hash"]
 
@@ -87,10 +90,7 @@ def test_assessment_detail_and_history(api_client, doc_and_framework):
 
 
 @pytest.mark.django_db
-def test_reprocess_resets_to_pending(api_client, doc_and_framework):
-    from assessments.models import Assessment
-    from common.enums import AssessmentStatus
-
+def test_reprocess_reruns_deterministically(api_client, doc_and_framework):
     doc = doc_and_framework
     created = api_client.post(
         "/api/process",
@@ -98,15 +98,12 @@ def test_reprocess_resets_to_pending(api_client, doc_and_framework):
         format="json",
     ).json()["data"]
     aid = created["id"]
-
-    # simulate a completed run
-    a = Assessment.objects.get(pk=aid)
-    a.status = AssessmentStatus.COMPLETED
-    a.overall_score = 88
-    a.save()
+    first_score = created["overall_score"]
+    assert created["status"] == "COMPLETED"
 
     resp = api_client.post("/api/reprocess", {"assessment_id": aid}, format="json")
-    assert resp.status_code == 202
-    a.refresh_from_db()
-    assert a.status == AssessmentStatus.PENDING
-    assert a.overall_score is None
+    assert resp.status_code == 200
+    data = resp.json()["data"]
+    assert data["status"] == "COMPLETED"
+    # deterministic: identical inputs -> identical score (100% reproducibility)
+    assert data["overall_score"] == first_score

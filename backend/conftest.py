@@ -43,10 +43,34 @@ def synced_frameworks(db):
     return sync_all()
 
 
+def make_real_pdf(paragraphs: list[str]) -> bytes:
+    """A genuinely parseable PDF (via PyMuPDF) for pipeline/ingestion tests."""
+    import fitz
+
+    doc = fitz.open()
+    for para in paragraphs:
+        page = doc.new_page()
+        page.insert_text((72, 72), para, fontsize=11)
+    data = doc.tobytes()
+    doc.close()
+    return data
+
+
+GOVERNANCE_PARAGRAPHS = [
+    "The organization maintains a documented AI risk management system with periodic "
+    "risk assessment and risk treatment activities for each AI system.",
+    "Data governance controls ensure dataset provenance, data lineage records, and "
+    "data quality checks for training and validation data.",
+    "Human oversight procedures assign named reviewers who can monitor, intervene in, "
+    "and override the AI system, with logging and record keeping of decisions.",
+]
+
+
 @pytest.fixture
 def sample_document(db):
     from documents.services import create_document
 
+    pdf = make_real_pdf(GOVERNANCE_PARAGRAPHS)
     return create_document(
-        SimpleUploadedFile("policy.pdf", PDF_BYTES, content_type="application/pdf")
+        SimpleUploadedFile("governance.pdf", pdf, content_type="application/pdf")
     )

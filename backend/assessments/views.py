@@ -4,9 +4,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 
-from common.responses import accepted, ok
+from common.enums import AssessmentStatus
+from common.responses import ok
 
 from .models import Assessment
+from .pipeline import run_assessment
 from .serializers import (
     AssessmentCreateSerializer,
     AssessmentDetailSerializer,
@@ -24,12 +26,33 @@ _DETAIL_PREFETCH = (
 )
 
 
-class ProcessView(APIView):
-    """POST /api/process — create an assessment (framework × documents).
+def _run_and_serialize(assessment, request) -> tuple[dict, dict]:
+    """Run the pipeline (mock LLM by default) and return (data, meta).
 
-    Returns 202: the assessment is created in PENDING state. The
-    ingestion→RAG→LLM→scoring pipeline that advances it to COMPLETED is
-    delivered in later phases (see config_snapshot for the pinned config).
+    Pipeline failures are captured on the assessment (status FAILED); the
+    endpoint still returns the assessment record rather than a 500 so the client
+    can inspect the error.
+    """
+    meta: dict = {}
+    try:
+        run_assessment(assessment)
+    except Exception as exc:  # noqa: BLE001 - surfaced via assessment.error_message
+        meta = {"pipeline": "failed", "error": str(exc)}
+    assessment = (
+        Assessment.objects.prefetch_related(*_DETAIL_PREFETCH)
+        .select_related("framework")
+        .get(pk=assessment.pk)
+    )
+    meta.setdefault("pipeline", assessment.status.lower())
+    return AssessmentDetailSerializer(assessment, context={"request": request}).data, meta
+
+
+class ProcessView(APIView):
+    """POST /api/process — create an assessment (framework × documents) and run
+    the full pipeline (ingest → index → LLM assess → score → recommend).
+
+    Runs synchronously with the configured LLM provider (deterministic mock by
+    default). With a real provider a task queue would be introduced (Phase 8).
     """
 
     def post(self, request):
@@ -42,19 +65,12 @@ class ProcessView(APIView):
             name=serializer.validated_data.get("name", ""),
             created_by=actor,
         )
-        assessment = (
-            Assessment.objects.prefetch_related(*_DETAIL_PREFETCH)
-            .select_related("framework")
-            .get(pk=assessment.pk)
-        )
-        return accepted(
-            AssessmentDetailSerializer(assessment, context={"request": request}).data,
-            meta={"pipeline": "queued", "note": "Assessment created in PENDING state."},
-        )
+        data, meta = _run_and_serialize(assessment, request)
+        return ok(data, meta=meta)
 
 
 class ReprocessView(APIView):
-    """POST /api/reprocess — reset an assessment to PENDING for a fresh run."""
+    """POST /api/reprocess — reset an assessment and run it again."""
 
     def post(self, request):
         serializer = ReprocessSerializer(data=request.data)
@@ -62,15 +78,8 @@ class ReprocessView(APIView):
         actor = request.user if request.user.is_authenticated else None
         assessment = get_object_or_404(Assessment, pk=serializer.validated_data["assessment_id"])
         assessment = reprocess_assessment(assessment, requested_by=actor)
-        assessment = (
-            Assessment.objects.prefetch_related(*_DETAIL_PREFETCH)
-            .select_related("framework")
-            .get(pk=assessment.pk)
-        )
-        return accepted(
-            AssessmentDetailSerializer(assessment, context={"request": request}).data,
-            meta={"pipeline": "queued"},
-        )
+        data, meta = _run_and_serialize(assessment, request)
+        return ok(data, meta=meta)
 
 
 class AssessmentDetailView(APIView):
